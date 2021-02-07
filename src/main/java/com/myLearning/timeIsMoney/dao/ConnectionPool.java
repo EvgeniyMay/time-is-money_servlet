@@ -14,7 +14,7 @@ public class ConnectionPool {
     private static final String URL = "jdbc:mysql://localhost:3306/time_is_money_db?useUnicode=true&serverTimezone=UTC";
     private static final String USER = "myUser";
     private static final String PASSWORD = "myUserPassword";
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     private DataSource dataSource;
     private static volatile ConnectionPool connectionPool;

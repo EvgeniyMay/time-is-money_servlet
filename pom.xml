@@ -42,7 +42,7 @@
             <version>${jstl.version}</version>
         </dependency>
 
-        <!--        Is it legal ?-->
+        <!-- Is it legal ?-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>

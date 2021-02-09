@@ -4,5 +4,5 @@ import com.myLearning.timeIsMoney.dao.impl.JdbcConnectionPool;
 
 public interface DaoFactory {
 
-    public ActivityDao createActivityDao(JdbcConnectionPool jdbcConnectionPool);
+    public ActivityDao createActivityDao();
 }

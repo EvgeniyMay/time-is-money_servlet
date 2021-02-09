@@ -1,6 +1,7 @@
 package com.myLearning.timeIsMoney.dao.impl;
 
 import com.myLearning.timeIsMoney.dao.ActivityDao;
+import com.myLearning.timeIsMoney.dao.ConnectionPool;
 import com.myLearning.timeIsMoney.entity.Activity;
 
 import java.sql.*;
@@ -10,17 +11,18 @@ import java.util.ResourceBundle;
 
 public class JdbcActivityDao implements ActivityDao {
 
-    public JdbcActivityDao(JdbcConnectionPool jdbcConnectionPool) {
-        this.jdbcConnectionPool = jdbcConnectionPool;
-    }
-    private final JdbcConnectionPool jdbcConnectionPool;
+    private final ConnectionPool connectionPool;
     private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
+
+    public JdbcActivityDao(ConnectionPool connectionPool) {
+        this.connectionPool = connectionPool;
+    }
 
     @Override
     public List<Activity> findAll() {
         List<Activity> activities = new ArrayList<>();
 
-        try (Connection connection = jdbcConnectionPool.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.activity.find.all"))) {
 
@@ -42,7 +44,7 @@ public class JdbcActivityDao implements ActivityDao {
 
     @Override
     public Activity findById(int id) {
-        try (Connection connection = jdbcConnectionPool.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.activity.find.by.id"))) {
             preparedStatement.setInt(1, id);
 
@@ -65,7 +67,7 @@ public class JdbcActivityDao implements ActivityDao {
 
     @Override
     public boolean save(Activity activity) {
-        try (Connection connection = jdbcConnectionPool.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.activity.insert"))) {
             preparedStatement.setString(1, activity.getName());
             preparedStatement.setString(2, activity.getDescription());
@@ -80,7 +82,7 @@ public class JdbcActivityDao implements ActivityDao {
 
     @Override
     public boolean deleteById(int id) {
-        try (Connection connection = jdbcConnectionPool.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.activity.delete"))) {
             preparedStatement.setInt(1, id);
 
@@ -94,7 +96,7 @@ public class JdbcActivityDao implements ActivityDao {
 
     @Override
     public boolean update(Activity activity) {
-        try (Connection connection = jdbcConnectionPool.getConnection();
+        try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.activity.update"))) {
 
             preparedStatement.setString(1, activity.getName());

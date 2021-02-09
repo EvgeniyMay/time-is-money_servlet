@@ -1,6 +1,7 @@
 package com.myLearning.timeIsMoney.dao.impl;
 
 import com.myLearning.timeIsMoney.dao.ActivityDao;
+import com.myLearning.timeIsMoney.dao.ConnectionPool;
 import com.myLearning.timeIsMoney.dao.DaoFactory;
 
 public class JdbcDaoFactory implements DaoFactory {
@@ -18,9 +19,11 @@ public class JdbcDaoFactory implements DaoFactory {
         return jdbcDaoFactory;
     }
 
+    private final ConnectionPool connectionPool = JdbcConnectionPool.getInstance();
+
     @Override
-    public ActivityDao createActivityDao(JdbcConnectionPool jdbcConnectionPool) {
-        return new JdbcActivityDao(jdbcConnectionPool);
+    public ActivityDao createActivityDao() {
+        return new JdbcActivityDao(connectionPool);
     }
 
 }

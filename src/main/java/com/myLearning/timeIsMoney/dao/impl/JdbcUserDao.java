@@ -2,6 +2,7 @@ package com.myLearning.timeIsMoney.dao.impl;
 
 import com.myLearning.timeIsMoney.dao.ConnectionPool;
 import com.myLearning.timeIsMoney.dao.UserDao;
+import com.myLearning.timeIsMoney.dto.UserDto;
 import com.myLearning.timeIsMoney.entity.User;
 
 import java.sql.*;
@@ -59,11 +60,11 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean save(User user) {
+    public boolean save(UserDto userDto) {
         try (Connection connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.insert"))) {
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(1, userDto.getLogin());
+            preparedStatement.setString(2, userDto.getPassword());
 
             return preparedStatement.execute();
         } catch (SQLException e) {

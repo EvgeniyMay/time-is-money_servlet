@@ -1,6 +1,8 @@
 package com.myLearning.timeIsMoney.command;
 
 import com.myLearning.timeIsMoney.command.activity.*;
+import com.myLearning.timeIsMoney.command.auth.GetRegistrationCommand;
+import com.myLearning.timeIsMoney.command.auth.PostRegistrationCommand;
 import com.myLearning.timeIsMoney.command.user.GetUserCommand;
 import com.myLearning.timeIsMoney.dao.ActivityDao;
 import com.myLearning.timeIsMoney.dao.DaoFactory;
@@ -40,12 +42,15 @@ public class CommandController {
         getCommands.put("/activity/delete", new GetActivityDeleteCommand());
         getCommands.put("/activity/edit", new GetActivityEditCommand(activityDao));
 
-        getCommands.put("/user", new GetUserCommand(userDao));
-
         postCommands = new HashMap<>();
         postCommands.put("/activity/add", new PostActivityCreateCommand(activityDao));
         postCommands.put("/activity/delete", new PostActivityDeleteCommand(activityDao));
         postCommands.put("/activity/edit", new PostActivityEditCommand(activityDao));
+
+        getCommands.put("/user", new GetUserCommand(userDao));
+        getCommands.put("/registration", new GetRegistrationCommand());
+
+        postCommands.put("/registration", new PostRegistrationCommand(userDao));
     }
 
     public Command getCommand(HttpServletRequest request) {

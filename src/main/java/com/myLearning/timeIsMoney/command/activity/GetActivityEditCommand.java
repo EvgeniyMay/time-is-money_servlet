@@ -1,7 +1,10 @@
 package com.myLearning.timeIsMoney.command.activity;
 
 import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.dao.JdbcActivityDao;
+import com.myLearning.timeIsMoney.dao.ActivityDao;
+import com.myLearning.timeIsMoney.dao.DaoFactory;
+import com.myLearning.timeIsMoney.dao.impl.JdbcConnectionPool;
+import com.myLearning.timeIsMoney.dao.impl.JdbcDaoFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,12 +12,13 @@ public class GetActivityEditCommand implements Command {
 
     //ToDo
     // Replace
-    private final JdbcActivityDao jdbcActivityDao = new JdbcActivityDao();
+    private final DaoFactory daoFactory = JdbcDaoFactory.getInstance();
+    private final ActivityDao activityDao = daoFactory.createActivityDao(JdbcConnectionPool.getInstance());
 
     @Override
     public String execute(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("activity", jdbcActivityDao.findById(id));
+        request.setAttribute("activity", activityDao.findById(id));
 
         return "/WEB-INF/jsp/activity/activityEdit.jsp";
     }

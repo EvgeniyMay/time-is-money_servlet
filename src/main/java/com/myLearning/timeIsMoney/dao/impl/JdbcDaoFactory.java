@@ -3,6 +3,7 @@ package com.myLearning.timeIsMoney.dao.impl;
 import com.myLearning.timeIsMoney.dao.ActivityDao;
 import com.myLearning.timeIsMoney.dao.ConnectionPool;
 import com.myLearning.timeIsMoney.dao.DaoFactory;
+import com.myLearning.timeIsMoney.dao.UserDao;
 
 public class JdbcDaoFactory implements DaoFactory {
 
@@ -26,4 +27,8 @@ public class JdbcDaoFactory implements DaoFactory {
         return new JdbcActivityDao(connectionPool);
     }
 
+    @Override
+    public UserDao createUserDao() {
+        return new JdbcUserDao(connectionPool);
+    }
 }

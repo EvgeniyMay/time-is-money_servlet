@@ -1,10 +1,10 @@
 package com.myLearning.timeIsMoney.command;
 
 import com.myLearning.timeIsMoney.command.activity.*;
+import com.myLearning.timeIsMoney.command.user.GetUserCommand;
 import com.myLearning.timeIsMoney.dao.ActivityDao;
-import com.myLearning.timeIsMoney.dao.ConnectionPool;
 import com.myLearning.timeIsMoney.dao.DaoFactory;
-import com.myLearning.timeIsMoney.dao.impl.JdbcConnectionPool;
+import com.myLearning.timeIsMoney.dao.UserDao;
 import com.myLearning.timeIsMoney.dao.impl.JdbcDaoFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +32,15 @@ public class CommandController {
     private CommandController () {
         DaoFactory daoFactory = JdbcDaoFactory.getInstance();
         ActivityDao activityDao = daoFactory.createActivityDao();
+        UserDao userDao = daoFactory.createUserDao();
 
         getCommands = new HashMap<>();
         getCommands.put("/activity", new GetActivityCommand(activityDao));
         getCommands.put("/activity/add", new GetActivityCreateCommand());
         getCommands.put("/activity/delete", new GetActivityDeleteCommand());
         getCommands.put("/activity/edit", new GetActivityEditCommand(activityDao));
+
+        getCommands.put("/user", new GetUserCommand(userDao));
 
         postCommands = new HashMap<>();
         postCommands.put("/activity/add", new PostActivityCreateCommand(activityDao));

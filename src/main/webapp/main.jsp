@@ -6,5 +6,6 @@
 <body>
     <h1>Main page</h1>
     <a href="/app/activity">Activity</a>
+    <a href="/app/user">User</a>
 </body>
 </html>

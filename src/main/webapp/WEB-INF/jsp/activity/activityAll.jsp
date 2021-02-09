@@ -17,6 +17,7 @@
                 <td>${activity.description}</td>
                 <td>
                     <form action="/app/activity/delete" method="GET">
+                        <input type="hidden" name="id" value="${activity.id}">
                         <input type="hidden" name="name" value="${activity.name}">
                         <input type="submit" value="Delete">
                     </form>

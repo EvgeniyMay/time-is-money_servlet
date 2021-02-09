@@ -1,30 +1,24 @@
 package com.myLearning.timeIsMoney.dao;
 
-
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class ConnectionPool {
 
-    //ToDo
-    // Make properties
-    private static final String URL = "jdbc:mysql://localhost:3306/time_is_money_db?useUnicode=true&serverTimezone=UTC";
-    private static final String USER = "myUser";
-    private static final String PASSWORD = "myUserPassword";
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-
-    private DataSource dataSource;
+    private final DataSource dataSource;
     private static volatile ConnectionPool connectionPool;
+    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
 
     private ConnectionPool() {
         BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(URL);
-        basicDataSource.setUsername(USER);
-        basicDataSource.setPassword(PASSWORD);
-        basicDataSource.setDriverClassName(DRIVER);
+        basicDataSource.setUrl(resourceBundle.getString("database.url"));
+        basicDataSource.setUsername(resourceBundle.getString("database.user"));
+        basicDataSource.setPassword(resourceBundle.getString("database.password"));
+        basicDataSource.setDriverClassName(resourceBundle.getString("database.driver"));
 
         dataSource = basicDataSource;
     }

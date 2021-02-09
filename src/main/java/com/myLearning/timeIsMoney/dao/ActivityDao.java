@@ -12,7 +12,7 @@ public interface ActivityDao {
 
     boolean save(Activity activity);
 
-    boolean deleteByName(String name);
+    boolean deleteById(int id);
 
     boolean update(Activity activity);
 

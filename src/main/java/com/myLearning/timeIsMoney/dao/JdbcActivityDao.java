@@ -5,18 +5,14 @@ import com.myLearning.timeIsMoney.entity.Activity;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class JdbcActivityDao implements ActivityDao {
 
     //ToDo
     // Out of here
-    private final static String SQL_SELECT_ALL = "SELECT * FROM activity;";
-    private final static String SQL_SELECT_BY_ID = "SELECT * FROM activity WHERE id = ?;";
-    private final static String SQL_SAVE = "INSERT INTO activity (name, description) VALUES (?, ?);";
-    private final static String SQL_DELETE_BY_NAME = "DELETE FROM activity WHERE name = ?;";
-    private final static String SQL_UPDATE_QUERY = "UPDATE activity SET name = ?, description = ? WHERE id = ?";
-
     private final ConnectionPool connectionPool = ConnectionPool.getInstance();
+    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
 
     @Override
     public List<Activity> findAll() {
@@ -24,7 +20,7 @@ public class JdbcActivityDao implements ActivityDao {
 
         try (Connection connection = connectionPool.getConnection();
             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL)) {
+             ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.activity.find.all"))) {
 
             while (resultSet.next()) {
                 Activity activity = new Activity();
@@ -45,7 +41,7 @@ public class JdbcActivityDao implements ActivityDao {
     @Override
     public Activity findById(int id) {
         try (Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_BY_ID)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.activity.find.by.id"))) {
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -68,7 +64,7 @@ public class JdbcActivityDao implements ActivityDao {
     @Override
     public boolean save(Activity activity) {
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.activity.insert"))) {
             preparedStatement.setString(1, activity.getName());
             preparedStatement.setString(2, activity.getDescription());
 
@@ -81,10 +77,10 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
-    public boolean deleteByName(String name) {
+    public boolean deleteById(int id) {
         try (Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_BY_NAME)) {
-            preparedStatement.setString(1, name);
+            PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.activity.delete"))) {
+            preparedStatement.setInt(1, id);
 
             return preparedStatement.execute();
 
@@ -97,7 +93,7 @@ public class JdbcActivityDao implements ActivityDao {
     @Override
     public boolean update(Activity activity) {
         try (Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_QUERY)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.activity.update"))) {
 
             preparedStatement.setString(1, activity.getName());
             preparedStatement.setString(2, activity.getDescription());

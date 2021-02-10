@@ -33,6 +33,8 @@ public class MainServlet extends HttpServlet {
             throws ServletException, IOException {
         String page = commandController.getCommand(request).execute(request);
 
+        System.out.println(request.getSession().getAttribute("auth"));
+
         if(page.contains("redirect:")) {
             response.sendRedirect(page.replace("redirect:", ""));
         } else {

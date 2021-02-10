@@ -60,6 +60,26 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
+    public User findByLogin(String login) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login"))) {
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            User user = new User();
+            user.setId(resultSet.getInt("id"));
+            user.setLogin(resultSet.getString("login"));
+            user.setPassword(resultSet.getString("password"));
+
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public boolean save(UserDto userDto) {
         try (Connection connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.insert"))) {
@@ -72,4 +92,6 @@ public class JdbcUserDao implements UserDao {
             throw new RuntimeException();
         }
     }
+
+
 }

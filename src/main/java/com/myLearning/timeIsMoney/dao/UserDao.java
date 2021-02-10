@@ -12,4 +12,6 @@ public interface UserDao {
     User findById(int id);
 
     boolean save(UserDto userDto);
+
+    User findByLogin(String login);
 }

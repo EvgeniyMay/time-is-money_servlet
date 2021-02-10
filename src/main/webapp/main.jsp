@@ -8,5 +8,6 @@
     <a href="/app/activity">Activity</a>
     <a href="/app/user">User</a>
     <a href="/app/registration">Sign up</a>
+    <a href="/app/login">Login</a>
 </body>
 </html>

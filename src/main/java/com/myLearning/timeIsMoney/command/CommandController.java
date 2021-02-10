@@ -1,7 +1,9 @@
 package com.myLearning.timeIsMoney.command;
 
 import com.myLearning.timeIsMoney.command.activity.*;
+import com.myLearning.timeIsMoney.command.auth.GetLoginCommand;
 import com.myLearning.timeIsMoney.command.auth.GetRegistrationCommand;
+import com.myLearning.timeIsMoney.command.auth.PostLoginCommand;
 import com.myLearning.timeIsMoney.command.auth.PostRegistrationCommand;
 import com.myLearning.timeIsMoney.command.user.GetUserCommand;
 import com.myLearning.timeIsMoney.dao.ActivityDao;
@@ -37,20 +39,24 @@ public class CommandController {
         UserDao userDao = daoFactory.createUserDao();
 
         getCommands = new HashMap<>();
+        postCommands = new HashMap<>();
+
         getCommands.put("/activity", new GetActivityCommand(activityDao));
         getCommands.put("/activity/add", new GetActivityCreateCommand());
         getCommands.put("/activity/delete", new GetActivityDeleteCommand());
         getCommands.put("/activity/edit", new GetActivityEditCommand(activityDao));
 
-        postCommands = new HashMap<>();
         postCommands.put("/activity/add", new PostActivityCreateCommand(activityDao));
         postCommands.put("/activity/delete", new PostActivityDeleteCommand(activityDao));
         postCommands.put("/activity/edit", new PostActivityEditCommand(activityDao));
 
+
         getCommands.put("/user", new GetUserCommand(userDao));
         getCommands.put("/registration", new GetRegistrationCommand());
+        getCommands.put("/login", new GetLoginCommand());
 
         postCommands.put("/registration", new PostRegistrationCommand(userDao));
+        postCommands.put("/login", new PostLoginCommand(userDao));
     }
 
     public Command getCommand(HttpServletRequest request) {

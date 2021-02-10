@@ -13,8 +13,16 @@
         </ul>
     </div>
     <form action="/app/registration" method="post">
-        <input type="text" name="login">
-        <input type="text" name="password">
+        <table>
+            <tr>
+                <td>Login</td>
+                <td><input type="text" name="login"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+        </table>
         <input type="submit" value="Sign up">
     </form>
 </body>

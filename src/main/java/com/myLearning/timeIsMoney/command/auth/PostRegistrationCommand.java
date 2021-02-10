@@ -26,7 +26,6 @@ public class PostRegistrationCommand implements Command {
 
         if(!UserValidator.getErrors(userDto).isEmpty()){
             request.setAttribute("errors", UserValidator.getErrors(userDto));
-            request.setAttribute("userForm", new UserDto());
             return "/WEB-INF/jsp/auth/registration.jsp";
         }
 
@@ -34,7 +33,6 @@ public class PostRegistrationCommand implements Command {
             userService.save(userDto);
         } catch (Exception e) {
             request.setAttribute("errors", Arrays.asList("Login exists"));
-            request.setAttribute("userForm", new UserDto());
             return "/WEB-INF/jsp/auth/registration.jsp";
         }
         return "redirect:/app";

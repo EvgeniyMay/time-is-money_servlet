@@ -24,11 +24,7 @@ public class CommandController {
 
     public static CommandController getInstance() {
         if(commandController == null) {
-            synchronized (CommandController.class) {
-                if(commandController == null) {
-                    commandController = new CommandController();
-                }
-            }
+            commandController = new CommandController();
         }
         return commandController;
     }

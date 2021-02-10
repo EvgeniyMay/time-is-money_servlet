@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainServlet extends HttpServlet {
 
@@ -15,6 +16,7 @@ public class MainServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         commandController = CommandController.getInstance();
+        getServletContext().setAttribute("authedUsers", new ArrayList<Integer>());
     }
 
     @Override
@@ -32,8 +34,6 @@ public class MainServlet extends HttpServlet {
     private void process(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String page = commandController.getCommand(request).execute(request);
-
-        System.out.println(request.getSession().getAttribute("auth"));
 
         if(page.contains("redirect:")) {
             response.sendRedirect(page.replace("redirect:", ""));

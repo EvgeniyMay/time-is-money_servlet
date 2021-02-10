@@ -1,8 +1,8 @@
 package com.myLearning.timeIsMoney.command.auth;
 
 import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.dao.UserDao;
 import com.myLearning.timeIsMoney.dto.UserDto;
+import com.myLearning.timeIsMoney.service.UserService;
 import com.myLearning.timeIsMoney.util.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +10,9 @@ import java.util.Arrays;
 
 public class PostRegistrationCommand implements Command {
 
-    private final UserDao userDao;
-    public PostRegistrationCommand(UserDao userDao) {
-        this.userDao = userDao;
+    private final UserService userService;
+    public PostRegistrationCommand(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class PostRegistrationCommand implements Command {
         }
 
         try {
-            userDao.save(userDto);
+            userService.save(userDto);
         } catch (Exception e) {
             request.setAttribute("errors", Arrays.asList("Login exists"));
             request.setAttribute("userForm", new UserDto());

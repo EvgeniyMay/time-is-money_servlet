@@ -1,5 +1,6 @@
 package com.myLearning.timeIsMoney.dao;
 
+import com.myLearning.timeIsMoney.dto.ActivityDto;
 import com.myLearning.timeIsMoney.entity.Activity;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface ActivityDao {
 
     Activity findById(int id);
 
-    boolean save(Activity activity);
+    boolean save(ActivityDto activityDto);
 
     boolean deleteById(int id);
 

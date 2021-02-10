@@ -8,6 +8,7 @@ import com.myLearning.timeIsMoney.entity.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class JdbcUserDao implements UserDao {
@@ -41,7 +42,7 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User findById(int id) {
+    public Optional<User> findById(int id) {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.id"))) {
             preparedStatement.setInt(1, id);
@@ -52,7 +53,7 @@ public class JdbcUserDao implements UserDao {
             user.setId(resultSet.getInt("id"));
             user.setLogin(resultSet.getString("login"));
 
-            return user;
+            return Optional.of(user);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -60,7 +61,7 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User findByLogin(String login) {
+    public Optional<User> findByLogin(String login) {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login"))) {
             preparedStatement.setString(1, login);
@@ -72,7 +73,7 @@ public class JdbcUserDao implements UserDao {
             user.setLogin(resultSet.getString("login"));
             user.setPassword(resultSet.getString("password"));
 
-            return user;
+            return Optional.of(user);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -92,6 +93,4 @@ public class JdbcUserDao implements UserDao {
             throw new RuntimeException();
         }
     }
-
-
 }

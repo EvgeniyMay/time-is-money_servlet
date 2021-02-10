@@ -1,6 +1,6 @@
 package com.myLearning.timeIsMoney.dto;
 
-public class ActivityDTO {
+public class ActivityDto {
 
     private String name;
     private String description;

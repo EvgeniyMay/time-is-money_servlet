@@ -1,22 +1,22 @@
 package com.myLearning.timeIsMoney.command.activity;
 
 import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.dao.ActivityDao;
+import com.myLearning.timeIsMoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class GetActivityEditCommand implements Command {
 
-    private final ActivityDao activityDao;
+    private final ActivityService activityService;
 
-    public GetActivityEditCommand(ActivityDao activityDao) {
-        this.activityDao = activityDao;
+    public GetActivityEditCommand(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("activity", activityDao.findById(id));
+        request.setAttribute("activity", activityService.findById(id));
 
         return "/WEB-INF/jsp/activity/activityEdit.jsp";
     }

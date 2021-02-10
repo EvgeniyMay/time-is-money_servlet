@@ -6,10 +6,10 @@ import com.myLearning.timeIsMoney.command.auth.GetRegistrationCommand;
 import com.myLearning.timeIsMoney.command.auth.PostLoginCommand;
 import com.myLearning.timeIsMoney.command.auth.PostRegistrationCommand;
 import com.myLearning.timeIsMoney.command.user.GetUserCommand;
-import com.myLearning.timeIsMoney.dao.ActivityDao;
 import com.myLearning.timeIsMoney.dao.DaoFactory;
-import com.myLearning.timeIsMoney.dao.UserDao;
 import com.myLearning.timeIsMoney.dao.impl.JdbcDaoFactory;
+import com.myLearning.timeIsMoney.service.ActivityService;
+import com.myLearning.timeIsMoney.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -35,28 +35,28 @@ public class CommandController {
 
     private CommandController () {
         DaoFactory daoFactory = JdbcDaoFactory.getInstance();
-        ActivityDao activityDao = daoFactory.createActivityDao();
-        UserDao userDao = daoFactory.createUserDao();
+        ActivityService activityService = new ActivityService(daoFactory);
+        UserService userService = new UserService(daoFactory);
 
         getCommands = new HashMap<>();
         postCommands = new HashMap<>();
 
-        getCommands.put("/activity", new GetActivityCommand(activityDao));
+        getCommands.put("/activity", new GetActivityCommand(activityService));
         getCommands.put("/activity/add", new GetActivityCreateCommand());
         getCommands.put("/activity/delete", new GetActivityDeleteCommand());
-        getCommands.put("/activity/edit", new GetActivityEditCommand(activityDao));
+        getCommands.put("/activity/edit", new GetActivityEditCommand(activityService));
 
-        postCommands.put("/activity/add", new PostActivityCreateCommand(activityDao));
-        postCommands.put("/activity/delete", new PostActivityDeleteCommand(activityDao));
-        postCommands.put("/activity/edit", new PostActivityEditCommand(activityDao));
+        postCommands.put("/activity/add", new PostActivityCreateCommand(activityService));
+        postCommands.put("/activity/delete", new PostActivityDeleteCommand(activityService));
+        postCommands.put("/activity/edit", new PostActivityEditCommand(activityService));
 
 
-        getCommands.put("/user", new GetUserCommand(userDao));
+        getCommands.put("/user", new GetUserCommand(userService));
         getCommands.put("/registration", new GetRegistrationCommand());
         getCommands.put("/login", new GetLoginCommand());
 
-        postCommands.put("/registration", new PostRegistrationCommand(userDao));
-        postCommands.put("/login", new PostLoginCommand(userDao));
+        postCommands.put("/registration", new PostRegistrationCommand(userService));
+        postCommands.put("/login", new PostLoginCommand(userService));
     }
 
     public Command getCommand(HttpServletRequest request) {

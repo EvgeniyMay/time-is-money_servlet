@@ -1,17 +1,17 @@
 package com.myLearning.timeIsMoney.command.activity;
 
 import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.dao.ActivityDao;
-import com.myLearning.timeIsMoney.entity.Activity;
+import com.myLearning.timeIsMoney.dto.ActivityDto;
+import com.myLearning.timeIsMoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class PostActivityCreateCommand implements Command {
 
-    private final ActivityDao activityDao;
+    private final ActivityService activityService;
 
-    public PostActivityCreateCommand(ActivityDao activityDao) {
-        this.activityDao = activityDao;
+    public PostActivityCreateCommand(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override
@@ -19,11 +19,11 @@ public class PostActivityCreateCommand implements Command {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
 
-        Activity activity = new Activity();
-        activity.setName(name);
-        activity.setDescription(description);
+        ActivityDto activityDto = new ActivityDto();
+        activityDto.setName(name);
+        activityDto.setDescription(description);
 
-        activityDao.save(activity);
+        activityService.save(activityDto);
 
         return "redirect:/app/activity";
     }

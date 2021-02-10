@@ -1,19 +1,18 @@
 package com.myLearning.timeIsMoney.command.auth;
 
 import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.dao.UserDao;
 import com.myLearning.timeIsMoney.entity.User;
+import com.myLearning.timeIsMoney.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 
 public class PostLoginCommand implements Command {
 
-    private final UserDao userDao;
+    private final UserService userService;
 
-    public PostLoginCommand(UserDao userDao) {
-        this.userDao = userDao;
+    public PostLoginCommand(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -28,7 +27,7 @@ public class PostLoginCommand implements Command {
 
         User user;
         try {
-             user = userDao.findByLogin(login);
+             user = userService.findByLogin(login);
         } catch (Exception e) {
             request.setAttribute("error", "Such user does not exist");
             return "/WEB-INF/jsp/auth/login.jsp";

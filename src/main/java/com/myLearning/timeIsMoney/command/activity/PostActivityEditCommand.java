@@ -1,17 +1,17 @@
 package com.myLearning.timeIsMoney.command.activity;
 
 import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.dao.ActivityDao;
 import com.myLearning.timeIsMoney.entity.Activity;
+import com.myLearning.timeIsMoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class PostActivityEditCommand implements Command {
 
-    private final ActivityDao activityDao;
+    private final ActivityService activityService;
 
-    public PostActivityEditCommand(ActivityDao activityDao) {
-        this.activityDao = activityDao;
+    public PostActivityEditCommand(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class PostActivityEditCommand implements Command {
         activity.setName(name);
         activity.setDescription(description);
 
-        activityDao.update(activity);
+        activityService.update(activity);
 
         return "redirect:/app/activity";
     }

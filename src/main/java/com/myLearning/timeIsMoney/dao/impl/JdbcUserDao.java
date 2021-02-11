@@ -2,7 +2,6 @@ package com.myLearning.timeIsMoney.dao.impl;
 
 import com.myLearning.timeIsMoney.dao.ConnectionPool;
 import com.myLearning.timeIsMoney.dao.UserDao;
-import com.myLearning.timeIsMoney.dto.UserDto;
 import com.myLearning.timeIsMoney.entity.User;
 
 import java.sql.*;
@@ -13,19 +12,18 @@ import java.util.ResourceBundle;
 
 public class JdbcUserDao implements UserDao {
 
-    private final ConnectionPool connectionPool;
+    private final Connection connection;
     private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
 
-    public JdbcUserDao(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+    public JdbcUserDao(Connection connection) {
+        this.connection = connection;
     }
 
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
 
-        try (Connection connection = connectionPool.getConnection();
-             Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.user.find.all"))) {
 
             while (resultSet.next()) {
@@ -43,8 +41,7 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public Optional<User> findById(int id) {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.id"))) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.id"))) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
@@ -62,8 +59,7 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public Optional<User> findByLogin(String login) {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login"))) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login"))) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
@@ -81,16 +77,31 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean save(UserDto userDto) {
-        try (Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.insert"))) {
-            preparedStatement.setString(1, userDto.getLogin());
-            preparedStatement.setString(2, userDto.getPassword());
+    public boolean create(User user) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.insert"))) {
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
 
             return preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public boolean update(User entity) {
+        return false;
+    }
+
+    @Override
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //ToDo:
+            // Add something
         }
     }
 }

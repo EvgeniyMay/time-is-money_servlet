@@ -30,7 +30,7 @@ public class PostRegistrationCommand implements Command {
         }
 
         try {
-            userService.save(userDto);
+            userService.create(userDto);
         } catch (Exception e) {
             request.setAttribute("errors", Arrays.asList("Login exists"));
             return "/WEB-INF/jsp/auth/registration.jsp";

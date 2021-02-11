@@ -2,7 +2,6 @@ package com.myLearning.timeIsMoney.service;
 
 import com.myLearning.timeIsMoney.dao.ActivityDao;
 import com.myLearning.timeIsMoney.dao.DaoFactory;
-import com.myLearning.timeIsMoney.dto.ActivityDto;
 import com.myLearning.timeIsMoney.entity.Activity;
 
 import java.util.List;
@@ -20,11 +19,11 @@ public class ActivityService {
     }
 
     public Activity findById(int id) {
-        return activityDao.findById(id);
+        return activityDao.findById(id).orElseThrow(() -> new RuntimeException());
     }
 
-    public boolean save(ActivityDto activityDto) {
-        return activityDao.save(activityDto);
+    public boolean create(Activity activity) {
+        return activityDao.create(activity);
     }
 
     public boolean update(Activity activity) {

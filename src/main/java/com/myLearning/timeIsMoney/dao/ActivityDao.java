@@ -1,20 +1,26 @@
 package com.myLearning.timeIsMoney.dao;
 
-import com.myLearning.timeIsMoney.dto.ActivityDto;
 import com.myLearning.timeIsMoney.entity.Activity;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface ActivityDao {
+public interface ActivityDao extends GenericDao<Activity> {
 
+    @Override
+    boolean create(Activity entity);
+
+    @Override
+    Optional<Activity> findById(int id);
+
+    @Override
     List<Activity> findAll();
 
-    Activity findById(int id);
-
-    boolean save(ActivityDto activityDto);
+    @Override
+    boolean update(Activity entity);
 
     boolean deleteById(int id);
 
-    boolean update(Activity activity);
-
+    @Override
+    void close();
 }

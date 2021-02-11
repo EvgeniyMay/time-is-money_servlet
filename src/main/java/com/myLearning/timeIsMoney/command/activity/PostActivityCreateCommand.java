@@ -1,7 +1,7 @@
 package com.myLearning.timeIsMoney.command.activity;
 
 import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.dto.ActivityDto;
+import com.myLearning.timeIsMoney.entity.Activity;
 import com.myLearning.timeIsMoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +19,11 @@ public class PostActivityCreateCommand implements Command {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
 
-        ActivityDto activityDto = new ActivityDto();
-        activityDto.setName(name);
-        activityDto.setDescription(description);
+        Activity activity = new Activity();
+        activity.setName(name);
+        activity.setDescription(description);
 
-        activityService.save(activityDto);
+        activityService.create(activity);
 
         return "redirect:/app/activity";
     }

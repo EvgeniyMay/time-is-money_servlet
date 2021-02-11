@@ -21,8 +21,12 @@ public class UserService {
                 .orElseThrow(()-> new RuntimeException());
     }
 
-    public boolean save(UserDto userDto) {
-        return userDao.save(userDto);
+    public boolean create(UserDto userDto) {
+        User user = new User();
+        user.setLogin(userDto.getLogin());
+        user.setPassword(userDto.getPassword());
+
+        return userDao.create(user);
     }
 
     public List<User> findAll() {

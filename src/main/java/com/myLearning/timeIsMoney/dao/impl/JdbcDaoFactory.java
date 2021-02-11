@@ -8,7 +8,7 @@ import com.myLearning.timeIsMoney.dao.UserDao;
 public class JdbcDaoFactory implements DaoFactory {
 
     private static JdbcDaoFactory jdbcDaoFactory;
-    private JdbcDaoFactory() { }
+    private JdbcDaoFactory() {}
     public static JdbcDaoFactory getInstance() {
         if(jdbcDaoFactory == null) {
             synchronized (JdbcDaoFactory.class) {
@@ -22,13 +22,14 @@ public class JdbcDaoFactory implements DaoFactory {
 
     private final ConnectionPool connectionPool = JdbcConnectionPool.getInstance();
 
+
     @Override
     public ActivityDao createActivityDao() {
-        return new JdbcActivityDao(connectionPool);
+        return new JdbcActivityDao(connectionPool.getConnection());
     }
 
     @Override
     public UserDao createUserDao() {
-        return new JdbcUserDao(connectionPool);
+        return new JdbcUserDao(connectionPool.getConnection());
     }
 }

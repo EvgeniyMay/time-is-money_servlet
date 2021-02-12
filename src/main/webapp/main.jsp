@@ -10,5 +10,6 @@
     <a href="/app/registration">Sign up</a>
     <a href="/app/login">Login</a>
     <a href="/app/profile">My Profile</a>
+    <a href="/app/logout">Logout</a>
 </body>
 </html>

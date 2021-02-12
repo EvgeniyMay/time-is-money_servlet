@@ -1,10 +1,7 @@
 package com.myLearning.timeIsMoney.command;
 
 import com.myLearning.timeIsMoney.command.activity.*;
-import com.myLearning.timeIsMoney.command.auth.GetLoginCommand;
-import com.myLearning.timeIsMoney.command.auth.GetRegistrationCommand;
-import com.myLearning.timeIsMoney.command.auth.PostLoginCommand;
-import com.myLearning.timeIsMoney.command.auth.PostRegistrationCommand;
+import com.myLearning.timeIsMoney.command.auth.*;
 import com.myLearning.timeIsMoney.command.user.GetUserCommand;
 import com.myLearning.timeIsMoney.command.user.GetUserProfile;
 import com.myLearning.timeIsMoney.dao.DaoFactory;
@@ -51,9 +48,11 @@ public class CommandController {
         getCommands.put("/user", new GetUserCommand(userService));
         getCommands.put("/registration", new GetRegistrationCommand());
         getCommands.put("/login", new GetLoginCommand());
+        getCommands.put("/logout", new GetLogoutCommand());
 
         postCommands.put("/registration", new PostRegistrationCommand(userService));
         postCommands.put("/login", new PostLoginCommand(userService));
+        postCommands.put("/logout", new PostLogoutCommand());
 
 //        User
         getCommands.put("/profile", new GetUserProfile());

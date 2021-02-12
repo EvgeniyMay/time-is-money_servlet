@@ -50,7 +50,7 @@ public class PostLoginCommand implements Command {
         authedUsers.add(user.getId());
 
         HttpSession session = request.getSession();
-        session.setAttribute("auth", user);
+        session.setAttribute("authUser", user);
 
         return "redirect:/";
     }

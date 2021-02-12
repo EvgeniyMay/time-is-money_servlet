@@ -13,7 +13,7 @@ public class PostLogoutCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("auth");
+        User user = (User)session.getAttribute("authUser");
 
         session.invalidate();
 

@@ -5,10 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-    <h2>Hello, ${sessionScope.get("auth").login}</h2>
+    <h2>Hello, ${sessionScope.get("authUser").login}</h2>
     <h3>Missions: </h3>
     <table>
-        <c:forEach items="${sessionScope.get('auth').missions}" var="mission">
+        <c:forEach items="${sessionScope.get('authUser').missions}" var="mission">
             <tr>
                 <td>${mission.activity.name}</td>
                 <td>${mission.startTime}</td>

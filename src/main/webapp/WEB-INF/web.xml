@@ -8,6 +8,7 @@
         <welcome-file>main.jsp</welcome-file>
     </welcome-file-list>
 
+
     <servlet>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>com.myLearning.timeIsMoney.MainServlet</servlet-class>
@@ -17,6 +18,7 @@
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
 
+
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.myLearning.timeIsMoney.filter.EncodingFilter</filter-class>
@@ -25,4 +27,24 @@
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.myLearning.timeIsMoney.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/app/*</url-pattern>
+    </filter-mapping>
+
+
+    <error-page>
+        <exception-type>com.myLearning.timeIsMoney.exception.PageNotFoundException</exception-type>
+        <location>/WEB-INF/jsp/error/404.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <exception-type>com.myLearning.timeIsMoney.exception.AuthorizationException</exception-type>
+        <location>/WEB-INF/jsp/auth/login.jsp</location>
+    </error-page>
 </web-app>

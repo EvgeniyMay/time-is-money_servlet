@@ -3,6 +3,7 @@ package com.myLearning.timeIsMoney.dao.mapper;
 import com.myLearning.timeIsMoney.entity.User;
 import com.myLearning.timeIsMoney.entity.enums.Role;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,5 +20,11 @@ public class UserMapper {
         user.setMissions(new ArrayList<>());
 
         return user;
+    }
+
+    public static void fillStatement(PreparedStatement ps, User user) throws SQLException {
+        ps.setString(1, user.getLogin());
+        ps.setString(2, user.getPassword());
+        ps.setString(3, Role.USER.toString());
     }
 }

@@ -9,5 +9,6 @@
     <a href="/app/user">User</a>
     <a href="/app/registration">Sign up</a>
     <a href="/app/login">Login</a>
+    <a href="/app/profile">My Profile</a>
 </body>
 </html>

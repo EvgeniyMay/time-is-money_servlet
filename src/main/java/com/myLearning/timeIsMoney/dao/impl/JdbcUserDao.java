@@ -27,7 +27,7 @@ public class JdbcUserDao implements UserDao {
         Map<Integer, Activity> activityMap = new HashMap<>();
 
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.user.find.all.join"))) {
+             ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.user.find.all"))) {
 
             while (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
@@ -63,25 +63,121 @@ public class JdbcUserDao implements UserDao {
 
         return new ArrayList<>(userMap.values());
     }
-
     @Override
     public Optional<User> findById(int id) {
-        throw new RuntimeException();
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.by.id"))) {
+
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+
+            Map<Integer, Activity> activityMap = new HashMap<>();
+            User user = null;
+
+            while (resultSet.next()) {
+                if(Objects.isNull(user)) {
+                    user = UserMapper.getFromResultSet(resultSet);
+                }
+
+                if(!Objects.isNull(resultSet.getString("mission_state"))) {
+                    Mission mission = MissionMapper.getFromResultSet(resultSet);
+
+                    int activityId = resultSet.getInt("activity_id");
+                    if(!activityMap.containsKey(activityId)) {
+                        Activity activity = ActivityMapper.getFromResultSet(resultSet);
+                        activityMap.put(activityId, activity);
+                    }
+
+                    Activity activity = activityMap.get(activityId);
+                    activity.getMissions().add(mission);
+
+                    mission.setUser(user);
+                    mission.setActivity(activity);
+
+                    user.getMissions().add(mission);
+                }
+            }
+
+            return Optional.ofNullable(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     @Override
     public Optional<User> findByLogin(String login) {
-        throw new RuntimeException();
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login"))) {
+            ps.setString(1, login);
+            ResultSet resultSet = ps.executeQuery();
+
+            Map<Integer, Activity> activityMap = new HashMap<>();
+            User user = null;
+
+            while (resultSet.next()) {
+                if(Objects.isNull(user)) {
+                    user = UserMapper.getFromResultSet(resultSet);
+                }
+
+                if(!Objects.isNull(resultSet.getString("mission_state"))) {
+                    Mission mission = MissionMapper.getFromResultSet(resultSet);
+
+                    int activityId = resultSet.getInt("activity_id");
+                    if(!activityMap.containsKey(activityId)) {
+                        Activity activity = ActivityMapper.getFromResultSet(resultSet);
+                        activityMap.put(activityId, activity);
+                    }
+
+                    Activity activity = activityMap.get(activityId);
+                    activity.getMissions().add(mission);
+
+                    mission.setUser(user);
+                    mission.setActivity(activity);
+
+                    user.getMissions().add(mission);
+                }
+            }
+
+            return Optional.ofNullable(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     @Override
     public boolean create(User user) {
-        throw new RuntimeException();
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.insert"))) {
+            UserMapper.fillStatement(ps, user);
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     @Override
-    public boolean update(User entity) {
-        throw new RuntimeException();
+    public boolean update(User user) {
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.update"))) {
+            UserMapper.fillStatement(ps, user);
+            ps.setInt(4, user.getId());
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    public boolean delete(User user) {
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.delete"))) {
+            ps.setInt(1, user.getId());
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     @Override

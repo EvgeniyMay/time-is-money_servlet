@@ -1,11 +1,14 @@
 package com.myLearning.timeIsMoney.entity;
 
+import java.util.List;
+
 public class Activity {
 
     private int id;
     private String name;
     private String description;
 
+    private List<Mission> missions;
 
     public int getId() {
         return id;
@@ -26,5 +29,12 @@ public class Activity {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Mission> getMissions() {
+        return missions;
+    }
+    public void setMissions(List<Mission> missions) {
+        this.missions = missions;
     }
 }

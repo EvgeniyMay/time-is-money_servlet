@@ -1,9 +1,6 @@
 package com.myLearning.timeIsMoney.dao.impl;
 
-import com.myLearning.timeIsMoney.dao.ActivityDao;
-import com.myLearning.timeIsMoney.dao.ConnectionPool;
-import com.myLearning.timeIsMoney.dao.DaoFactory;
-import com.myLearning.timeIsMoney.dao.UserDao;
+import com.myLearning.timeIsMoney.dao.*;
 
 public class JdbcDaoFactory implements DaoFactory {
 
@@ -22,6 +19,10 @@ public class JdbcDaoFactory implements DaoFactory {
 
     private final ConnectionPool connectionPool = JdbcConnectionPool.getInstance();
 
+    @Override
+    public UserDao createUserDao() {
+        return new JdbcUserDao(connectionPool.getConnection());
+    }
 
     @Override
     public ActivityDao createActivityDao() {
@@ -29,7 +30,7 @@ public class JdbcDaoFactory implements DaoFactory {
     }
 
     @Override
-    public UserDao createUserDao() {
-        return new JdbcUserDao(connectionPool.getConnection());
+    public MissionDao createMissionDao() {
+        return new JdbcMissionDao(connectionPool.getConnection());
     }
 }

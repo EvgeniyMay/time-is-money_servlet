@@ -5,10 +5,26 @@
     <title>Users</title>
 </head>
 <body>
-    <ul>
-        <c:forEach items="${requestScope.users}" var="user">
-            <li>${user.login}</li>
+    <table>
+        <c:forEach items="#{requestScope.users}" var="user">
+            <tr>
+                <td>${user.login}</td>
+                <td>
+                    <table>
+                        <c:forEach items="${user.missions}" var="mission">
+                            <tr>
+
+                                <td>${mission.activity.name}</td>
+                                <td>${mission.activity.description}</td>
+                                <td>${mission.startTime}</td>
+                                <td>${mission.endTime}</td>
+                                <td>${mission.state}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </td>
+            </tr>
         </c:forEach>
-    </ul>
+    </table>
 </body>
 </html>

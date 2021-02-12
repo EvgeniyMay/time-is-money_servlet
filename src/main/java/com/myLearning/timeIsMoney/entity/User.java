@@ -1,5 +1,9 @@
 package com.myLearning.timeIsMoney.entity;
 
+import com.myLearning.timeIsMoney.entity.enums.Role;
+
+import java.util.List;
+
 public class User {
 
     private int id;
@@ -7,6 +11,9 @@ public class User {
     private String login;
     private String password;
 
+    private Role role;
+
+    private List<Mission> missions;
 
     public int getId() {
         return id;
@@ -27,5 +34,19 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Mission> getMissions() {
+        return missions;
+    }
+    public void setMissions(List<Mission> missions) {
+        this.missions = missions;
     }
 }

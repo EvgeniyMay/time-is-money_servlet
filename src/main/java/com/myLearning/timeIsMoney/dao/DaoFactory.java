@@ -6,4 +6,6 @@ public interface DaoFactory {
 
     UserDao createUserDao();
 
+    MissionDao createMissionDao();
+
 }

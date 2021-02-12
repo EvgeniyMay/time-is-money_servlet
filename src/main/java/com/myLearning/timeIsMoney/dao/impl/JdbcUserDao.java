@@ -1,14 +1,15 @@
 package com.myLearning.timeIsMoney.dao.impl;
 
-import com.myLearning.timeIsMoney.dao.ConnectionPool;
 import com.myLearning.timeIsMoney.dao.UserDao;
+import com.myLearning.timeIsMoney.dao.mapper.ActivityMapper;
+import com.myLearning.timeIsMoney.dao.mapper.MissionMapper;
+import com.myLearning.timeIsMoney.dao.mapper.UserMapper;
+import com.myLearning.timeIsMoney.entity.Activity;
+import com.myLearning.timeIsMoney.entity.Mission;
 import com.myLearning.timeIsMoney.entity.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class JdbcUserDao implements UserDao {
 
@@ -19,79 +20,68 @@ public class JdbcUserDao implements UserDao {
         this.connection = connection;
     }
 
+
     @Override
     public List<User> findAll() {
-        List<User> users = new ArrayList<>();
+        Map<Integer, User> userMap = new HashMap<>();
+        Map<Integer, Activity> activityMap = new HashMap<>();
 
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.user.find.all"))) {
+             ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.user.find.all.join"))) {
 
             while (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setLogin(resultSet.getString("login"));
-                users.add(user);
+                int userId = resultSet.getInt("user_id");
+
+                if(!userMap.containsKey(userId)) {
+                   User user = UserMapper.getFromResultSet(resultSet);
+                   userMap.put(userId, user);
+                }
+
+                if(!Objects.isNull(resultSet.getString("mission_state"))) {
+                    Mission mission = MissionMapper.getFromResultSet(resultSet);
+
+                    int activityId = resultSet.getInt("activity_id");
+
+                    if(!activityMap.containsKey(activityId)) {
+                        Activity activity = ActivityMapper.getFromResultSet(resultSet);
+                        activityMap.put(activityId, activity);
+                    }
+
+                    Activity activity = activityMap.get(activityId);
+                    activity.getMissions().add(mission);
+
+                    User user = userMap.get(userId);
+                    user.getMissions().add(mission);
+
+                    mission.setUser(user);
+                    mission.setActivity(activity);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return users;
+        return new ArrayList<>(userMap.values());
     }
 
     @Override
     public Optional<User> findById(int id) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.id"))) {
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-
-            User user = new User();
-            user.setId(resultSet.getInt("id"));
-            user.setLogin(resultSet.getString("login"));
-
-            return Optional.of(user);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
+        throw new RuntimeException();
     }
 
     @Override
     public Optional<User> findByLogin(String login) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login"))) {
-            preparedStatement.setString(1, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-
-            User user = new User();
-            user.setId(resultSet.getInt("id"));
-            user.setLogin(resultSet.getString("login"));
-            user.setPassword(resultSet.getString("password"));
-
-            return Optional.of(user);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
+        throw new RuntimeException();
     }
 
     @Override
     public boolean create(User user) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("query.user.insert"))) {
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
-
-            return preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
+        throw new RuntimeException();
     }
 
     @Override
     public boolean update(User entity) {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override

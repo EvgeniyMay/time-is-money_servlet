@@ -1,12 +1,12 @@
-package com.myLearning.timeIsMoney.dao.impl;
+package com.mylearning.timeismoney.dao.impl;
 
-import com.myLearning.timeIsMoney.dao.ActivityDao;
-import com.myLearning.timeIsMoney.dao.mapper.ActivityMapper;
-import com.myLearning.timeIsMoney.dao.mapper.MissionMapper;
-import com.myLearning.timeIsMoney.dao.mapper.UserMapper;
-import com.myLearning.timeIsMoney.entity.Activity;
-import com.myLearning.timeIsMoney.entity.Mission;
-import com.myLearning.timeIsMoney.entity.User;
+import com.mylearning.timeismoney.dao.ActivityDao;
+import com.mylearning.timeismoney.dao.mapper.ActivityMapper;
+import com.mylearning.timeismoney.dao.mapper.MissionMapper;
+import com.mylearning.timeismoney.dao.mapper.UserMapper;
+import com.mylearning.timeismoney.entity.Activity;
+import com.mylearning.timeismoney.entity.Mission;
+import com.mylearning.timeismoney.entity.User;
 
 import java.sql.*;
 import java.util.*;

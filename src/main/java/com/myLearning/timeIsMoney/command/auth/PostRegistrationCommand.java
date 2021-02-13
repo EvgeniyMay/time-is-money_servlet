@@ -1,9 +1,9 @@
-package com.myLearning.timeIsMoney.command.auth;
+package com.mylearning.timeismoney.command.auth;
 
-import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.dto.UserDto;
-import com.myLearning.timeIsMoney.service.UserService;
-import com.myLearning.timeIsMoney.util.UserValidator;
+import com.mylearning.timeismoney.command.Command;
+import com.mylearning.timeismoney.dto.UserDto;
+import com.mylearning.timeismoney.service.UserService;
+import com.mylearning.timeismoney.util.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;

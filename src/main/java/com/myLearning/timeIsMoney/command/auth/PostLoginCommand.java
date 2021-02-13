@@ -1,8 +1,8 @@
-package com.myLearning.timeIsMoney.command.auth;
+package com.mylearning.timeismoney.command.auth;
 
-import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.entity.User;
-import com.myLearning.timeIsMoney.service.UserService;
+import com.mylearning.timeismoney.command.Command;
+import com.mylearning.timeismoney.entity.User;
+import com.mylearning.timeismoney.service.UserService;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

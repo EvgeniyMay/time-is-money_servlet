@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.dao.mapper;
+package com.mylearning.timeismoney.dao.mapper;
 
-import com.myLearning.timeIsMoney.entity.Activity;
+import com.mylearning.timeismoney.entity.Activity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

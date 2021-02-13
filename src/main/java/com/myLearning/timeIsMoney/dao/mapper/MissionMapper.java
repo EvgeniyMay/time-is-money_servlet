@@ -1,7 +1,7 @@
-package com.myLearning.timeIsMoney.dao.mapper;
+package com.mylearning.timeismoney.dao.mapper;
 
-import com.myLearning.timeIsMoney.entity.Mission;
-import com.myLearning.timeIsMoney.entity.enums.MissionState;
+import com.mylearning.timeismoney.entity.Mission;
+import com.mylearning.timeismoney.entity.enums.MissionState;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

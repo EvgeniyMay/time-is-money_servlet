@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>MainServlet</servlet-name>
-        <servlet-class>com.myLearning.timeIsMoney.MainServlet</servlet-class>
+        <servlet-class>com.mylearning.timeismoney.MainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
@@ -21,7 +21,7 @@
 
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>com.myLearning.timeIsMoney.filter.EncodingFilter</filter-class>
+        <filter-class>com.mylearning.timeismoney.filter.EncodingFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
@@ -30,7 +30,7 @@
 
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>com.myLearning.timeIsMoney.filter.AuthFilter</filter-class>
+        <filter-class>com.mylearning.timeismoney.filter.AuthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
@@ -39,12 +39,12 @@
 
 
     <error-page>
-        <exception-type>com.myLearning.timeIsMoney.exception.PageNotFoundException</exception-type>
+        <exception-type>com.mylearning.timeismoney.exception.PageNotFoundException</exception-type>
         <location>/WEB-INF/jsp/error/404.jsp</location>
     </error-page>
     
     <error-page>
-        <exception-type>com.myLearning.timeIsMoney.exception.AuthorizationException</exception-type>
+        <exception-type>com.mylearning.timeismoney.exception.AuthorizationException</exception-type>
         <location>/WEB-INF/jsp/auth/login.jsp</location>
     </error-page>
 </web-app>

@@ -1,4 +1,4 @@
-package com.myLearning.timeIsMoney.filter;
+package com.mylearning.timeismoney.filter;
 
 import javax.servlet.*;
 import java.io.IOException;

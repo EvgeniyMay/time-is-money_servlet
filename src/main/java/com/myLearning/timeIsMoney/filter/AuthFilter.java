@@ -1,9 +1,9 @@
-package com.myLearning.timeIsMoney.filter;
+package com.mylearning.timeismoney.filter;
 
-import com.myLearning.timeIsMoney.entity.User;
-import com.myLearning.timeIsMoney.entity.enums.Role;
-import com.myLearning.timeIsMoney.exception.AuthorizationException;
-import com.myLearning.timeIsMoney.exception.PageNotFoundException;
+import com.mylearning.timeismoney.entity.User;
+import com.mylearning.timeismoney.entity.enums.Role;
+import com.mylearning.timeismoney.exception.AuthorizationException;
+import com.mylearning.timeismoney.exception.PageNotFoundException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

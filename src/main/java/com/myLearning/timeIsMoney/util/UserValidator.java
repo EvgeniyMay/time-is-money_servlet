@@ -1,9 +1,10 @@
-package com.myLearning.timeIsMoney.util;
+package com.mylearning.timeismoney.util;
 
-import com.myLearning.timeIsMoney.dto.UserDto;
+import com.mylearning.timeismoney.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserValidator {
 
@@ -18,7 +19,7 @@ public class UserValidator {
     }
 
     private static void checkLoginLength(List<String> errors, String login) {
-        if(login == null) {
+        if(Objects.isNull(login)) {
             errors.add("Length login error");
             return;
         }
@@ -29,7 +30,7 @@ public class UserValidator {
     }
 
     private static void checkPasswordLength(List<String> errors, String password) {
-        if(password == null) {
+        if(Objects.isNull(password)) {
             errors.add("Length password error");
             return;
         }

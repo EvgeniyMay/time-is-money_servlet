@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.dao.impl;
+package com.mylearning.timeismoney.dao.impl;
 
-import com.myLearning.timeIsMoney.dao.ConnectionPool;
+import com.mylearning.timeismoney.dao.ConnectionPool;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;

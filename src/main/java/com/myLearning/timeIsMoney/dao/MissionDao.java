@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.dao;
+package com.mylearning.timeismoney.dao;
 
-import com.myLearning.timeIsMoney.entity.Mission;
+import com.mylearning.timeismoney.entity.Mission;
 
 public interface MissionDao extends GenericDao<Mission> {
 

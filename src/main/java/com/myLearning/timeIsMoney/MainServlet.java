@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney;
+package com.mylearning.timeismoney;
 
-import com.myLearning.timeIsMoney.command.*;
+import com.mylearning.timeismoney.command.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

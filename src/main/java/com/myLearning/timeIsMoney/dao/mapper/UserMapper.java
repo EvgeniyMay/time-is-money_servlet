@@ -1,7 +1,7 @@
-package com.myLearning.timeIsMoney.dao.mapper;
+package com.mylearning.timeismoney.dao.mapper;
 
-import com.myLearning.timeIsMoney.entity.User;
-import com.myLearning.timeIsMoney.entity.enums.Role;
+import com.mylearning.timeismoney.entity.User;
+import com.mylearning.timeismoney.entity.enums.Role;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

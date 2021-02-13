@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.command.auth;
+package com.mylearning.timeismoney.command.auth;
 
-import com.myLearning.timeIsMoney.command.Command;
+import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 

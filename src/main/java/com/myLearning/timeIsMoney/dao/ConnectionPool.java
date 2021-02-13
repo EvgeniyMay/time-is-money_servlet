@@ -1,4 +1,4 @@
-package com.myLearning.timeIsMoney.dao;
+package com.mylearning.timeismoney.dao;
 
 import java.sql.Connection;
 

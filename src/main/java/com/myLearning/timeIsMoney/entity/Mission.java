@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.entity;
+package com.mylearning.timeismoney.entity;
 
-import com.myLearning.timeIsMoney.entity.enums.MissionState;
+import com.mylearning.timeismoney.entity.enums.MissionState;
 
 import java.time.LocalDateTime;
 

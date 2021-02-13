@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.entity;
+package com.mylearning.timeismoney.entity;
 
-import com.myLearning.timeIsMoney.entity.enums.Role;
+import com.mylearning.timeismoney.entity.enums.Role;
 
 import java.util.List;
 

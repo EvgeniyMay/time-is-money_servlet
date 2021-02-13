@@ -1,7 +1,7 @@
-package com.myLearning.timeIsMoney.dao.impl;
+package com.mylearning.timeismoney.dao.impl;
 
-import com.myLearning.timeIsMoney.dao.MissionDao;
-import com.myLearning.timeIsMoney.entity.Mission;
+import com.mylearning.timeismoney.dao.MissionDao;
+import com.mylearning.timeismoney.entity.Mission;
 
 import java.sql.*;
 import java.util.List;

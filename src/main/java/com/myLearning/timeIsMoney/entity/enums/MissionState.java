@@ -1,4 +1,4 @@
-package com.myLearning.timeIsMoney.entity.enums;
+package com.mylearning.timeismoney.entity.enums;
 
 public enum MissionState {
 

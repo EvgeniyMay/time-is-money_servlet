@@ -1,4 +1,4 @@
-package com.myLearning.timeIsMoney.entity;
+package com.mylearning.timeismoney.entity;
 
 import java.util.List;
 

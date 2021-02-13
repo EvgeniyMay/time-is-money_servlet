@@ -1,4 +1,4 @@
-package com.myLearning.timeIsMoney.entity.enums;
+package com.mylearning.timeismoney.entity.enums;
 
 import java.util.Arrays;
 import java.util.List;

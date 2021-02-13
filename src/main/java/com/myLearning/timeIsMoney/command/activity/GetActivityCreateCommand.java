@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.command.activity;
+package com.mylearning.timeismoney.command.activity;
 
-import com.myLearning.timeIsMoney.command.Command;
+import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 

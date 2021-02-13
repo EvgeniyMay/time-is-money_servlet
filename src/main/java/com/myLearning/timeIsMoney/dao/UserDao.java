@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.dao;
+package com.mylearning.timeismoney.dao;
 
-import com.myLearning.timeIsMoney.entity.User;
+import com.mylearning.timeismoney.entity.User;
 
 import java.util.List;
 import java.util.Optional;

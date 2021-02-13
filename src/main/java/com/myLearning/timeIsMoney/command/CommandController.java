@@ -1,13 +1,13 @@
-package com.myLearning.timeIsMoney.command;
+package com.mylearning.timeismoney.command;
 
-import com.myLearning.timeIsMoney.command.activity.*;
-import com.myLearning.timeIsMoney.command.auth.*;
-import com.myLearning.timeIsMoney.command.user.GetUserCommand;
-import com.myLearning.timeIsMoney.command.user.GetUserProfile;
-import com.myLearning.timeIsMoney.dao.DaoFactory;
-import com.myLearning.timeIsMoney.dao.impl.JdbcDaoFactory;
-import com.myLearning.timeIsMoney.service.ActivityService;
-import com.myLearning.timeIsMoney.service.UserService;
+import com.mylearning.timeismoney.command.activity.*;
+import com.mylearning.timeismoney.command.auth.*;
+import com.mylearning.timeismoney.command.user.GetUserCommand;
+import com.mylearning.timeismoney.command.user.GetUserProfile;
+import com.mylearning.timeismoney.dao.DaoFactory;
+import com.mylearning.timeismoney.dao.impl.JdbcDaoFactory;
+import com.mylearning.timeismoney.service.ActivityService;
+import com.mylearning.timeismoney.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.myLearning.timeIsMoney.command;
+package com.mylearning.timeismoney.command;
 
 import javax.servlet.http.HttpServletRequest;
 

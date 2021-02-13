@@ -1,7 +1,7 @@
-package com.myLearning.timeIsMoney.command.mission;
+package com.mylearning.timeismoney.command.mission;
 
-import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.service.UserService;
+import com.mylearning.timeismoney.command.Command;
+import com.mylearning.timeismoney.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 

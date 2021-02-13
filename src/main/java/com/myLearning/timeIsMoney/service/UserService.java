@@ -1,9 +1,9 @@
-package com.myLearning.timeIsMoney.service;
+package com.mylearning.timeismoney.service;
 
-import com.myLearning.timeIsMoney.dao.DaoFactory;
-import com.myLearning.timeIsMoney.dao.UserDao;
-import com.myLearning.timeIsMoney.dto.UserDto;
-import com.myLearning.timeIsMoney.entity.User;
+import com.mylearning.timeismoney.dao.DaoFactory;
+import com.mylearning.timeismoney.dao.UserDao;
+import com.mylearning.timeismoney.dto.UserDto;
+import com.mylearning.timeismoney.entity.User;
 
 import java.util.List;
 

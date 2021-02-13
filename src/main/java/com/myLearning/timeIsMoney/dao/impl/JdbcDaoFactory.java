@@ -1,6 +1,6 @@
-package com.myLearning.timeIsMoney.dao.impl;
+package com.mylearning.timeismoney.dao.impl;
 
-import com.myLearning.timeIsMoney.dao.*;
+import com.mylearning.timeismoney.dao.*;
 
 public class JdbcDaoFactory implements DaoFactory {
 

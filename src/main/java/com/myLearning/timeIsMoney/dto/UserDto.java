@@ -1,4 +1,4 @@
-package com.myLearning.timeIsMoney.dto;
+package com.mylearning.timeismoney.dto;
 
 public class UserDto {
 

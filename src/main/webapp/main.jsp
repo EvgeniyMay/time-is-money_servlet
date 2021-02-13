@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
+        <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
     <h2><fmt:message key="welcome" /></h2>
 </body>

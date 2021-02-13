@@ -14,7 +14,12 @@ public enum Role {
             "/",
             "/profile",
             "/logout",
-            "/user"
+            "/user",
+
+            "/activity",
+            "/activity/add",
+            "/activity/edit",
+            "/activity/delete"
     )),
     USER(Arrays.asList(
             "/",

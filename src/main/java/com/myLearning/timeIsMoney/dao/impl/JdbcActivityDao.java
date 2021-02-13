@@ -133,7 +133,7 @@ public class JdbcActivityDao implements ActivityDao {
     public boolean update(Activity activity) {
         try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.update"))) {
             ActivityMapper.basicFillStatement(ps, activity);
-            ps.setInt(4, activity.getId());
+            ps.setInt(3, activity.getId());
 
             return ps.execute();
         } catch (SQLException e) {

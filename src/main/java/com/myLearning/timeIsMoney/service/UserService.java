@@ -9,16 +9,24 @@ import java.util.List;
 
 public class UserService {
 
-    private final UserDao userDao;
+    private final DaoFactory daoFactory;
 
     public UserService(DaoFactory daoFactory) {
-        this.userDao = daoFactory.createUserDao();
+        this.daoFactory = daoFactory;
     }
 
 
+    public List<User> findAll() {
+        try(UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findAll();
+        }
+    }
+
     public User findByLogin(String login) {
-        return userDao.findByLogin(login)
-                .orElseThrow(()-> new RuntimeException());
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findByLogin(login)
+                    .orElseThrow(() -> new RuntimeException());
+        }
     }
 
     public boolean create(UserDto userDto) {
@@ -26,10 +34,8 @@ public class UserService {
         user.setLogin(userDto.getLogin());
         user.setPassword(userDto.getPassword());
 
-        return userDao.create(user);
-    }
-
-    public List<User> findAll() {
-        return userDao.findAll();
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.create(user);
+        }
     }
 }

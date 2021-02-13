@@ -8,31 +8,41 @@ import java.util.List;
 
 public class ActivityService {
 
-    private final ActivityDao activityDao;
+    private final DaoFactory daoFactory;
 
     public ActivityService(DaoFactory daoFactory) {
-        this.activityDao = daoFactory.createActivityDao();
+        this.daoFactory = daoFactory;
     }
 
 
     public List<Activity> findAll() {
-        return activityDao.findAll();
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.findAll();
+        }
     }
 
     public Activity findById(int id) {
-        return activityDao.findById(id).orElseThrow(() -> new RuntimeException());
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.findById(id)
+                    .orElseThrow(() -> new RuntimeException());
+        }
     }
 
     public boolean create(Activity activity) {
-        return activityDao.create(activity);
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.create(activity);
+        }
     }
 
     public boolean update(Activity activity) {
-        return activityDao.update(activity);
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.update(activity);
+        }
     }
 
     public boolean deleteById(int id) {
-        return activityDao.deleteById(id);
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.deleteById(id);
+        }
     }
-
 }

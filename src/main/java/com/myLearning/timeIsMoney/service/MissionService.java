@@ -8,14 +8,16 @@ import java.util.List;
 
 public class MissionService {
 
-    public final MissionDao missionDao;
+    public final DaoFactory daoFactory;
 
     public MissionService(DaoFactory daoFactory) {
-        this.missionDao = daoFactory.createMissionDao();
+        this.daoFactory = daoFactory;
     }
 
 
     public List<Mission> findAll() {
-        return missionDao.findAll();
+        try(MissionDao missionDao = daoFactory.createMissionDao()) {
+            return missionDao.findAll();
+        }
     }
 }

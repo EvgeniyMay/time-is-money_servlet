@@ -9,6 +9,7 @@ import java.util.List;
 public class ActivityService {
 
     private final ActivityDao activityDao;
+
     public ActivityService(DaoFactory daoFactory) {
         this.activityDao = daoFactory.createActivityDao();
     }

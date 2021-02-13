@@ -1,12 +1,15 @@
 package com.mylearning.timeismoney.dao.impl;
 
 import com.mylearning.timeismoney.dao.MissionDao;
+import com.mylearning.timeismoney.dao.mapper.ActivityMapper;
+import com.mylearning.timeismoney.dao.mapper.MissionMapper;
+import com.mylearning.timeismoney.dao.mapper.UserMapper;
+import com.mylearning.timeismoney.entity.Activity;
 import com.mylearning.timeismoney.entity.Mission;
+import com.mylearning.timeismoney.entity.User;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class JdbcMissionDao implements MissionDao {
 
@@ -17,14 +20,40 @@ public class JdbcMissionDao implements MissionDao {
         this.connection = connection;
     }
 
-    private static final String SELECT_ALL = "SELECT * FROM mission";
-    private static final String INSERT = "INSERT INTO mission (user_id, activity_id, start_time, end_time, state) VALUES (?, ?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE mission SET user_id = ?, activity_id = ?, start_time = ?, end_time = ?, state = ? where id = ?";
-    private static final String FIND_BY_ID = "SELECT * FROM mission WHERE id = ?";
-
     @Override
     public List<Mission> findAll() {
-        throw new RuntimeException();
+        Map<Integer, User> userMap = new HashMap<>();
+        Map<Integer, Activity> activityMap = new HashMap<>();
+        List<Mission> missions = new ArrayList<>();
+
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.find.all"))) {
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int userId = resultSet.getInt("user_id");
+                if(!userMap.containsKey(userId)) {
+                    User user = UserMapper.getFromResultSet(resultSet);
+                    userMap.put(userId, user);
+                }
+
+                int activityId = resultSet.getInt("activity_id");
+                if(!activityMap.containsKey(activityId)) {
+                    Activity activity = ActivityMapper.getFromResultSet(resultSet);
+                    activityMap.put(activityId, activity);
+                }
+
+                Mission mission = MissionMapper.getFromResultSet(resultSet);
+                mission.setUser(userMap.get(userId));
+                mission.setActivity(activityMap.get(activityId));
+
+                missions.add(mission);
+            }
+
+            return missions;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     @Override

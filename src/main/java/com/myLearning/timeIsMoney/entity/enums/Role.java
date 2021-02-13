@@ -19,7 +19,9 @@ public enum Role {
             "/activity",
             "/activity/add",
             "/activity/edit",
-            "/activity/delete"
+            "/activity/delete",
+
+            "/mission"
     )),
     USER(Arrays.asList(
             "/",

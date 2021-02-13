@@ -28,7 +28,7 @@
                 <c:if test="${sessionScope.authUser.role == 'ADMIN'}">
                     <a href="<c:url value="/app/activity"/>"><fmt:message key="nav.activities" /></a>
                     <a href="<c:url value="/app/user"/>"><fmt:message key="nav.users" /></a>
-                    <a href="<c:url value="/app/missions"/>"><fmt:message key="nav.missions" /></a>
+                    <a href="<c:url value="/app/mission"/>"><fmt:message key="nav.missions" /></a>
                 </c:if>
             </nav>
         </c:if>

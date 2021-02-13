@@ -2,11 +2,13 @@ package com.mylearning.timeismoney.command;
 
 import com.mylearning.timeismoney.command.activity.*;
 import com.mylearning.timeismoney.command.auth.*;
+import com.mylearning.timeismoney.command.mission.GetMissionCommand;
 import com.mylearning.timeismoney.command.user.GetUserCommand;
 import com.mylearning.timeismoney.command.user.GetUserProfile;
 import com.mylearning.timeismoney.dao.DaoFactory;
 import com.mylearning.timeismoney.dao.impl.JdbcDaoFactory;
 import com.mylearning.timeismoney.service.ActivityService;
+import com.mylearning.timeismoney.service.MissionService;
 import com.mylearning.timeismoney.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +33,7 @@ public class CommandController {
         DaoFactory daoFactory = JdbcDaoFactory.getInstance();
         ActivityService activityService = new ActivityService(daoFactory);
         UserService userService = new UserService(daoFactory);
+        MissionService missionService = new MissionService(daoFactory);
 
         getCommands = new HashMap<>();
         postCommands = new HashMap<>();
@@ -45,7 +48,6 @@ public class CommandController {
         postCommands.put("/activity/delete", new PostActivityDeleteCommand(activityService));
         postCommands.put("/activity/edit", new PostActivityEditCommand(activityService));
 //        Auth
-        getCommands.put("/user", new GetUserCommand(userService));
         getCommands.put("/registration", new GetRegistrationCommand());
         getCommands.put("/login", new GetLoginCommand());
         getCommands.put("/logout", new GetLogoutCommand());
@@ -53,9 +55,11 @@ public class CommandController {
         postCommands.put("/registration", new PostRegistrationCommand(userService));
         postCommands.put("/login", new PostLoginCommand(userService));
         postCommands.put("/logout", new PostLogoutCommand());
-
 //        User
+        getCommands.put("/user", new GetUserCommand(userService));
         getCommands.put("/profile", new GetUserProfile());
+//        Mission
+        getCommands.put("/mission", new GetMissionCommand(missionService));
     }
 
     public Command getCommand(HttpServletRequest request) {

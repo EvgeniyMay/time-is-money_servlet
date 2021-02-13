@@ -1,22 +1,23 @@
 package com.mylearning.timeismoney.command.mission;
 
 import com.mylearning.timeismoney.command.Command;
+import com.mylearning.timeismoney.service.MissionService;
 import com.mylearning.timeismoney.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class GetMissionCommand implements Command {
 
-    private final UserService userService;
+    private final MissionService missionService;
 
-    public GetMissionCommand(UserService userService) {
-        this.userService = userService;
+    public GetMissionCommand(MissionService missionService) {
+        this.missionService = missionService;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("users", userService.findAll());
+        request.setAttribute("missions", missionService.findAll());
 
-        return "/WEB-INF/jsp/activity/activityAdd.jsp";
+        return "/WEB-INF/jsp/mission/missionAll.jsp";
     }
 }

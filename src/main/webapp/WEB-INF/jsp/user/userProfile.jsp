@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+    <header>
+        <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
+    </header>
     <h2>Hello, ${sessionScope.get("authUser").login}</h2>
     <h3>Missions: </h3>
     <table>

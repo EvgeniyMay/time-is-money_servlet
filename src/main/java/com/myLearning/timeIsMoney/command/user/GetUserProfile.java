@@ -1,7 +1,6 @@
 package com.myLearning.timeIsMoney.command.user;
 
 import com.myLearning.timeIsMoney.command.Command;
-import com.myLearning.timeIsMoney.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 

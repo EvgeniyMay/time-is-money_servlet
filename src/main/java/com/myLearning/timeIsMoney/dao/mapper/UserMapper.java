@@ -22,7 +22,7 @@ public class UserMapper {
         return user;
     }
 
-    public static void fillStatement(PreparedStatement ps, User user) throws SQLException {
+    public static void basicFillStatement(PreparedStatement ps, User user) throws SQLException {
         ps.setString(1, user.getLogin());
         ps.setString(2, user.getPassword());
         ps.setString(3, Role.USER.toString());

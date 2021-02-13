@@ -5,6 +5,10 @@
     <title>Registration</title>
 </head>
 <body>
+    <header>
+        <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
+    </header>
+    <h2>Registration</h2>
     <div>
         <ul>
             <c:forEach items="${requestScope.errors}" var="error">

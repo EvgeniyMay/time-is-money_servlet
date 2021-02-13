@@ -12,10 +12,6 @@ public class LocalizationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
 
-//        if(((HttpServletRequest)request).getSession().getAttribute("lang") == null) {
-//            ((HttpServletRequest) request).getSession().setAttribute("lang", "en");
-//        }
-
         if (request.getParameter("lang") != null) {
             ((HttpServletRequest)request).getSession().setAttribute("lang", request.getParameter("lang"));
         }

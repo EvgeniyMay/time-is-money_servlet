@@ -16,14 +16,14 @@
                 <td>${activity.name}</td>
                 <td>${activity.description}</td>
                 <td>
-                    <form action="/app/activity/delete" method="GET">
+                    <form action="<c:url value="/app/activity/delete"/>" method="GET">
                         <input type="hidden" name="id" value="${activity.id}">
                         <input type="hidden" name="name" value="${activity.name}">
                         <input type="submit" value="Delete">
                     </form>
                 </td>
                 <td>
-                    <form action="/app/activity/edit" method="GET">
+                    <form action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
                         <input type="hidden" name="id" value="${activity.id}">
                         <input type="submit" value="Edit">
                     </form>
@@ -31,6 +31,6 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="/app/activity/add">Create new</a>
+    <a href="${pageContext.request.contextPath}/app/activity/add">Create new</a>
 </body>
 </html>

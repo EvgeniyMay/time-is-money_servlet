@@ -31,7 +31,6 @@ public class JdbcUserDao implements UserDao {
 
             while (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
-
                 if(!userMap.containsKey(userId)) {
                    User user = UserMapper.getFromResultSet(resultSet);
                    userMap.put(userId, user);
@@ -41,7 +40,6 @@ public class JdbcUserDao implements UserDao {
                     Mission mission = MissionMapper.getFromResultSet(resultSet);
 
                     int activityId = resultSet.getInt("activity_id");
-
                     if(!activityMap.containsKey(activityId)) {
                         Activity activity = ActivityMapper.getFromResultSet(resultSet);
                         activityMap.put(activityId, activity);
@@ -57,21 +55,22 @@ public class JdbcUserDao implements UserDao {
                     mission.setActivity(activity);
                 }
             }
+
+            return new ArrayList<>(userMap.values());
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
-
-        return new ArrayList<>(userMap.values());
     }
+
     @Override
     public Optional<User> findById(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.by.id"))) {
+        Map<Integer, Activity> activityMap = new HashMap<>();
+        User user = null;
 
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.by.id"))) {
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
-
-            Map<Integer, Activity> activityMap = new HashMap<>();
-            User user = null;
 
             while (resultSet.next()) {
                 if(Objects.isNull(user)) {
@@ -106,12 +105,13 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public Optional<User> findByLogin(String login) {
+
+        Map<Integer, Activity> activityMap = new HashMap<>();
+        User user = null;
+
         try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login"))) {
             ps.setString(1, login);
             ResultSet resultSet = ps.executeQuery();
-
-            Map<Integer, Activity> activityMap = new HashMap<>();
-            User user = null;
 
             while (resultSet.next()) {
                 if(Objects.isNull(user)) {
@@ -147,7 +147,7 @@ public class JdbcUserDao implements UserDao {
     @Override
     public boolean create(User user) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.insert"))) {
-            UserMapper.fillStatement(ps, user);
+            UserMapper.basicFillStatement(ps, user);
 
             return ps.execute();
         } catch (SQLException e) {
@@ -159,7 +159,7 @@ public class JdbcUserDao implements UserDao {
     @Override
     public boolean update(User user) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.update"))) {
-            UserMapper.fillStatement(ps, user);
+            UserMapper.basicFillStatement(ps, user);
             ps.setInt(4, user.getId());
 
             return ps.execute();
@@ -169,6 +169,8 @@ public class JdbcUserDao implements UserDao {
         }
     }
 
+    //ToDo
+    // Delete missions of user
     public boolean delete(User user) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.delete"))) {
             ps.setInt(1, user.getId());

@@ -4,6 +4,9 @@
     <title>Logout</title>
 </head>
 <body>
+    <header>
+        <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
+    </header>
     <h2>Are you sure you want logout ?</h2>
     <form action="/app/logout" method="POST">
         <input type="submit" value="Yes">

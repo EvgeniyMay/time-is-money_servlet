@@ -5,10 +5,14 @@
     <title>Login</title>
 </head>
 <body>
+    <header>
+        <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
+    </header>
+    <h2>Login page</h2>
     <div>
         <p>${requestScope.error}</p>
     </div>
-    <form action="/app/login" method="POST">
+    <form action="<c:url value="/app/login"/>" method="POST">
         <table>
             <tr>
                 <td>Login</td>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -6,7 +7,7 @@
 <body>
     <h1>Delete page</h1>
     <h2>Are you sure you want to delete <span>${requestScope.name}</span> ?</h2>
-    <form action="/app/activity/delete" method="POST">
+    <form action="<c:url value="/app/activity/delete"/>" method="POST">
         <input type="hidden" name="id" value="${requestScope.id}">
         <input type="submit" value="Delete">
     </form>

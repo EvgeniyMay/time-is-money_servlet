@@ -2,6 +2,7 @@ package com.myLearning.timeIsMoney.dao.mapper;
 
 import com.myLearning.timeIsMoney.entity.Activity;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,5 +18,10 @@ public class ActivityMapper {
         activity.setMissions(new ArrayList<>());
 
         return activity;
+    }
+
+    public static void basicFillStatement(PreparedStatement ps, Activity activity) throws SQLException {
+        ps.setString(1, activity.getName());
+        ps.setString(2, activity.getDescription());
     }
 }

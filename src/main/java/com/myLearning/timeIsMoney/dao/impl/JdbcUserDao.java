@@ -64,6 +64,25 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
+    public List<User> findAllProxy() {
+        List<User> proxyUsers = new ArrayList<>();
+
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.all.proxy"));
+            ResultSet resultSet = ps.executeQuery()) {
+
+            while (resultSet.next()) {
+                User proxyUser = UserMapper.getProxyFromResultSet(resultSet);
+                proxyUsers.add(proxyUser);
+            }
+
+            return proxyUsers;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public Optional<User> findById(int id) {
         Map<Integer, Activity> activityMap = new HashMap<>();
         User user = null;

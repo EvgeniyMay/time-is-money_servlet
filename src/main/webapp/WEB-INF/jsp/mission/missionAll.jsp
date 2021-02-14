@@ -13,6 +13,7 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
+    <a href="<c:url value="/app/mission/add"/>">Create new</a>
     <table>
         <tr>
             <th>Activity</th>

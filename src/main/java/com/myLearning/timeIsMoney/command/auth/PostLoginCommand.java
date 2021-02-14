@@ -29,7 +29,8 @@ public class PostLoginCommand implements Command {
 
         User user;
         try {
-             user = userService.findByLogin(login);
+             user = userService.findByLoginProxy(login);
+
         } catch (Exception e) {
             request.setAttribute("error", "Such user does not exist");
             return "/WEB-INF/jsp/auth/login.jsp";

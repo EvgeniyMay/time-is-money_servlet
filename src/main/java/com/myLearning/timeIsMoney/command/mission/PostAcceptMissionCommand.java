@@ -21,7 +21,7 @@ public class PostAcceptMissionCommand implements Command {
         Mission mission = new Mission();
         mission.setId(missionId);
 
-        missionService.updateMissionState(mission, MissionState.GIVEN);
+        missionService.updateMissionState(mission, MissionState.ACTIVE);
 
         return "redirect:/app/mission/offered";
     }

@@ -12,4 +12,6 @@ public interface UserDao extends GenericDao<User> {
     Optional<User> findById(int id);
 
     Optional<User> findByLogin(String login);
+
+    Optional<User> findByLoginProxy(String login);
 }

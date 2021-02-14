@@ -22,9 +22,9 @@ public class UserService {
         }
     }
 
-    public User findByLogin(String login) {
-        try (UserDao userDao = daoFactory.createUserDao()) {
-            return userDao.findByLogin(login)
+    public User findByLoginProxy(String login) {
+        try(UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findByLoginProxy(login)
                     .orElseThrow(() -> new RuntimeException());
         }
     }

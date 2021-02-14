@@ -27,7 +27,7 @@ public class PostCreateMissionCommand implements Command {
         user.setId(Integer.parseInt(request.getParameter("userId")));
         mission.setUser(user);
 
-        mission.setState(MissionState.GIVEN);
+        mission.setState(MissionState.ACTIVE);
 
         Activity activity = new Activity();
         activity.setId(Integer.parseInt(request.getParameter("activityId")));

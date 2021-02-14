@@ -30,6 +30,16 @@ public class UserMapper {
         return user;
     }
 
+    public static User getUserDetailsFromResultSet(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setId(resultSet.getInt("user_id"));
+        user.setLogin(resultSet.getString("user_login"));
+        user.setPassword(resultSet.getString("user_password"));
+        user.setRole(Role.valueOf(resultSet.getString("user_role")));
+
+        return user;
+    }
+
     public static void basicFillStatement(PreparedStatement ps, User user) throws SQLException {
         ps.setString(1, user.getLogin());
         ps.setString(2, user.getPassword());

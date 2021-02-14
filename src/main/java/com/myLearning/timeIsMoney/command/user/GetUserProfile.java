@@ -24,7 +24,7 @@ public class GetUserProfile implements Command {
         List<Mission> missions = userService.findById(user.getId()).getMissions();
 
         request.setAttribute("activeMissions", missions.stream()
-                .filter(m -> MissionState.GIVEN.equals(m.getState()))
+                .filter(m -> MissionState.ACTIVE.equals(m.getState()))
                 .collect(Collectors.toList()));
 
         request.setAttribute("passedMissions", missions.stream()

@@ -154,8 +154,22 @@ public class JdbcUserDao implements UserDao {
                     user.getMissions().add(mission);
                 }
             }
-
             return Optional.ofNullable(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public Optional<User> findByLoginProxy(String login) {
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login.proxy"))) {
+            ps.setString(1, login);
+            ResultSet resultSet = ps.executeQuery();
+            resultSet.next();
+
+            User user = UserMapper.getUserDetailsFromResultSet(resultSet);
+            return Optional.of(user);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();

@@ -52,6 +52,6 @@ public class PostLoginCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute("authUser", user);
 
-        return "redirect:/";
+        return "redirect:/app/profile";
     }
 }

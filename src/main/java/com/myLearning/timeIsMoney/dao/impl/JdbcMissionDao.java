@@ -83,13 +83,8 @@ public class JdbcMissionDao implements MissionDao {
     public boolean create(Mission mission) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.insert"))) {
             MissionMapper.basicFillStatement(ps, mission);
-
-<<<<<<< HEAD
+            
             return ps.execute();
-=======
-            //return ps.execute();
-            return true;
->>>>>>> 284404c78d168fae9918061e65bc5792817f427b
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();

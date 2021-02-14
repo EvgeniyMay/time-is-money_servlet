@@ -27,7 +27,9 @@ public enum Role {
     USER(Arrays.asList(
             "/",
             "/profile",
-            "/logout"
+            "/logout",
+
+            "/mission/offer"
     ));
 
     private List<String> authorities;

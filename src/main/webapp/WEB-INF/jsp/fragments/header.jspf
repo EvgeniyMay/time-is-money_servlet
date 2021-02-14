@@ -24,7 +24,6 @@
     <div class="menu">
         <c:if test="${sessionScope.authUser != null}">
             <nav>
-                <a href="<c:url value="/app/"/>"><fmt:message key="nav.main" /></a>
                 <c:if test="${sessionScope.authUser.role == 'ADMIN'}">
                     <a href="<c:url value="/app/activity"/>"><fmt:message key="nav.activities" /></a>
                     <a href="<c:url value="/app/user"/>"><fmt:message key="nav.users" /></a>

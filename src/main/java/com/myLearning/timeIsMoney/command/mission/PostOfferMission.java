@@ -11,11 +11,11 @@ import com.mylearning.timeismoney.util.HtmlDataConverter;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
-public class PostCreateMissionCommand implements Command {
+public class PostOfferMission implements Command {
 
     private final MissionService missionService;
 
-    public PostCreateMissionCommand(MissionService missionService) {
+    public PostOfferMission(MissionService missionService) {
         this.missionService = missionService;
     }
 
@@ -23,11 +23,10 @@ public class PostCreateMissionCommand implements Command {
     public String execute(HttpServletRequest request) {
         Mission mission = new Mission();
 
-        User user = new User();
-        user.setId(Integer.parseInt(request.getParameter("userId")));
+        User user = (User)request.getSession().getAttribute("authUser");
         mission.setUser(user);
 
-        mission.setState(MissionState.GIVEN);
+        mission.setState(MissionState.OFFERED);
 
         Activity activity = new Activity();
         activity.setId(Integer.parseInt(request.getParameter("activityId")));
@@ -40,6 +39,6 @@ public class PostCreateMissionCommand implements Command {
 
         missionService.createMission(mission);
 
-        return "redirect:/app/mission";
+        return "redirect:/app/profile";
     }
 }

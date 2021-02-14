@@ -2,7 +2,9 @@ package com.mylearning.timeismoney.command;
 
 import com.mylearning.timeismoney.command.activity.*;
 import com.mylearning.timeismoney.command.auth.*;
+import com.mylearning.timeismoney.command.mission.GetCreateMissionCommand;
 import com.mylearning.timeismoney.command.mission.GetMissionCommand;
+import com.mylearning.timeismoney.command.mission.PostCreateMissionCommand;
 import com.mylearning.timeismoney.command.user.GetUserCommand;
 import com.mylearning.timeismoney.command.user.GetUserProfile;
 import com.mylearning.timeismoney.dao.DaoFactory;
@@ -60,6 +62,9 @@ public class CommandController {
         getCommands.put("/profile", new GetUserProfile());
 //        Mission
         getCommands.put("/mission", new GetMissionCommand(missionService));
+        getCommands.put("/mission/add", new GetCreateMissionCommand(missionService));
+
+        postCommands.put("/mission/add", new PostCreateMissionCommand(missionService));
     }
 
     public Command getCommand(HttpServletRequest request) {

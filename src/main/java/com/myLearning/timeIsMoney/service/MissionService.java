@@ -2,6 +2,7 @@ package com.mylearning.timeismoney.service;
 
 import com.mylearning.timeismoney.dao.DaoFactory;
 import com.mylearning.timeismoney.dao.MissionDao;
+import com.mylearning.timeismoney.dto.UsersAndActivities;
 import com.mylearning.timeismoney.entity.Mission;
 
 import java.util.List;
@@ -20,4 +21,18 @@ public class MissionService {
             return missionDao.findAll();
         }
     }
+
+    public UsersAndActivities getUsersAndActivities() {
+        try(MissionDao missionDao = daoFactory.createMissionDao()) {
+            return missionDao.getUsersAndActivities();
+        }
+    }
+
+    public boolean createMission(Mission mission) {
+        try (MissionDao missionDao = daoFactory.createMissionDao()) {
+            return missionDao.create(mission);
+        }
+    }
+
+
 }

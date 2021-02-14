@@ -7,14 +7,16 @@ import java.util.Optional;
 
 public interface ActivityDao extends GenericDao<Activity> {
 
+    List<Activity> findAllProxy();
+
     @Override
-    boolean create(Activity entity);
+    List<Activity> findAll();
 
     @Override
     Optional<Activity> findById(int id);
 
     @Override
-    List<Activity> findAll();
+    boolean create(Activity entity);
 
     @Override
     boolean update(Activity entity);

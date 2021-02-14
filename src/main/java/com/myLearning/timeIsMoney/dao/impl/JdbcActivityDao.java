@@ -63,6 +63,25 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
+    public List<Activity> findAllProxy() {
+        List<Activity> proxyActivities = new ArrayList<>();
+
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all.proxy"));
+            ResultSet resultSet = ps.executeQuery()) {
+
+            while(resultSet.next()) {
+                Activity proxyActivity = ActivityMapper.getProxyFromResultSet(resultSet);
+                proxyActivities.add(proxyActivity);
+            }
+
+            return proxyActivities;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public Optional<Activity> findById(int id) {
         Map<Integer, User> userMap = new HashMap<>();
         Activity activity = null;

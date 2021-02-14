@@ -15,6 +15,7 @@
     </header>
     <a href="<c:url value="/app/mission/add"/>">Create new</a>
     <nav>
+        <a href="<c:url value="/app/mission/active"/>">Active</a>
         <a href="<c:url value="/app/mission/offered"/>">Offered</a>
     </nav>
 </body>

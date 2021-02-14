@@ -66,6 +66,7 @@ public class CommandController {
         postCommands.put("/mission/add", new PostCreateMissionCommand(missionService));
         postCommands.put("/mission/offer", new PostOfferMission(missionService));
         postCommands.put("/mission/pass", new PostPassMissionCommand(missionService));
+        postCommands.put("/mission/cancel", new PostCancelMissionCommand(missionService));
     }
 
     public Command getCommand(HttpServletRequest request) {

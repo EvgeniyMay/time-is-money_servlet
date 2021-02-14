@@ -38,6 +38,7 @@
         </c:forEach>
     </table>
     <hr/>
+
     <h4>Passed:</h4>
     <table>
         <c:forEach items="${requestScope.passedMissions}" var="mission">
@@ -49,6 +50,7 @@
         </c:forEach>
     </table>
     <hr/>
+
     <h4>Offered:</h4>
     <table>
         <c:forEach items="${requestScope.offeredMissions}" var="mission">
@@ -56,6 +58,12 @@
                 <td>${mission.activity.name}</td>
                 <td>${mission.startTime}</td>
                 <td>${mission.endTime}</td>
+                <td>
+                    <form action="<c:url value="/app/mission/cancel"/>" method="POST">
+                        <input type="hidden" name="missionId" value="${mission.id}">
+                        <input type="submit" value="Cancel">
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>

@@ -117,6 +117,18 @@ public class JdbcMissionDao implements MissionDao {
     }
 
     @Override
+    public boolean delete(Mission mission) {
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.delete"))) {
+            ps.setInt(1, mission.getId());
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public void close() {
         try {
             connection.close();

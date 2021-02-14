@@ -6,7 +6,9 @@ import com.mylearning.timeismoney.entity.enums.MissionState;
 
 public interface MissionDao extends GenericDao<Mission> {
 
-    public UsersAndActivities getUsersAndActivities();
+    UsersAndActivities getUsersAndActivities();
 
-    public boolean updateMissionState(Mission mission, MissionState state);
+    boolean updateMissionState(Mission mission, MissionState state);
+
+    boolean delete(Mission mission);
 }

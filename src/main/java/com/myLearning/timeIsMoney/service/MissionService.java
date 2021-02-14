@@ -39,4 +39,10 @@ public class MissionService {
             return missionDao.updateMissionState(mission, state);
         }
     }
+
+    public boolean delete(Mission mission) {
+        try(MissionDao missionDao = daoFactory.createMissionDao()) {
+            return missionDao.delete(mission);
+        }
+    }
 }

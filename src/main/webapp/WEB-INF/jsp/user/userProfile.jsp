@@ -21,19 +21,41 @@
         <a href="<c:url value="/app/mission/offer"/>">Offer mission</a>
     </c:if>
 
+    <h4>Active:</h4>
     <table>
-        <c:forEach items="${sessionScope.get('authUser').missions}" var="mission">
+        <c:forEach items="${requestScope.activeMissions}" var="mission">
             <tr>
                 <td>${mission.activity.name}</td>
                 <td>${mission.startTime}</td>
                 <td>${mission.endTime}</td>
-                <td>${mission.state.toString()}</td>
                 <td>
                     <form action="<c:url value="/app/mission/pass"/>" method="POST">
                         <input type="hidden" name="missionId" value="${mission.id}">
                         <input type="submit" value="Pass">
                     </form>
                 </td>
+            </tr>
+        </c:forEach>
+    </table>
+    <hr/>
+    <h4>Passed:</h4>
+    <table>
+        <c:forEach items="${requestScope.passedMissions}" var="mission">
+            <tr>
+                <td>${mission.activity.name}</td>
+                <td>${mission.startTime}</td>
+                <td>${mission.endTime}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    <hr/>
+    <h4>Offered:</h4>
+    <table>
+        <c:forEach items="${requestScope.offeredMissions}" var="mission">
+            <tr>
+                <td>${mission.activity.name}</td>
+                <td>${mission.startTime}</td>
+                <td>${mission.endTime}</td>
             </tr>
         </c:forEach>
     </table>

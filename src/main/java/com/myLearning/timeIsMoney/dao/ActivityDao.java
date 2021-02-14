@@ -9,20 +9,7 @@ public interface ActivityDao extends GenericDao<Activity> {
 
     List<Activity> findAllProxy();
 
-    @Override
-    List<Activity> findAll();
-
-    @Override
     Optional<Activity> findById(int id);
 
-    @Override
-    boolean create(Activity entity);
-
-    @Override
-    boolean update(Activity entity);
-
     boolean deleteById(int id);
-
-    @Override
-    void close();
 }

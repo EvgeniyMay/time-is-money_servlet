@@ -29,7 +29,8 @@ public enum Role {
             "/profile",
             "/logout",
 
-            "/mission/offer"
+            "/mission/offer",
+            "/mission/pass"
     ));
 
     private List<String> authorities;

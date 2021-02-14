@@ -4,6 +4,7 @@ import com.mylearning.timeismoney.dao.DaoFactory;
 import com.mylearning.timeismoney.dao.MissionDao;
 import com.mylearning.timeismoney.dto.UsersAndActivities;
 import com.mylearning.timeismoney.entity.Mission;
+import com.mylearning.timeismoney.entity.enums.MissionState;
 
 import java.util.List;
 
@@ -14,7 +15,6 @@ public class MissionService {
     public MissionService(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
-
 
     public List<Mission> findAll() {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
@@ -34,5 +34,9 @@ public class MissionService {
         }
     }
 
-
+    public boolean updateMissionState(Mission mission, MissionState state) {
+        try(MissionDao missionDao = daoFactory.createMissionDao()) {
+            return missionDao.updateMissionState(mission, state);
+        }
+    }
 }

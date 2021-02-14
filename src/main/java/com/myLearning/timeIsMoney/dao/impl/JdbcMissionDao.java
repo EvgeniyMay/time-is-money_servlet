@@ -11,6 +11,7 @@ import com.mylearning.timeismoney.dto.UsersAndActivities;
 import com.mylearning.timeismoney.entity.Activity;
 import com.mylearning.timeismoney.entity.Mission;
 import com.mylearning.timeismoney.entity.User;
+import com.mylearning.timeismoney.entity.enums.MissionState;
 
 import java.sql.*;
 import java.util.*;
@@ -63,8 +64,6 @@ public class JdbcMissionDao implements MissionDao {
         }
     }
 
-
-
     @Override
     public UsersAndActivities getUsersAndActivities() {
         try(UserDao userDao = daoFactory.createUserDao();
@@ -92,13 +91,29 @@ public class JdbcMissionDao implements MissionDao {
     }
 
     @Override
-    public Optional<Mission> findById(int id) {
-        throw new RuntimeException();
+    public boolean update(Mission mission) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.update"))) {
+            MissionMapper.basicFillStatement(ps, mission);
+            ps.setInt(6, mission.getId());
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     @Override
-    public boolean update(Mission mission) {
-        throw new RuntimeException();
+    public boolean updateMissionState(Mission mission, MissionState state) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.update.change.state"))) {
+            ps.setString(1, state.toString());
+            ps.setInt(2, mission.getId());
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     @Override

@@ -21,7 +21,7 @@ public class MissionMapper {
     }
 
     public static void basicFillStatement(PreparedStatement ps, Mission mission) throws SQLException {
-        ps.setInt(1,mission.getUser().getId());
+        ps.setInt(1, mission.getUser().getId());
         ps.setInt(2, mission.getActivity().getId());
         ps.setTimestamp(3, Timestamp.valueOf(mission.getStartTime()));
         ps.setTimestamp(4, Timestamp.valueOf(mission.getEndTime()));

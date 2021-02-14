@@ -29,6 +29,13 @@ public class UserService {
         }
     }
 
+    public User findById(int id) {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findById(id)
+                    .orElseThrow(() -> new RuntimeException());
+        }
+    }
+
     public boolean create(UserDto userDto) {
         User user = new User();
         user.setLogin(userDto.getLogin());

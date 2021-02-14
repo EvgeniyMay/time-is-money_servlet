@@ -57,7 +57,7 @@ public class CommandController {
         postCommands.put("/logout", new PostLogoutCommand());
 //        User
         getCommands.put("/user", new GetUserCommand(userService));
-        getCommands.put("/profile", new GetUserProfile());
+        getCommands.put("/profile", new GetUserProfile(userService));
 //        Mission
         getCommands.put("/mission", new GetMissionCommand(missionService));
         getCommands.put("/mission/add", new GetCreateMissionCommand(missionService));

@@ -124,7 +124,6 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public Optional<User> findByLogin(String login) {
-
         Map<Integer, Activity> activityMap = new HashMap<>();
         User user = null;
 

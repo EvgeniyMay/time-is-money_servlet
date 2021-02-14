@@ -14,23 +14,8 @@
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
     <a href="<c:url value="/app/mission/add"/>">Create new</a>
-    <table>
-        <tr>
-            <th>Activity</th>
-            <th>User</th>
-            <th>State</th>
-            <th>Start time</th>
-            <th>End time</th>
-        </tr>
-        <c:forEach items="${requestScope.missions}" var="mission">
-            <tr>
-                <td>${mission.activity.name}</td>
-                <td>${mission.user.login}</td>
-                <td>${mission.state}</td>
-                <td>${mission.startTime}</td>
-                <td>${mission.endTime}</td>
-            </tr>
-        </c:forEach>
-    </table>
+    <nav>
+        <a href="<c:url value="/app/mission/offered"/>">Offered</a>
+    </nav>
 </body>
 </html>

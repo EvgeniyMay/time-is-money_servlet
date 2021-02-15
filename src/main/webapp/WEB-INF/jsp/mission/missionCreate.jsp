@@ -13,6 +13,13 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
+    <div>
+        <ul>
+            <c:forEach items="${requestScope.errors}" var="error">
+                <li>${error}</li>
+            </c:forEach>
+        </ul>
+    </div>
     <form action="<c:url value="/app/mission/add"/>" method="POST">
         <table>
             <tr>

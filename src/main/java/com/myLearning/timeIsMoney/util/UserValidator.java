@@ -1,6 +1,6 @@
 package com.mylearning.timeismoney.util;
 
-import com.mylearning.timeismoney.dto.UserDto;
+import com.mylearning.timeismoney.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import java.util.Objects;
 
 public class UserValidator {
 
-    public static List<String> getErrors(UserDto userDto) {
+    public static List<String> getErrors(User user) {
         List<String> errors = new ArrayList<>();
 
-        checkLoginLength(errors, userDto.getLogin());
+        checkLoginLength(errors, user.getLogin());
 
-        checkPasswordLength(errors, userDto.getPassword());
+        checkPasswordLength(errors, user.getPassword());
 
         return errors;
     }
@@ -24,8 +24,8 @@ public class UserValidator {
             return;
         }
 
-        if(login.length() < 4 || login.length() > 20) {
-            errors.add("Length login error");
+        if(login.length() < 5 || login.length() > 20) {
+            errors.add("Length login error. Between 5 and 20 characters");
         }
     }
 
@@ -36,8 +36,7 @@ public class UserValidator {
         }
 
         if(password.length() < 6 || password.length() > 20) {
-            errors.add("Length password error");
+            errors.add("Length password error. Between 6 and 20 characters");
         }
     }
-
 }

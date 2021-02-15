@@ -2,7 +2,6 @@ package com.mylearning.timeismoney.service;
 
 import com.mylearning.timeismoney.dao.DaoFactory;
 import com.mylearning.timeismoney.dao.UserDao;
-import com.mylearning.timeismoney.dto.UserDto;
 import com.mylearning.timeismoney.entity.User;
 
 import java.util.List;
@@ -36,11 +35,7 @@ public class UserService {
         }
     }
 
-    public boolean create(UserDto userDto) {
-        User user = new User();
-        user.setLogin(userDto.getLogin());
-        user.setPassword(userDto.getPassword());
-
+    public boolean create(User user) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return userDao.create(user);
         }

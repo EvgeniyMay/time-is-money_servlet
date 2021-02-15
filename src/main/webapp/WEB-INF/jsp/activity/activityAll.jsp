@@ -14,6 +14,7 @@
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
     <h1>Activities</h1>
+    <a href="${pageContext.request.contextPath}/app/activity/add">Create new</a>
     <table>
         <tr>
             <th>Name:</th>
@@ -39,6 +40,5 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="${pageContext.request.contextPath}/app/activity/add">Create new</a>
 </body>
 </html>

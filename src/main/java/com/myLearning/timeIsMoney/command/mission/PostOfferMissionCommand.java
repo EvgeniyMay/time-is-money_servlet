@@ -13,42 +13,46 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 
-public class PostCreateMissionCommand implements Command {
+public class PostOfferMissionCommand implements Command {
 
     private final MissionService missionService;
 
-    public PostCreateMissionCommand(MissionService missionService) {
+    public PostOfferMissionCommand(MissionService missionService) {
         this.missionService = missionService;
     }
-
 
     @Override
     public String execute(HttpServletRequest request) {
         Mission mission;
+
         try {
             mission = new Mission.Builder()
-                    .user(new User.Builder().id(Integer.parseInt(request.getParameter("userId"))).build())
+                    .user((User)request.getSession().getAttribute("authUser"))
                     .activity(new Activity.Builder().id(Integer.parseInt(request.getParameter("activityId"))).build())
-                    .state(MissionState.ACTIVE)
+                    .state(MissionState.OFFERED)
                     .startTime(HtmlDataConverter.parseToLocalDateTime(request.getParameter("startTime")))
                     .endTime(HtmlDataConverter.parseToLocalDateTime(request.getParameter("endTime")))
                     .build();
         } catch (DateTimeParseException | NumberFormatException e) {
             request.setAttribute("errors", Collections.singletonList("Please, fill all fields"));
-            request.setAttribute("usersAndActivities", missionService.getUsersAndActivities());
+            //ToDo
+            // Change for activity service
+            request.setAttribute("activities", missionService.getUsersAndActivities().getActivities());
 
-            return "/WEB-INF/jsp/mission/missionCreate.jsp";
+            return "/WEB-INF/jsp/mission/missionOffer.jsp";
         }
 
         if(!MissionValidator.getErrors(mission).isEmpty()) {
             request.setAttribute("errors", MissionValidator.getErrors(mission));
-            request.setAttribute("usersAndActivities", missionService.getUsersAndActivities());
+            //ToDo
+            // Change for activity service
+            request.setAttribute("activities", missionService.getUsersAndActivities().getActivities());
 
-            return "/WEB-INF/jsp/mission/missionCreate.jsp";
+            return "/WEB-INF/jsp/mission/missionOffer.jsp";
         }
 
         missionService.createMission(mission);
 
-        return "redirect:/app/mission/active";
+        return "redirect:/app/profile";
     }
 }

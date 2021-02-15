@@ -5,11 +5,11 @@ import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class GetOfferMission implements Command {
+public class GetOfferMissionCommand implements Command {
 
     private final ActivityService activityService;
 
-    public GetOfferMission(ActivityService activityService) {
+    public GetOfferMissionCommand(ActivityService activityService) {
         this.activityService = activityService;
     }
 

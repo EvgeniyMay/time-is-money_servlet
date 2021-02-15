@@ -3,11 +3,13 @@ package com.mylearning.timeismoney.command.auth;
 import com.mylearning.timeismoney.command.Command;
 import com.mylearning.timeismoney.entity.User;
 import com.mylearning.timeismoney.service.UserService;
+import sun.security.util.Password;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 public class PostLoginCommand implements Command {
 
@@ -22,7 +24,7 @@ public class PostLoginCommand implements Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        if(login == null || password == null) {
+        if(String.valueOf(login).isEmpty() || String.valueOf(password).isEmpty()) {
             request.setAttribute("error", "Please, fill all fields");
             return "/WEB-INF/jsp/auth/login.jsp";
         }

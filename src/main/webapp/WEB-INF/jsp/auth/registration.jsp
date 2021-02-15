@@ -21,7 +21,7 @@
             </c:forEach>
         </ul>
     </div>
-    <form action="/app/registration" method="post">
+    <form action="<c:url value="/app/registration"/>" method="post">
         <table>
             <tr>
                 <td>Login</td>

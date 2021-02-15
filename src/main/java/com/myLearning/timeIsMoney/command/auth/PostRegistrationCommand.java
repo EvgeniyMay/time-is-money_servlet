@@ -1,12 +1,13 @@
 package com.mylearning.timeismoney.command.auth;
 
 import com.mylearning.timeismoney.command.Command;
-import com.mylearning.timeismoney.dto.UserDto;
+import com.mylearning.timeismoney.entity.User;
 import com.mylearning.timeismoney.service.UserService;
 import com.mylearning.timeismoney.util.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class PostRegistrationCommand implements Command {
 
@@ -17,24 +18,23 @@ public class PostRegistrationCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        User user = new User.Builder()
+                .login(request.getParameter("login"))
+                .password(request.getParameter("password"))
+                .build();
 
-        UserDto userDto = new UserDto();
-        userDto.setLogin(login);
-        userDto.setPassword(password);
-
-        if(!UserValidator.getErrors(userDto).isEmpty()){
-            request.setAttribute("errors", UserValidator.getErrors(userDto));
+        if(!UserValidator.getErrors(user).isEmpty()){
+            request.setAttribute("errors", UserValidator.getErrors(user));
             return "/WEB-INF/jsp/auth/registration.jsp";
         }
 
         try {
-            userService.create(userDto);
+            userService.create(user);
         } catch (Exception e) {
-            request.setAttribute("errors", Arrays.asList("Login exists"));
+            request.setAttribute("errors", Collections.singletonList("Login exists"));
             return "/WEB-INF/jsp/auth/registration.jsp";
         }
-        return "redirect:/app";
+
+        return "redirect:/app/login";
     }
 }

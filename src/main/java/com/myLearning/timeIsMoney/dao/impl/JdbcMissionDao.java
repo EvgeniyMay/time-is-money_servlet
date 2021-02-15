@@ -68,12 +68,11 @@ public class JdbcMissionDao implements MissionDao {
     public UsersAndActivities getUsersAndActivities() {
         try(UserDao userDao = daoFactory.createUserDao();
             ActivityDao activityDao = daoFactory.createActivityDao()) {
-            List<User> users = userDao.findAllProxy();
-            List<Activity> activities = activityDao.findAllProxy();
-
             UsersAndActivities usersAndActivities = new UsersAndActivities();
-            usersAndActivities.setUsers(users);
-            usersAndActivities.setActivities(activities);
+
+            usersAndActivities.setUsers(userDao.findAllProxy());
+            usersAndActivities.setActivities(activityDao.findAllProxy());
+
             return usersAndActivities;
         }
     }
@@ -134,8 +133,6 @@ public class JdbcMissionDao implements MissionDao {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            //ToDo:
-            // Add something
         }
     }
 }

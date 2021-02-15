@@ -21,12 +21,14 @@ public enum Role {
             "/activity/edit",
             "/activity/delete",
 
-            "/mission",
             "/mission/add",
             "/mission/accept",
             "/mission/cancel",
+            "/mission/complete",
+            "/mission/return",
             "/mission/offered",
-            "/mission/active"
+            "/mission/active",
+            "/mission/passed"
     )),
     USER(Arrays.asList(
             "/",

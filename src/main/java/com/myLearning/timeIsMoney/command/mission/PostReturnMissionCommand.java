@@ -7,11 +7,11 @@ import com.mylearning.timeismoney.service.MissionService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class PostPassMissionCommand implements Command {
+public class PostReturnMissionCommand implements Command {
 
     private final MissionService missionService;
 
-    public PostPassMissionCommand(MissionService missionService) {
+    public PostReturnMissionCommand(MissionService missionService) {
         this.missionService = missionService;
     }
 
@@ -21,8 +21,8 @@ public class PostPassMissionCommand implements Command {
         int missionId = Integer.parseInt(request.getParameter("missionId"));
         mission.setId(missionId);
 
-        missionService.updateMissionState(mission, MissionState.PASSED);
+        missionService.updateMissionState(mission, MissionState.ACTIVE);
 
-        return "redirect:/app/profile";
+        return "redirect:/app/mission/passed";
     }
 }

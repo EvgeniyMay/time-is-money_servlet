@@ -59,17 +59,19 @@ public class CommandController {
         getCommands.put("/user", new GetUserCommand(userService));
         getCommands.put("/profile", new GetUserProfile(userService));
 //        Mission
-        getCommands.put("/mission", new GetMissionCommand(missionService));
         getCommands.put("/mission/add", new GetCreateMissionCommand(missionService));
         getCommands.put("/mission/offer", new GetOfferMission(activityService));
         getCommands.put("/mission/offered", new GetOfferedMissionsCommand(missionService));
         getCommands.put("/mission/active", new GetActiveMissionCommand(missionService));
+        getCommands.put("/mission/passed", new GetPassedMissionCommand(missionService));
 
         postCommands.put("/mission/add", new PostCreateMissionCommand(missionService));
         postCommands.put("/mission/offer", new PostOfferMission(missionService));
         postCommands.put("/mission/pass", new PostPassMissionCommand(missionService));
         postCommands.put("/mission/cancel", new PostCancelMissionCommand(missionService));
         postCommands.put("/mission/accept", new PostAcceptMissionCommand(missionService));
+        postCommands.put("/mission/return", new PostReturnMissionCommand(missionService));
+        postCommands.put("/mission/complete", new PostCompleteMissionCommand(missionService));
     }
 
     public Command getCommand(HttpServletRequest request) {

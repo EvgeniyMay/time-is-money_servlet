@@ -1,0 +1,9 @@
+<div>
+    <nav>
+        <span>Missions: </span>
+        <a href="<c:url value="/app/mission/active"/>">Active</a>
+        <a href="<c:url value="/app/mission/offered"/>">Offered</a>
+        <a href="<c:url value="/app/mission/passed"/>">Passed</a>
+        <a href="<c:url value="/app/mission/add"/>">Create new</a>
+    </nav>
+</div>

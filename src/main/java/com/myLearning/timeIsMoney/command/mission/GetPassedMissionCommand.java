@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GetOfferedMissionsCommand implements Command {
+public class GetPassedMissionCommand implements Command {
 
     private final MissionService missionService;
 
-    public GetOfferedMissionsCommand(MissionService missionService) {
+    public GetPassedMissionCommand(MissionService missionService) {
         this.missionService = missionService;
     }
 
@@ -24,9 +24,9 @@ public class GetOfferedMissionsCommand implements Command {
         //ToDo
         // Make query
         request.setAttribute("missions", missions.stream()
-            .filter(m -> MissionState.OFFERED.equals(m.getState()))
-            .collect(Collectors.toList()));
+                .filter(m -> MissionState.PASSED.equals(m.getState()))
+                .collect(Collectors.toList()));
 
-        return "/WEB-INF/jsp/mission/missionOffered.jsp";
+        return "/WEB-INF/jsp/mission/missionPassed.jsp";
     }
 }

@@ -64,6 +64,7 @@ public class CommandController {
         getCommands.put("/mission/offered", new GetOfferedMissionsCommand(missionService));
         getCommands.put("/mission/active", new GetActiveMissionCommand(missionService));
         getCommands.put("/mission/passed", new GetPassedMissionCommand(missionService));
+        getCommands.put("/mission/completed", new GetCompletedMissionCommand(missionService));
 
         postCommands.put("/mission/add", new PostCreateMissionCommand(missionService));
         postCommands.put("/mission/offer", new PostOfferMission(missionService));

@@ -28,7 +28,8 @@ public enum Role {
             "/mission/return",
             "/mission/offered",
             "/mission/active",
-            "/mission/passed"
+            "/mission/passed",
+            "/mission/completed"
     )),
     USER(Arrays.asList(
             "/",

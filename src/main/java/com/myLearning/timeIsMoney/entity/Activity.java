@@ -37,4 +37,37 @@ public class Activity {
     public void setMissions(List<Mission> missions) {
         this.missions = missions;
     }
+
+    public static class Builder {
+
+        private final Activity newActivity;
+
+        public Builder() {
+            newActivity = new Activity();
+        }
+
+        public Builder id(int id) {
+            newActivity.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            newActivity.name = name;
+            return this;
+        }
+
+        public Builder description(String description) {
+            newActivity.description = description;
+            return this;
+        }
+
+        public Builder missions(List<Mission> missions) {
+            newActivity.missions = missions;
+            return this;
+        }
+
+        public Activity build() {
+            return newActivity;
+        }
+    }
 }

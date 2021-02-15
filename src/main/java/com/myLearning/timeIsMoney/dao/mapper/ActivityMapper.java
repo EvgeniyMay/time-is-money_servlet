@@ -10,24 +10,20 @@ import java.util.ArrayList;
 public class ActivityMapper {
 
     public static Activity getFromResultSet(ResultSet resultSet) throws SQLException {
-        Activity activity = new Activity();
-        activity.setId(resultSet.getInt("activity_id"));
-        activity.setName(resultSet.getString("activity_name"));
-        activity.setDescription(resultSet.getString("activity_description"));
-
-        activity.setMissions(new ArrayList<>());
-
-        return activity;
+        return new Activity.Builder()
+                .id(resultSet.getInt("activity_id"))
+                .name(resultSet.getString("activity_name"))
+                .description(resultSet.getString("activity_description"))
+                .missions(new ArrayList<>())
+                .build();
     }
 
     public static Activity getProxyFromResultSet(ResultSet resultSet) throws SQLException {
-        Activity activity = new Activity();
-
-        activity.setId(resultSet.getInt("activity_id"));
-        activity.setName(resultSet.getString("activity_name"));
-        activity.setDescription(resultSet.getString("activity_description"));
-
-        return activity;
+        return new Activity.Builder()
+                .id(resultSet.getInt("activity_id"))
+                .name(resultSet.getString("activity_name"))
+                .description(resultSet.getString("activity_description"))
+                .build();
     }
 
     public static void basicFillStatement(PreparedStatement ps, Activity activity) throws SQLException {

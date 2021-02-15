@@ -11,33 +11,29 @@ import java.util.ArrayList;
 public class UserMapper {
 
     public static User getFromResultSet(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        user.setId(resultSet.getInt("user_id"));
-        user.setLogin(resultSet.getString("user_login"));
-        user.setPassword(resultSet.getString("user_password"));
-        user.setRole(Role.valueOf(resultSet.getString("user_role")));
-
-        user.setMissions(new ArrayList<>());
-
-        return user;
+        return new User.Builder()
+                .id(resultSet.getInt("user_id"))
+                .login(resultSet.getString("user_login"))
+                .password(resultSet.getString("user_password"))
+                .role(Role.valueOf(resultSet.getString("user_role")))
+                .missions(new ArrayList<>())
+                .build();
     }
 
     public static User getProxyFromResultSet(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        user.setId(resultSet.getInt("user_id"));
-        user.setLogin(resultSet.getString("user_login"));
-
-        return user;
+        return new User.Builder()
+                .id(resultSet.getInt("user_id"))
+                .login(resultSet.getString("user_login"))
+                .build();
     }
 
     public static User getUserDetailsFromResultSet(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        user.setId(resultSet.getInt("user_id"));
-        user.setLogin(resultSet.getString("user_login"));
-        user.setPassword(resultSet.getString("user_password"));
-        user.setRole(Role.valueOf(resultSet.getString("user_role")));
-
-        return user;
+        return new User.Builder()
+                .id(resultSet.getInt("user_id"))
+                .login(resultSet.getString("user_login"))
+                .password(resultSet.getString("user_password"))
+                .role(Role.valueOf(resultSet.getString("user_role")))
+                .build();
     }
 
     public static void basicFillStatement(PreparedStatement ps, User user) throws SQLException {

@@ -39,14 +39,16 @@ public class CommandController {
         postCommands = new HashMap<>();
 
 //        Activity
-        getCommands.put("/activity", new GetActivityCommand(activityService));
+        getCommands.put("/activity/active", new GetActiveActivityCommand(activityService));
+        getCommands.put("/activity/archived", new GetArchivedActivityCommand(activityService));
         getCommands.put("/activity/add", new GetActivityCreateCommand());
-        getCommands.put("/activity/delete", new GetActivityDeleteCommand());
+        getCommands.put("/activity/archive", new GetArchiveActivityCommand());
         getCommands.put("/activity/edit", new GetActivityEditCommand(activityService));
 
         postCommands.put("/activity/add", new PostActivityCreateCommand(activityService));
-        postCommands.put("/activity/delete", new PostActivityDeleteCommand(activityService));
+        postCommands.put("/activity/archive", new PostArchiveActivityCommand(activityService));
         postCommands.put("/activity/edit", new PostActivityEditCommand(activityService));
+        postCommands.put("/activity/activate", new PostActivateActivityCommand(activityService));
 //        Auth
         getCommands.put("/registration", new GetRegistrationCommand());
         getCommands.put("/login", new GetLoginCommand());

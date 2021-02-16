@@ -16,22 +16,27 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <h1>Activities</h1>
+    <h1>Active Activities</h1>
     <a href="${pageContext.request.contextPath}/app/activity/add">Create new</a>
     <table>
         <tr>
             <th>Name:</th>
             <th>Description:</th>
         </tr>
+        <nav>
+            <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
+                <a href="<c:url value="/app/activity/active?cur_page=${i}"/>">${i + 1}</a>
+            </c:forEach>
+        </nav>
         <c:forEach items="${requestScope.activities}" var="activity">
             <tr>
                 <td>${activity.name}</td>
                 <td>${activity.description}</td>
                 <td>
-                    <form action="<c:url value="/app/activity/delete"/>" method="GET">
+                    <form action="<c:url value="/app/activity/archive"/>" method="GET">
                         <input type="hidden" name="id" value="${activity.id}">
                         <input type="hidden" name="name" value="${activity.name}">
-                        <input type="submit" value="Delete">
+                        <input type="submit" value="Archive">
                     </form>
                 </td>
                 <td>
@@ -42,11 +47,6 @@
                 </td>
             </tr>
         </c:forEach>
-        <nav>
-            <c:forEach begin="0" end="${requestScope.pageCount - 1}" step="1" var="i">
-                <a href="<c:url value="/app/activity?curPage=${i}"/>">${i + 1}</a>
-            </c:forEach>
-        </nav>
     </table>
 </body>
 </html>

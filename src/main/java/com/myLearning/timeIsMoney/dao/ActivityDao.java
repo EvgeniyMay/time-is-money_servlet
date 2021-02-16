@@ -11,9 +11,15 @@ public interface ActivityDao extends GenericDao<Activity> {
 
     Optional<Activity> findById(int id);
 
-    boolean deleteById(int id);
+    boolean archiveById(int id);
 
-    int getCount();
+    boolean activateById(int id);
+
+    int getActiveCount();
+
+    int getArchivedCount();
 
     List<Activity> findActivePageableProxy(int page, int size);
+
+    List<Activity> findArchivedPageableProxy(int page, int size);
 }

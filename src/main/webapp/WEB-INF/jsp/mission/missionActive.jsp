@@ -18,10 +18,10 @@
     </header>
     <h2>Active missions:</h2>
     <nav>
-        <c:forEach begin="0" end="${requestScope.pageCount - 1}" step="1" var="i">
+        <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
             <form>
-                <input type="hidden" name="curPage" value="${i}">
-                <input type="hidden" name="sortField" value="${requestScope.sortField}">
+                <input type="hidden" name="cur_page" value="${i}">
+                <input type="hidden" name="sort_field" value="${requestScope.sort_field}">
                 <input type="submit" value="${i + 1}">
             </form>
         </c:forEach>
@@ -30,18 +30,28 @@
         <tr>
             <th>
                 <form>
-                    <input type="hidden" name="sortField" value="${'user_id'}">
+                    <input type="hidden" name="sort_field" value="${'user_id'}">
                     <input type="submit" value="${'User'}">
                 </form>
             </th>
             <th>
                 <form>
-                    <input type="hidden" name="sortField" value="${'activity_id'}">
+                    <input type="hidden" name="sort_field" value="${'activity_id'}">
                     <input type="submit" value="${'Activity'}">
                 </form>
             </th>
-            <th><a href="<c:url value="?sortField=${'start_time'}"/>">Start Time</a></th>
-            <th><a href="<c:url value="?sortField=${'end_time'}"/>">End Time</a></th>
+            <th>
+                <form>
+                    <input type="hidden" name="sort_field" value="${'start_time'}">
+                    <input type="submit" value="${'Start Time'}">
+                </form>
+            </th>
+            <th>
+                <form>
+                    <input type="hidden" name="sort_field" value="${'end_time'}">
+                    <input type="submit" value="${'End Time'}">
+                </form>
+            </th>
         </tr>
         <c:forEach items="${requestScope.missions}" var="mission">
             <tr>

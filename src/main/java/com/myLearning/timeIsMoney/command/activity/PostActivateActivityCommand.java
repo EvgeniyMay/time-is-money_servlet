@@ -5,18 +5,18 @@ import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class PostActivityDeleteCommand implements Command {
+public class PostActivateActivityCommand implements Command {
 
     private final ActivityService activityService;
 
-    public PostActivityDeleteCommand(ActivityService activityService) {
+    public PostActivateActivityCommand(ActivityService activityService) {
         this.activityService = activityService;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
-         activityService.deleteById(Integer.parseInt(request.getParameter("id")));
+        activityService.activateById(Integer.parseInt(request.getParameter("id")));
 
-        return "redirect:/app/activity";
+        return "redirect:/app/activity/archived";
     }
 }

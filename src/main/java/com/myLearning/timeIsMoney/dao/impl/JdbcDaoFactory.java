@@ -31,8 +31,6 @@ public class JdbcDaoFactory implements DaoFactory {
 
     @Override
     public MissionDao createMissionDao() {
-        //ToDo
-        // Refactor
-        return new JdbcMissionDao(connectionPool.getConnection(), this);
+        return new JdbcMissionDao(connectionPool.getConnection());
     }
 }

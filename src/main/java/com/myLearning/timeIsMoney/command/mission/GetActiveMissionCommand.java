@@ -26,18 +26,17 @@ public class GetActiveMissionCommand implements Command {
         int pageSize = 5;
         MissionField sortField = MissionField.ACTIVITY_ID;
 
-        if (request.getParameter("curPage") != null) {
+        if (request.getParameter("cur_page") != null) {
             try {
-                curPage = Integer.parseInt(request.getParameter("curPage"));
+                curPage = Integer.parseInt(request.getParameter("cur_page"));
             } catch (NumberFormatException e) {
                 throw new PageNotFoundException();
             }
         }
 
-        if(!Objects.isNull(request.getParameter("sortField"))) {
+        if(!Objects.isNull(request.getParameter("sort_field"))) {
             try {
-                sortField = MissionField.valueOf(request.getParameter("sortField").toUpperCase());
-
+                sortField = MissionField.valueOf(request.getParameter("sort_field").toUpperCase());
             } catch (IllegalArgumentException e) {
                 throw new PageNotFoundException();
             }
@@ -46,13 +45,9 @@ public class GetActiveMissionCommand implements Command {
         int activityCount = missionService.countByState(MissionState.ACTIVE);
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 
-        System.out.println(sortField);
-
         request.setAttribute("missions", missionService.findPageable(curPage, pageSize, MissionState.ACTIVE, sortField));
-        request.setAttribute("sortField", sortField.toString().toLowerCase());
-        request.setAttribute("curPage", curPage);
-        request.setAttribute("pageSize", pageSize);
-        request.setAttribute("pageCount", pageCount);
+        request.setAttribute("sort_field", sortField.toString().toLowerCase());
+        request.setAttribute("page_count", pageCount);
 
         return "/WEB-INF/jsp/mission/missionActive.jsp";
     }

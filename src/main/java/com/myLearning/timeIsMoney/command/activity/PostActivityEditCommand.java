@@ -21,7 +21,7 @@ public class PostActivityEditCommand implements Command {
                 .name(request.getParameter("name"))
                 .description(request.getParameter("description"))
                 .build());
-
-        return "redirect:/app/activity";
+        
+        return "redirect:/app/activity/active";
     }
 }

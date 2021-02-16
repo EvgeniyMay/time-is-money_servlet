@@ -16,10 +16,12 @@ public enum Role {
             "/logout",
             "/user",
 
-            "/activity",
+            "/activity/active",
             "/activity/add",
             "/activity/edit",
-            "/activity/delete",
+            "/activity/archive",
+            "/activity/activate",
+            "/activity/archived",
 
             "/mission/add",
             "/mission/accept",

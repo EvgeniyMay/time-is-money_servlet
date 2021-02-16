@@ -40,15 +40,27 @@ public class ActivityService {
         }
     }
 
-    public boolean deleteById(int id) {
+    public boolean archiveById(int id) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.deleteById(id);
+            return activityDao.archiveById(id);
         }
     }
 
-    public int getCount() {
+    public boolean activateById(int id) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.getCount();
+            return activityDao.activateById(id);
+        }
+    }
+
+    public int getActiveCount() {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.getActiveCount();
+        }
+    }
+
+    public int getArchivedCount() {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.getArchivedCount();
         }
     }
 
@@ -57,4 +69,11 @@ public class ActivityService {
             return activityDao.findActivePageableProxy(page, size);
         }
     }
+
+    public List<Activity> findArchivedPageable(int page, int size) {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.findArchivedPageableProxy(page, size);
+        }
+    }
+
 }

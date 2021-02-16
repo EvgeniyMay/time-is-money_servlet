@@ -10,6 +10,8 @@ public class Activity {
 
     private List<Mission> missions;
 
+    private boolean isArchived;
+
     public int getId() {
         return id;
     }
@@ -38,6 +40,13 @@ public class Activity {
         this.missions = missions;
     }
 
+    public boolean isArchived() {
+        return isArchived;
+    }
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
+
     public static class Builder {
 
         private final Activity newActivity;
@@ -63,6 +72,11 @@ public class Activity {
 
         public Builder missions(List<Mission> missions) {
             newActivity.missions = missions;
+            return this;
+        }
+
+        public Builder isArchived(boolean isArchived) {
+            newActivity.isArchived = isArchived;
             return this;
         }
 

@@ -7,11 +7,11 @@ import com.mylearning.timeismoney.service.ActivityService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
-public class GetActivityCommand implements Command {
+public class GetActiveActivityCommand implements Command {
 
     private final ActivityService activityService;
 
-    public GetActivityCommand(ActivityService activityService) {
+    public GetActiveActivityCommand(ActivityService activityService) {
         this.activityService = activityService;
     }
 
@@ -20,21 +20,20 @@ public class GetActivityCommand implements Command {
         int curPage = 0;
         int pageSize = 10;
 
-        if (request.getParameter("curPage") != null) {
+        if (request.getParameter("cur_page") != null) {
             try {
-                curPage = Integer.parseInt(request.getParameter("curPage"));
+                curPage = Integer.parseInt(request.getParameter("cur_page"));
             } catch (NumberFormatException e) {
                 throw new PageNotFoundException();
             }
         }
 
-        int activityCount = activityService.getCount();
+        int activityCount = activityService.getActiveCount();
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 
         request.setAttribute("activities", activityService.findActivePageable(curPage, pageSize));
-        request.setAttribute("curPage", curPage);
-        request.setAttribute("pageSize", pageSize);
-        request.setAttribute("pageCount", pageCount);
-        return "/WEB-INF/jsp/activity/activityAll.jsp";
+        request.setAttribute("cur_page", curPage);
+        request.setAttribute("page_count", pageCount);
+        return "/WEB-INF/jsp/activity/activityActive.jsp";
     }
 }

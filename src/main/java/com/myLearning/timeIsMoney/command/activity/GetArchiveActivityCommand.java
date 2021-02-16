@@ -4,7 +4,7 @@ import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class GetActivityDeleteCommand implements Command {
+public class GetArchiveActivityCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -14,6 +14,6 @@ public class GetActivityDeleteCommand implements Command {
         request.setAttribute("id", id);
         request.setAttribute("name", name);
 
-        return "/WEB-INF/jsp/activity/activityDelete.jsp";
+        return "/WEB-INF/jsp/activity/activityArchive.jsp";
     }
 }

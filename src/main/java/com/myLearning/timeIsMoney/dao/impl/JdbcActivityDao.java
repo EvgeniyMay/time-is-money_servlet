@@ -104,6 +104,28 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
+    public List<Activity> findArchivedPageableProxy(int page, int size) {
+        List<Activity> proxyActivities = new ArrayList<>();
+
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all.archived.pageable.proxy"))) {
+            ps.setInt(1, size);
+            ps.setInt(2, size * page);
+
+            ResultSet resultSet = ps.executeQuery();
+            while(resultSet.next()) {
+                Activity proxyActivity = ActivityMapper.getProxyFromResultSet(resultSet);
+                proxyActivities.add(proxyActivity);
+            }
+
+            System.out.println(proxyActivities);
+            return proxyActivities;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public Optional<Activity> findById(int id) {
         Map<Integer, User> userMap = new HashMap<>();
         Activity activity = null;
@@ -156,11 +178,21 @@ public class JdbcActivityDao implements ActivityDao {
         }
     }
 
-    //ToDo
-    // Delete missions of activity
     @Override
-    public boolean deleteById(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.delete"))) {
+    public boolean archiveById(int id) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.archive"))) {
+            ps.setInt(1, id);
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public boolean activateById(int id) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.activate"))) {
             ps.setInt(1, id);
 
             return ps.execute();
@@ -184,9 +216,25 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
-    public int getCount() {
+    public int getActiveCount() {
         try (Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.activity.count"))) {
+            ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.activity.active.count"))) {
+
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+
+            return 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public int getArchivedCount() {
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.activity.archived.count"))) {
 
             if(resultSet.next()) {
                 return resultSet.getInt(1);

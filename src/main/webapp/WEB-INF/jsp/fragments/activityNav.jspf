@@ -1,0 +1,7 @@
+<div>
+    <nav>
+        <span>Activities: </span>
+        <a href="<c:url value="/app/activity/active"/>"><fmt:message key="nav.activities" /></a>
+        <a href="<c:url value="/app/activity/archived"/>">Archive</a>
+    </nav>
+</div>

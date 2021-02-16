@@ -29,7 +29,9 @@ public enum Role {
             "/mission/offered",
             "/mission/active",
             "/mission/passed",
-            "/mission/completed"
+            "/mission/completed",
+            "/mission/offer",
+            "/mission/pass"
     )),
     USER(Arrays.asList(
             "/",

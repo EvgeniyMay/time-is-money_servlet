@@ -17,9 +17,9 @@ public class PostReturnMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Mission mission = new Mission();
-        int missionId = Integer.parseInt(request.getParameter("missionId"));
-        mission.setId(missionId);
+        Mission mission = new Mission.Builder()
+                .id(Integer.parseInt(request.getParameter("missionId")))
+                .build();
 
         missionService.updateMissionState(mission, MissionState.ACTIVE);
 

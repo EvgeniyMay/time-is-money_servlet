@@ -34,7 +34,6 @@ public class GetUserProfile implements Command {
                 .filter(m -> MissionState.OFFERED.equals(m.getState()))
                 .collect(Collectors.toList()));
 
-
         return "/WEB-INF/jsp/user/userProfile.jsp";
     }
 }

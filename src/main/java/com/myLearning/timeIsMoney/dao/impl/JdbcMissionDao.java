@@ -65,7 +65,7 @@ public class JdbcMissionDao implements MissionDao {
     }
 
     //ToDo
-    // GOOGLE
+    // Refactor
     @Override
     public UsersAndActivities getUsersAndActivities() {
         try(UserDao userDao = daoFactory.createUserDao();
@@ -121,6 +121,20 @@ public class JdbcMissionDao implements MissionDao {
     public boolean delete(Mission mission) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.delete"))) {
             ps.setInt(1, mission.getId());
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public boolean userUpdateMissionState(User user, Mission mission, MissionState state) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.update.user.change.state"))) {
+            ps.setString(1, state.toString());
+            ps.setInt(2, mission.getId());
+            ps.setInt(3, user.getId());
 
             return ps.execute();
         } catch (SQLException e) {

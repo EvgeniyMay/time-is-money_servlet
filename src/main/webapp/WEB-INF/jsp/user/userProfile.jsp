@@ -19,10 +19,11 @@
     <h2>Hello, ${sessionScope.get("authUser").login}</h2>
     <h3>Missions: </h3>
 
-    <c:if test="${sessionScope.authUser.role != 'ADMIN'}">
-        <a href="<c:url value="/app/mission/offer"/>">Offer mission</a>
-    </c:if>
+    <a href="<c:url value="/app/mission/offer"/>">Offer mission</a>
 
+    <c:if test="${requestScope.error != null}">
+        <div>${requestScope.error}</div>
+    </c:if>
     <h4>Active:</h4>
     <table>
         <c:forEach items="${requestScope.activeMissions}" var="mission">

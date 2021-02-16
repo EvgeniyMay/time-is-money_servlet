@@ -16,16 +16,11 @@ public class PostActivityEditCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-
-        Activity activity = new Activity();
-        activity.setId(id);
-        activity.setName(name);
-        activity.setDescription(description);
-
-        activityService.update(activity);
+        activityService.update(new Activity.Builder()
+                .id(Integer.parseInt(request.getParameter("id")))
+                .name(request.getParameter("name"))
+                .description(request.getParameter("description"))
+                .build());
 
         return "redirect:/app/activity";
     }

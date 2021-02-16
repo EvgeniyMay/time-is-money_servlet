@@ -17,11 +17,10 @@ public class PostReturnMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Mission mission = new Mission.Builder()
-                .id(Integer.parseInt(request.getParameter("missionId")))
-                .build();
-
-        missionService.updateMissionState(mission, MissionState.ACTIVE);
+        missionService.updateMissionState(new Mission.Builder()
+                        .id(Integer.parseInt(request.getParameter("missionId")))
+                        .build(),
+                MissionState.ACTIVE);
 
         return "redirect:/app/mission/passed";
     }

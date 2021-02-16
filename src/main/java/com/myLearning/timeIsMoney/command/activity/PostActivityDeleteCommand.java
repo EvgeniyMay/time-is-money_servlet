@@ -15,9 +15,7 @@ public class PostActivityDeleteCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-
-        activityService.deleteById(id);
+         activityService.deleteById(Integer.parseInt(request.getParameter("id")));
 
         return "redirect:/app/activity";
     }

@@ -16,14 +16,10 @@ public class PostActivityCreateCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-
-        Activity activity = new Activity();
-        activity.setName(name);
-        activity.setDescription(description);
-
-        activityService.create(activity);
+        activityService.create(new Activity.Builder()
+                .name(request.getParameter("name"))
+                .description(request.getParameter("description"))
+                .build());
 
         return "redirect:/app/activity";
     }

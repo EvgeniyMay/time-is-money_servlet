@@ -17,11 +17,10 @@ public class PostAcceptMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int missionId = Integer.parseInt(request.getParameter("missionId"));
-        Mission mission = new Mission();
-        mission.setId(missionId);
-
-        missionService.updateMissionState(mission, MissionState.ACTIVE);
+        missionService.updateMissionState(new Mission.Builder()
+                .id(Integer.parseInt(request.getParameter("missionId")))
+                .build(),
+                MissionState.ACTIVE);
 
         return "redirect:/app/mission/offered";
     }

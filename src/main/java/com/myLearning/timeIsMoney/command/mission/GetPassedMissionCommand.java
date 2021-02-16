@@ -19,13 +19,7 @@ public class GetPassedMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-
-        List<Mission> missions = missionService.findAll();
-        //ToDo
-        // Make query
-        request.setAttribute("missions", missions.stream()
-                .filter(m -> MissionState.PASSED.equals(m.getState()))
-                .collect(Collectors.toList()));
+        request.setAttribute("missions", missionService.findByState(MissionState.PASSED));
 
         return "/WEB-INF/jsp/mission/missionPassed.jsp";
     }

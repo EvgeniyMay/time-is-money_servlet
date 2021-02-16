@@ -19,13 +19,7 @@ public class GetOfferedMissionsCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-
-        List<Mission> missions = missionService.findAll();
-        //ToDo
-        // Make query
-        request.setAttribute("missions", missions.stream()
-            .filter(m -> MissionState.OFFERED.equals(m.getState()))
-            .collect(Collectors.toList()));
+        request.setAttribute("missions", missionService.findByState(MissionState.OFFERED));
 
         return "/WEB-INF/jsp/mission/missionOffered.jsp";
     }

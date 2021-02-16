@@ -23,6 +23,11 @@ public class MissionService {
             return missionDao.findAll();
         }
     }
+    public List<Mission> findByState(MissionState state) {
+        try (MissionDao missionDao = daoFactory.createMissionDao()) {
+            return missionDao.findByState(state);
+        }
+    }
 
     public UsersAndActivities getUsersAndActivities() {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
@@ -62,4 +67,6 @@ public class MissionService {
             return missionDao.cancel(user, mission);
         }
     }
+
+
 }

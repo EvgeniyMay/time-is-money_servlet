@@ -45,4 +45,16 @@ public class ActivityService {
             return activityDao.deleteById(id);
         }
     }
+
+    public int getCount() {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.getCount();
+        }
+    }
+
+    public List<Activity> findPageable(int page, int size) {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.findPageable(page, size);
+        }
+    }
 }

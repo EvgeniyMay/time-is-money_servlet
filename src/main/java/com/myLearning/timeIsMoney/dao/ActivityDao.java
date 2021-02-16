@@ -12,4 +12,8 @@ public interface ActivityDao extends GenericDao<Activity> {
     Optional<Activity> findById(int id);
 
     boolean deleteById(int id);
+
+    int getCount();
+
+    List<Activity> findPageable(int page, int size);
 }

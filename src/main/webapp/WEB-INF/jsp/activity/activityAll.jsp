@@ -42,6 +42,11 @@
                 </td>
             </tr>
         </c:forEach>
+        <nav>
+            <c:forEach begin="0" end="${requestScope.pageCount - 1}" step="1" var="i">
+                <a href="<c:url value="/app/activity?curPage=${i}"/>">${i + 1}</a>
+            </c:forEach>
+        </nav>
     </table>
 </body>
 </html>

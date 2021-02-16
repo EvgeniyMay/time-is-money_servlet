@@ -82,6 +82,28 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
+    public List<Activity> findPageable(int page, int size) {
+        List<Activity> proxyActivities = new ArrayList<>();
+
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all.proxy.pageable"))) {
+            ps.setInt(1, size);
+            ps.setInt(2, size * page);
+
+            ResultSet resultSet = ps.executeQuery();
+            while(resultSet.next()) {
+                Activity proxyActivity = ActivityMapper.getProxyFromResultSet(resultSet);
+                proxyActivities.add(proxyActivity);
+            }
+
+            System.out.println(proxyActivities);
+            return proxyActivities;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public Optional<Activity> findById(int id) {
         Map<Integer, User> userMap = new HashMap<>();
         Activity activity = null;
@@ -155,6 +177,22 @@ public class JdbcActivityDao implements ActivityDao {
             ps.setInt(3, activity.getId());
 
             return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public int getCount() {
+        try (Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.mission.count"))) {
+
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();

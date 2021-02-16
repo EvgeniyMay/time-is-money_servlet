@@ -1,6 +1,7 @@
 package com.mylearning.timeismoney.command.activity;
 
 import com.mylearning.timeismoney.command.Command;
+import com.mylearning.timeismoney.exception.PageNotFoundException;
 import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,21 +18,20 @@ public class GetActivityCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         int curPage = 0;
-        int pageSize = 7;
+        int pageSize = 10;
 
         if (request.getParameter("curPage") != null) {
             try {
                 curPage = Integer.parseInt(request.getParameter("curPage"));
             } catch (NumberFormatException e) {
-                curPage = 0;
+                throw new PageNotFoundException();
             }
         }
-
 
         int activityCount = activityService.getCount();
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 
-        request.setAttribute("activities", activityService.findPageable(curPage, pageSize));
+        request.setAttribute("activities", activityService.findActivePageable(curPage, pageSize));
         request.setAttribute("curPage", curPage);
         request.setAttribute("pageSize", pageSize);
         request.setAttribute("pageCount", pageCount);

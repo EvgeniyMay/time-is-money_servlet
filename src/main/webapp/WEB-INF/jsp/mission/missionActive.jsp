@@ -17,6 +17,11 @@
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
     <h2>Active missions:</h2>
+    <nav>
+        <c:forEach begin="0" end="${requestScope.pageCount - 1}" step="1" var="i">
+            <a href="<c:url value="/app/mission/active?curPage=${i}"/>">${i + 1}</a>
+        </c:forEach>
+    </nav>
     <table>
         <tr>
             <th>User</th>

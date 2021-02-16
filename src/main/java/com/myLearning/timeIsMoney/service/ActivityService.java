@@ -52,9 +52,9 @@ public class ActivityService {
         }
     }
 
-    public List<Activity> findPageable(int page, int size) {
+    public List<Activity> findActivePageable(int page, int size) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findPageable(page, size);
+            return activityDao.findActivePageableProxy(page, size);
         }
     }
 }

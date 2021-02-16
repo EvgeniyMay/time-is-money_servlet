@@ -15,5 +15,5 @@ public interface ActivityDao extends GenericDao<Activity> {
 
     int getCount();
 
-    List<Activity> findPageable(int page, int size);
+    List<Activity> findActivePageableProxy(int page, int size);
 }

@@ -3,6 +3,7 @@ package com.mylearning.timeismoney.dao;
 import com.mylearning.timeismoney.dto.UsersAndActivities;
 import com.mylearning.timeismoney.entity.Mission;
 import com.mylearning.timeismoney.entity.User;
+import com.mylearning.timeismoney.entity.enums.MissionField;
 import com.mylearning.timeismoney.entity.enums.MissionState;
 
 import java.util.List;
@@ -10,6 +11,10 @@ import java.util.List;
 public interface MissionDao extends GenericDao<Mission> {
 
     List<Mission> findByState(MissionState state);
+
+    List<Mission> findPageableSortedBy(int page, int size, MissionState state, MissionField field);
+
+    int countByState(MissionState state);
 
     UsersAndActivities getUsersAndActivities();
 

@@ -2,7 +2,9 @@ package com.mylearning.timeismoney.command.mission;
 
 import com.mylearning.timeismoney.command.Command;
 import com.mylearning.timeismoney.entity.Mission;
+import com.mylearning.timeismoney.entity.enums.MissionField;
 import com.mylearning.timeismoney.entity.enums.MissionState;
+import com.mylearning.timeismoney.exception.PageNotFoundException;
 import com.mylearning.timeismoney.service.MissionService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,25 @@ public class GetActiveMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("missions", missionService.findByState(MissionState.ACTIVE));
+        int curPage = 0;
+        int pageSize = 5;
+
+        if (request.getParameter("curPage") != null) {
+            try {
+                curPage = Integer.parseInt(request.getParameter("curPage"));
+            } catch (NumberFormatException e) {
+                throw new PageNotFoundException();
+            }
+        }
+
+        int activityCount = missionService.countByState(MissionState.ACTIVE);
+        int pageCount = (int)Math.ceil((double)activityCount/pageSize);
+
+        request.setAttribute("missions", missionService.findPageable(curPage, pageSize,
+                MissionState.ACTIVE, MissionField.USER_ID));
+        request.setAttribute("curPage", curPage);
+        request.setAttribute("pageSize", pageSize);
+        request.setAttribute("pageCount", pageCount);
 
         return "/WEB-INF/jsp/mission/missionActive.jsp";
     }

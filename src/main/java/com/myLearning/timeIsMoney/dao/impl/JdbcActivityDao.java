@@ -82,10 +82,10 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
-    public List<Activity> findPageable(int page, int size) {
+    public List<Activity> findActivePageableProxy(int page, int size) {
         List<Activity> proxyActivities = new ArrayList<>();
 
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all.proxy.pageable"))) {
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all.active.pageable.proxy"))) {
             ps.setInt(1, size);
             ps.setInt(2, size * page);
 
@@ -186,7 +186,7 @@ public class JdbcActivityDao implements ActivityDao {
     @Override
     public int getCount() {
         try (Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.mission.count"))) {
+            ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.activity.count"))) {
 
             if(resultSet.next()) {
                 return resultSet.getInt(1);

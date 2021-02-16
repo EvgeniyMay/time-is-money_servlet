@@ -7,16 +7,28 @@
     </div>
     <div class="profile">
         <c:if test="${sessionScope.authUser == null}">
-            <nav>
-                <a href="<c:url value="/app/registration"/>"><fmt:message key="nav.signup" /></a>
-                <a href="<c:url value="/app/login"/>"><fmt:message key="nav.login" /></a>
+            <nav class="navbar navbar-dark bg-dark">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/app/registration"/>"><fmt:message key="nav.signup" /></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/app/login"/>"><fmt:message key="nav.login" /></a>
+                    </li>
+                </ul>
             </nav>
         </c:if>
         <c:if test="${sessionScope.authUser != null}">
             <div>
-                <nav>
-                    <a href="<c:url value="/app/profile"/>"><fmt:message key="nav.profile" /></a>
-                    <a href="<c:url value="/app/logout"/>"><fmt:message key="nav.logout" /></a>
+                <nav class="navbar navbar-dark bg-dark">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/app/profile"/>"><fmt:message key="nav.profile" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/app/logout"/>"><fmt:message key="nav.logout" /></a>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </c:if>

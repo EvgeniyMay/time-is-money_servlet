@@ -64,6 +64,8 @@ public class JdbcMissionDao implements MissionDao {
         }
     }
 
+    //ToDo
+    // GOOGLE
     @Override
     public UsersAndActivities getUsersAndActivities() {
         try(UserDao userDao = daoFactory.createUserDao();

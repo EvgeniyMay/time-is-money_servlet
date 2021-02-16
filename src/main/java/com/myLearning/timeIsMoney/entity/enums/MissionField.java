@@ -1,15 +1,19 @@
 package com.mylearning.timeismoney.entity.enums;
 
 public enum MissionField {
-    USER_ID("user_id"), ACTIVITY_ID("activity_id"), START_TIME("start_time"), END_TIME("end_time");
+    USER_ID("query.mission.find.by.state.pageable.sorted.by.user.id"),
+    ACTIVITY_ID("query.mission.find.by.state.pageable.sorted.by.activity.id"),
+    START_TIME("query.mission.find.by.state.pageable.sorted.by.start.time"),
+    END_TIME("query.mission.find.by.state.pageable.sorted.by.end.time");
 
-    private String columnName;
 
-    MissionField(String columnName) {
-        this.columnName = columnName;
+    private String propertyName;
+
+    MissionField(String propertyName) {
+        this.propertyName = propertyName;
     }
 
-    public String getColumnName() {
-        return columnName;
+    public String getPropertyName() {
+        return propertyName;
     }
 }

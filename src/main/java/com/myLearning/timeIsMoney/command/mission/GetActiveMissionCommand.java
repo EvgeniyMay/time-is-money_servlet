@@ -9,6 +9,7 @@ import com.mylearning.timeismoney.service.MissionService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class GetActiveMissionCommand implements Command {
@@ -23,6 +24,7 @@ public class GetActiveMissionCommand implements Command {
     public String execute(HttpServletRequest request) {
         int curPage = 0;
         int pageSize = 5;
+        MissionField sortField = MissionField.ACTIVITY_ID;
 
         if (request.getParameter("curPage") != null) {
             try {
@@ -32,11 +34,22 @@ public class GetActiveMissionCommand implements Command {
             }
         }
 
+        if(!Objects.isNull(request.getParameter("sortField"))) {
+            try {
+                sortField = MissionField.valueOf(request.getParameter("sortField").toUpperCase());
+
+            } catch (IllegalArgumentException e) {
+                throw new PageNotFoundException();
+            }
+        }
+
         int activityCount = missionService.countByState(MissionState.ACTIVE);
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 
-        request.setAttribute("missions", missionService.findPageable(curPage, pageSize,
-                MissionState.ACTIVE, MissionField.USER_ID));
+        System.out.println(sortField);
+
+        request.setAttribute("missions", missionService.findPageable(curPage, pageSize, MissionState.ACTIVE, sortField));
+        request.setAttribute("sortField", sortField.toString().toLowerCase());
         request.setAttribute("curPage", curPage);
         request.setAttribute("pageSize", pageSize);
         request.setAttribute("pageCount", pageCount);

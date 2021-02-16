@@ -108,11 +108,10 @@ public class JdbcMissionDao implements MissionDao {
         Map<Integer, Activity> activityMap = new HashMap<>();
         List<Mission> missions = new ArrayList<>();
 
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.find.by.state.pageable"))) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString(field.getPropertyName()))) {
             ps.setString(1, state.toString());
-            ps.setString(2, field.getColumnName());
-            ps.setInt(3, size);
-            ps.setInt(4, page * size);
+            ps.setInt(2, size);
+            ps.setInt(3, page * size);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {

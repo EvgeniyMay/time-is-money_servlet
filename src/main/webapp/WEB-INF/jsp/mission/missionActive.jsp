@@ -19,15 +19,29 @@
     <h2>Active missions:</h2>
     <nav>
         <c:forEach begin="0" end="${requestScope.pageCount - 1}" step="1" var="i">
-            <a href="<c:url value="/app/mission/active?curPage=${i}"/>">${i + 1}</a>
+            <form>
+                <input type="hidden" name="curPage" value="${i}">
+                <input type="hidden" name="sortField" value="${requestScope.sortField}">
+                <input type="submit" value="${i + 1}">
+            </form>
         </c:forEach>
     </nav>
     <table>
         <tr>
-            <th>User</th>
-            <th>Activity</th>
-            <th>Start time</th>
-            <th>End time</th>
+            <th>
+                <form>
+                    <input type="hidden" name="sortField" value="${'user_id'}">
+                    <input type="submit" value="${'User'}">
+                </form>
+            </th>
+            <th>
+                <form>
+                    <input type="hidden" name="sortField" value="${'activity_id'}">
+                    <input type="submit" value="${'Activity'}">
+                </form>
+            </th>
+            <th><a href="<c:url value="?sortField=${'start_time'}"/>">Start Time</a></th>
+            <th><a href="<c:url value="?sortField=${'end_time'}"/>">End Time</a></th>
         </tr>
         <c:forEach items="${requestScope.missions}" var="mission">
             <tr>

@@ -106,9 +106,23 @@ public class JdbcMissionDao implements MissionDao {
 
     @Override
     public boolean updateMissionState(Mission mission, MissionState state) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.update.change.state"))) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.update.state"))) {
             ps.setString(1, state.toString());
             ps.setInt(2, mission.getId());
+
+            return ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public boolean userUpdateMissionState(User user, Mission mission, MissionState state) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.update.state"))) {
+            ps.setString(1, state.toString());
+            ps.setInt(2, mission.getId());
+            ps.setInt(3, user.getId());
 
             return ps.execute();
         } catch (SQLException e) {
@@ -130,11 +144,10 @@ public class JdbcMissionDao implements MissionDao {
     }
 
     @Override
-    public boolean userUpdateMissionState(User user, Mission mission, MissionState state) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.update.user.change.state"))) {
-            ps.setString(1, state.toString());
-            ps.setInt(2, mission.getId());
-            ps.setInt(3, user.getId());
+    public boolean userDelete(User user, Mission mission) {
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.delete"))) {
+            ps.setInt(1, mission.getId());
+            ps.setInt(2, user.getId());
 
             return ps.execute();
         } catch (SQLException e) {

@@ -6,6 +6,7 @@ import com.mylearning.timeismoney.dto.UsersAndActivities;
 import com.mylearning.timeismoney.entity.Mission;
 import com.mylearning.timeismoney.entity.User;
 import com.mylearning.timeismoney.entity.enums.MissionState;
+import com.mylearning.timeismoney.entity.enums.Role;
 
 import java.util.List;
 
@@ -53,4 +54,12 @@ public class MissionService {
         }
     }
 
+    public boolean userDelete(User user, Mission mission) {
+        try(MissionDao missionDao = daoFactory.createMissionDao()) {
+            if(Role.ADMIN.equals(user.getRole())) {
+                return missionDao.delete(mission);
+            }
+            return missionDao.userDelete(user, mission);
+        }
+    }
 }

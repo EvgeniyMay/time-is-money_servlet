@@ -42,9 +42,9 @@ public class MissionService {
         }
     }
 
-    public boolean userUpdateMissionState(User user, Mission mission, MissionState state) {
+    public boolean passMission(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
-            return missionDao.userUpdateMissionState(user, mission, state);
+            return missionDao.pass(user, mission);
         }
     }
 
@@ -54,12 +54,12 @@ public class MissionService {
         }
     }
 
-    public boolean userDelete(User user, Mission mission) {
+    public boolean cancel(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             if(Role.ADMIN.equals(user.getRole())) {
                 return missionDao.delete(mission);
             }
-            return missionDao.userDelete(user, mission);
+            return missionDao.cancel(user, mission);
         }
     }
 }

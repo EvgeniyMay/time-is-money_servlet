@@ -19,12 +19,10 @@ public class PostPassMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Mission mission = new Mission.Builder()
-                .id(Integer.parseInt(request.getParameter("missionId")))
-                .build();
-
-        User user = (User) request.getSession().getAttribute("authUser");
-        missionService.userUpdateMissionState(user, mission, MissionState.PASSED);
+        missionService.passMission((User) request.getSession().getAttribute("authUser"),
+                new Mission.Builder()
+                        .id(Integer.parseInt(request.getParameter("missionId")))
+                        .build());
 
         return "redirect:/app/profile";
 

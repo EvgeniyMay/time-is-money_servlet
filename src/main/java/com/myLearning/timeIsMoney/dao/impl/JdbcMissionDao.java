@@ -118,11 +118,10 @@ public class JdbcMissionDao implements MissionDao {
     }
 
     @Override
-    public boolean userUpdateMissionState(User user, Mission mission, MissionState state) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.update.state"))) {
-            ps.setString(1, state.toString());
-            ps.setInt(2, mission.getId());
-            ps.setInt(3, user.getId());
+    public boolean pass(User user, Mission mission) {
+        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.pass"))) {
+            ps.setInt(1, mission.getId());
+            ps.setInt(2, user.getId());
 
             return ps.execute();
         } catch (SQLException e) {
@@ -144,8 +143,8 @@ public class JdbcMissionDao implements MissionDao {
     }
 
     @Override
-    public boolean userDelete(User user, Mission mission) {
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.delete"))) {
+    public boolean cancel(User user, Mission mission) {
+        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.cancel"))) {
             ps.setInt(1, mission.getId());
             ps.setInt(2, user.getId());
 

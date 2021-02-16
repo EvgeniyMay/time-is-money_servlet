@@ -13,7 +13,7 @@ public interface MissionDao extends GenericDao<Mission> {
 
     boolean delete(Mission mission);
 
-    boolean userUpdateMissionState(User user, Mission mission, MissionState state);
+    boolean pass(User user, Mission mission);
 
-    boolean userDelete(User user, Mission mission);
+    boolean cancel(User user, Mission mission);
 }

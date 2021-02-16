@@ -17,7 +17,7 @@ public class PostCancelMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        missionService.userDelete((User) request.getSession().getAttribute("authUser"),
+        missionService.cancel((User) request.getSession().getAttribute("authUser"),
                 new Mission.Builder()
                     .id(Integer.parseInt(request.getParameter("missionId")))
                     .build());

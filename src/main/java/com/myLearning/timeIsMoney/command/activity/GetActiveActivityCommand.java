@@ -28,6 +28,8 @@ public class GetActiveActivityCommand implements Command {
             }
         }
 
+        //TODO IS(TRUE)
+        //TODO COUNT INNER QUERY
         int activityCount = activityService.getActiveCount();
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 

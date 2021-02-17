@@ -22,32 +22,7 @@ public class GetOfferedMissionsCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int curPage = 0;
-        int pageSize = 5;
-        MissionField sortField = MissionField.ACTIVITY_ID;
-
-        if (request.getParameter("cur_page") != null) {
-            try {
-                curPage = Integer.parseInt(request.getParameter("cur_page"));
-            } catch (NumberFormatException e) {
-                throw new PageNotFoundException();
-            }
-        }
-
-        if(!Objects.isNull(request.getParameter("sort_field"))) {
-            try {
-                sortField = MissionField.valueOf(request.getParameter("sort_field").toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new PageNotFoundException();
-            }
-        }
-
-        int activityCount = missionService.countByState(MissionState.OFFERED);
-        int pageCount = (int)Math.ceil((double)activityCount/pageSize);
-
-        request.setAttribute("missions", missionService.findPageable(curPage, pageSize, MissionState.OFFERED, sortField));
-        request.setAttribute("sort_field", sortField.toString().toLowerCase());
-        request.setAttribute("page_count", pageCount);
+        GetMission.makeExecuteByState(request, MissionState.OFFERED, missionService);
 
         return "/WEB-INF/jsp/mission/missionOffered.jsp";
     }

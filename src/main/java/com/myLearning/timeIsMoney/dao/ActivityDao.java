@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface ActivityDao extends GenericDao<Activity> {
 
-    List<Activity> findAllProxy();
-
     List<Activity> findActive();
 
     List<Activity> findActiveProxy();

@@ -20,33 +20,47 @@
         <div>${requestScope.addResult}</div>
     </c:if>
     <h2>Offers</h2>
-    <table>
-        <tr>
-            <th>User</th>
-            <th>Activity</th>
-            <th>Start time</th>
-            <th>End time</th>
-        </tr>
-        <c:forEach items="${requestScope.missions}" var="mission">
+    <c:if test="${requestScope.page_count == 0}">
+        <div> No active missions</div>
+    </c:if>
+    <c:if test="${requestScope.page_count > 0}">
+        <nav>
+            <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
+                <form>
+                    <input type="hidden" name="cur_page" value="${i}">
+                    <input type="hidden" name="sort_field" value="${requestScope.sort_field}">
+                    <input type="submit" value="${i + 1}">
+                </form>
+            </c:forEach>
+        </nav>
+        <table>
             <tr>
-                <td>${mission.user.login}</td>
-                <td>${mission.activity.name}</td>
-                <td>${mission.startTime}</td>
-                <td>${mission.endTime}</td>
-                <td>
-                    <form action="${pageContext.request.contextPath}/app/mission/accept" method="POST">
-                        <input type="hidden" name="missionId" value="${mission.id}">
-                        <input type="submit" value="Accept">
-                    </form>
-                </td>
-                <td>
-                    <form action="${pageContext.request.contextPath}/app/mission/cancel" method="POST">
-                        <input type="hidden" name="missionId" value="${mission.id}">
-                        <input type="submit" value="Deny">
-                    </form>
-                </td>
+                <th>User</th>
+                <th>Activity</th>
+                <th>Start time</th>
+                <th>End time</th>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach items="${requestScope.missions}" var="mission">
+                <tr>
+                    <td>${mission.user.login}</td>
+                    <td>${mission.activity.name}</td>
+                    <td>${mission.startTime}</td>
+                    <td>${mission.endTime}</td>
+                    <td>
+                        <form action="${pageContext.request.contextPath}/app/mission/accept" method="POST">
+                            <input type="hidden" name="missionId" value="${mission.id}">
+                            <input type="submit" value="Accept">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="${pageContext.request.contextPath}/app/mission/cancel" method="POST">
+                            <input type="hidden" name="missionId" value="${mission.id}">
+                            <input type="submit" value="Deny">
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
 </body>
 </html>

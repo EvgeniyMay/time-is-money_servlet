@@ -18,8 +18,8 @@ public class PostAcceptMissionCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         boolean added = missionService.updateMissionState(new Mission.Builder()
-                .id(Integer.parseInt(request.getParameter("missionId")))
-                .build(),
+                        .id(Integer.parseInt(request.getParameter("missionId")))
+                        .build(),
                 MissionState.ACTIVE);
 
         if(!added) {

@@ -16,6 +16,9 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
+    <c:if test="${requestScope.addResult != null}">
+        <div>${requestScope.addResult}</div>
+    </c:if>
     <h2>Offers</h2>
     <table>
         <tr>

@@ -21,6 +21,24 @@ public class ActivityService {
         }
     }
 
+    public List<Activity> findActivePageable(int page, int size) {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.findActivePageableProxy(page, size);
+        }
+    }
+
+    public List<Activity> findArchivedPageable(int page, int size) {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.findArchivedPageableProxy(page, size);
+        }
+    }
+
+    public List<Activity> findActive() {
+        try (ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.findActiveProxy();
+        }
+    }
+
     public Activity findById(int id) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findById(id)
@@ -64,16 +82,6 @@ public class ActivityService {
         }
     }
 
-    public List<Activity> findActivePageable(int page, int size) {
-        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findActivePageableProxy(page, size);
-        }
-    }
 
-    public List<Activity> findArchivedPageable(int page, int size) {
-        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findArchivedPageableProxy(page, size);
-        }
-    }
 
 }

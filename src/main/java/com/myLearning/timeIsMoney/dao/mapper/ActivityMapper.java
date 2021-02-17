@@ -14,15 +14,8 @@ public class ActivityMapper {
                 .id(resultSet.getInt("activity_id"))
                 .name(resultSet.getString("activity_name"))
                 .description(resultSet.getString("activity_description"))
+                .isArchived(resultSet.getBoolean("activity_is_archived"))
                 .missions(new ArrayList<>())
-                .build();
-    }
-
-    public static Activity getProxyFromResultSet(ResultSet resultSet) throws SQLException {
-        return new Activity.Builder()
-                .id(resultSet.getInt("activity_id"))
-                .name(resultSet.getString("activity_name"))
-                .description(resultSet.getString("activity_description"))
                 .build();
     }
 

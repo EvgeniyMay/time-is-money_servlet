@@ -15,7 +15,7 @@ public class GetOfferMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("activities", activityService.findAll());
+        request.setAttribute("activities", activityService.findActive());
 
         return "/WEB-INF/jsp/mission/missionOffer.jsp";
     }

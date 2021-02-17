@@ -9,6 +9,12 @@ public interface ActivityDao extends GenericDao<Activity> {
 
     List<Activity> findAllProxy();
 
+    List<Activity> findActiveProxy();
+
+    List<Activity> findActivePageableProxy(int page, int size);
+
+    List<Activity> findArchivedPageableProxy(int page, int size);
+
     Optional<Activity> findById(int id);
 
     boolean archiveById(int id);
@@ -19,7 +25,4 @@ public interface ActivityDao extends GenericDao<Activity> {
 
     int getArchivedCount();
 
-    List<Activity> findActivePageableProxy(int page, int size);
-
-    List<Activity> findArchivedPageableProxy(int page, int size);
 }

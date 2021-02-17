@@ -23,28 +23,33 @@
             </c:forEach>
         </ul>
     </div>
-    <form action="<c:url value="/app/mission/offer"/>" method="POST">
-        <table>
-            <tr>
-                <td>Mission: </td>
-                <td>
-                    <select name="activityId">
-                        <c:forEach items="${requestScope.activities}" var="activity">
-                            <option value="${activity.id}">${activity.name} | ${activity.description}</option>
-                        </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Start time:</td>
-                <td><input name="startTime" type="datetime-local"></td>
-            </tr>
-            <tr>
-                <td>End time:</td>
-                <td><input name="endTime" type="datetime-local"></td>
-            </tr>
-        </table>
-        <input type="submit" value="Create">
-    </form>
+    <c:if test="${requestScope.activities.size() == 0}">
+        <div>No active activities</div>
+    </c:if>
+    <c:if test="${requestScope.activities.size() !=0}">
+        <form action="<c:url value="/app/mission/offer"/>" method="POST">
+            <table>
+                <tr>
+                    <td>Mission: </td>
+                    <td>
+                        <select name="activityId">
+                            <c:forEach items="${requestScope.activities}" var="activity">
+                                <option value="${activity.id}">${activity.name} | ${activity.description}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Start time:</td>
+                    <td><input name="startTime" type="datetime-local"></td>
+                </tr>
+                <tr>
+                    <td>End time:</td>
+                    <td><input name="endTime" type="datetime-local"></td>
+                </tr>
+            </table>
+            <input type="submit" value="Create">
+        </form>
+    </c:if>
 </body>
 </html>

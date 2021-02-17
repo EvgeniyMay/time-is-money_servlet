@@ -17,50 +17,63 @@
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
     <h2>Active missions:</h2>
-    <nav>
-        <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
-            <form>
-                <input type="hidden" name="cur_page" value="${i}">
-                <input type="hidden" name="sort_field" value="${requestScope.sort_field}">
-                <input type="submit" value="${i + 1}">
-            </form>
-        </c:forEach>
-    </nav>
-    <table>
-        <tr>
-            <th>
+
+    <c:if test="${requestScope.page_count == 0}">
+        <div> No active missions</div>
+    </c:if>
+
+    <c:if test="${requestScope.page_count > 0}">
+        <nav>
+            <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
                 <form>
-                    <input type="hidden" name="sort_field" value="${'user_id'}">
-                    <input type="submit" value="${'User'}">
+                    <input type="hidden" name="cur_page" value="${i}">
+                    <input type="hidden" name="sort_field" value="${requestScope.sort_field}">
+                    <input type="submit" value="${i + 1}">
                 </form>
-            </th>
-            <th>
-                <form>
-                    <input type="hidden" name="sort_field" value="${'activity_id'}">
-                    <input type="submit" value="${'Activity'}">
-                </form>
-            </th>
-            <th>
-                <form>
-                    <input type="hidden" name="sort_field" value="${'start_time'}">
-                    <input type="submit" value="${'Start Time'}">
-                </form>
-            </th>
-            <th>
-                <form>
-                    <input type="hidden" name="sort_field" value="${'end_time'}">
-                    <input type="submit" value="${'End Time'}">
-                </form>
-            </th>
-        </tr>
-        <c:forEach items="${requestScope.missions}" var="mission">
+            </c:forEach>
+        </nav>
+        <table>
             <tr>
-                <td>${mission.user.login}</td>
-                <td>${mission.activity.name}</td>
-                <td>${mission.startTime}</td>
-                <td>${mission.endTime}</td>
+                <th>
+                    <form>
+                        <input type="hidden" name="sort_field" value="${'user_id'}">
+                        <input type="submit" value="${'User'}">
+                    </form>
+                </th>
+                <th>
+                    <form>
+                        <input type="hidden" name="sort_field" value="${'activity_id'}">
+                        <input type="submit" value="${'Activity'}">
+                    </form>
+                </th>
+                <th>
+                    <form>
+                        <input type="hidden" name="sort_field" value="${'start_time'}">
+                        <input type="submit" value="${'Start Time'}">
+                    </form>
+                </th>
+                <th>
+                    <form>
+                        <input type="hidden" name="sort_field" value="${'end_time'}">
+                        <input type="submit" value="${'End Time'}">
+                    </form>
+                </th>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach items="${requestScope.missions}" var="mission">
+                <tr>
+                    <td>${mission.user.login}</td>
+                    <td>${mission.activity.name}</td>
+                    <td>
+                        <fmt:parseDate value="${mission.startTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartTime" type="both"/>
+                        <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${parsedStartTime}"/>
+                    </td>
+                    <td>
+                        <fmt:parseDate value="${mission.endTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndTime" type="both"/>
+                        <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${parsedEndTime}"/>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
 </body>
 </html>

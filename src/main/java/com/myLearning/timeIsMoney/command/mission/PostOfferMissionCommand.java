@@ -24,7 +24,6 @@ public class PostOfferMissionCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         Mission mission;
-
         try {
             mission = new Mission.Builder()
                     .user((User)request.getSession().getAttribute("authUser"))

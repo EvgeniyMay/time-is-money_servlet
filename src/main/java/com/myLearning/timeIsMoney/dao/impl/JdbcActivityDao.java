@@ -14,7 +14,7 @@ import java.util.*;
 public class JdbcActivityDao implements ActivityDao {
 
     private final Connection connection;
-    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
+    private final static ResourceBundle rb = ResourceBundle.getBundle("database");
 
     public JdbcActivityDao(Connection connection) {
         this.connection = connection;
@@ -25,7 +25,7 @@ public class JdbcActivityDao implements ActivityDao {
         Map<Integer, Activity> activityMap = new HashMap<>();
         Map<Integer, User> userMap = new HashMap<>();
 
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all"))) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.all"))) {
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
@@ -66,11 +66,11 @@ public class JdbcActivityDao implements ActivityDao {
     public List<Activity> findAllProxy() {
         List<Activity> proxyActivities = new ArrayList<>();
 
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all.proxy"));
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.all.proxy"));
             ResultSet resultSet = ps.executeQuery()) {
 
             while(resultSet.next()) {
-                Activity proxyActivity = ActivityMapper.getProxyFromResultSet(resultSet);
+                Activity proxyActivity = ActivityMapper.getFromResultSet(resultSet);
                 proxyActivities.add(proxyActivity);
             }
 
@@ -82,16 +82,33 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
+    public List<Activity> findActiveProxy() {
+        List<Activity> activities = new ArrayList<>();
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.active.proxy"));
+            ResultSet resultSet = ps.executeQuery()) {
+            while (resultSet.next()) {
+                Activity activity = ActivityMapper.getFromResultSet(resultSet);
+                activities.add(activity);
+            }
+
+            return activities;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public List<Activity> findActivePageableProxy(int page, int size) {
         List<Activity> proxyActivities = new ArrayList<>();
 
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all.active.pageable.proxy"))) {
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.all.active.pageable.proxy"))) {
             ps.setInt(1, size);
             ps.setInt(2, size * page);
 
             ResultSet resultSet = ps.executeQuery();
             while(resultSet.next()) {
-                Activity proxyActivity = ActivityMapper.getProxyFromResultSet(resultSet);
+                Activity proxyActivity = ActivityMapper.getFromResultSet(resultSet);
                 proxyActivities.add(proxyActivity);
             }
 
@@ -107,13 +124,13 @@ public class JdbcActivityDao implements ActivityDao {
     public List<Activity> findArchivedPageableProxy(int page, int size) {
         List<Activity> proxyActivities = new ArrayList<>();
 
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.all.archived.pageable.proxy"))) {
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.all.archived.pageable.proxy"))) {
             ps.setInt(1, size);
             ps.setInt(2, size * page);
 
             ResultSet resultSet = ps.executeQuery();
             while(resultSet.next()) {
-                Activity proxyActivity = ActivityMapper.getProxyFromResultSet(resultSet);
+                Activity proxyActivity = ActivityMapper.getFromResultSet(resultSet);
                 proxyActivities.add(proxyActivity);
             }
 
@@ -130,7 +147,7 @@ public class JdbcActivityDao implements ActivityDao {
         Map<Integer, User> userMap = new HashMap<>();
         Activity activity = null;
 
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.find.by.id"))) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.by.id"))) {
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
 
@@ -167,7 +184,7 @@ public class JdbcActivityDao implements ActivityDao {
 
     @Override
     public boolean create(Activity activity) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.insert"))) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.insert"))) {
             ActivityMapper.basicFillStatement(ps, activity);
 
             return ps.execute();
@@ -180,7 +197,7 @@ public class JdbcActivityDao implements ActivityDao {
 
     @Override
     public boolean archiveById(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.archive"))) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.archive"))) {
             ps.setInt(1, id);
 
             return ps.execute();
@@ -192,7 +209,7 @@ public class JdbcActivityDao implements ActivityDao {
 
     @Override
     public boolean activateById(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.activate"))) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.activate"))) {
             ps.setInt(1, id);
 
             return ps.execute();
@@ -204,7 +221,7 @@ public class JdbcActivityDao implements ActivityDao {
 
     @Override
     public boolean update(Activity activity) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.activity.update"))) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.update"))) {
             ActivityMapper.basicFillStatement(ps, activity);
             ps.setInt(3, activity.getId());
 
@@ -218,7 +235,7 @@ public class JdbcActivityDao implements ActivityDao {
     @Override
     public int getActiveCount() {
         try (Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.activity.active.count"))) {
+            ResultSet resultSet = statement.executeQuery(rb.getString("query.activity.active.count"))) {
 
             if(resultSet.next()) {
                 return resultSet.getInt(1);
@@ -234,7 +251,7 @@ public class JdbcActivityDao implements ActivityDao {
     @Override
     public int getArchivedCount() {
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(resourceBundle.getString("query.activity.archived.count"))) {
+             ResultSet resultSet = statement.executeQuery(rb.getString("query.activity.archived.count"))) {
 
             if(resultSet.next()) {
                 return resultSet.getInt(1);

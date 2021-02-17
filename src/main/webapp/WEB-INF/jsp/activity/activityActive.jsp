@@ -18,35 +18,42 @@
     </header>
     <h1>Active Activities</h1>
     <a href="${pageContext.request.contextPath}/app/activity/add">Create new</a>
-    <table>
-        <tr>
-            <th>Name:</th>
-            <th>Description:</th>
-        </tr>
+
+    <c:if test="${requestScope.page_count == 0}">
+        <div> No archived activities </div>
+    </c:if>
+
+    <c:if test="${requestScope.page_count > 0}">
         <nav>
             <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
-                <a href="<c:url value="/app/activity/active?cur_page=${i}"/>">${i + 1}</a>
+                <a href="<c:url value="/app/activity/archived?cur_page=${i}"/>">${i + 1}</a>
             </c:forEach>
         </nav>
-        <c:forEach items="${requestScope.activities}" var="activity">
+        <table>
             <tr>
-                <td>${activity.name}</td>
-                <td>${activity.description}</td>
-                <td>
-                    <form action="<c:url value="/app/activity/archive"/>" method="GET">
-                        <input type="hidden" name="id" value="${activity.id}">
-                        <input type="hidden" name="name" value="${activity.name}">
-                        <input type="submit" value="Archive">
-                    </form>
-                </td>
-                <td>
-                    <form action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
-                        <input type="hidden" name="id" value="${activity.id}">
-                        <input type="submit" value="Edit">
-                    </form>
-                </td>
+                <th>Name:</th>
+                <th>Description:</th>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach items="${requestScope.activities}" var="activity">
+                <tr>
+                    <td>${activity.name}</td>
+                    <td>${activity.description}</td>
+                    <td>
+                        <form action="<c:url value="/app/activity/archive"/>" method="GET">
+                            <input type="hidden" name="id" value="${activity.id}">
+                            <input type="hidden" name="name" value="${activity.name}">
+                            <input type="submit" value="Archive">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
+                            <input type="hidden" name="id" value="${activity.id}">
+                            <input type="submit" value="Edit">
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
 </body>
 </html>

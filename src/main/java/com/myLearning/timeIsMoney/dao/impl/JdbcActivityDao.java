@@ -82,6 +82,48 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
+    public List<Activity> findActive() {
+        Map<Integer, User> userMap = new HashMap<>();
+        Map<Integer, Activity> activityMap = new HashMap<>();
+
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(rb.getString("query.mission.find.all"))) {
+
+            while (resultSet.next()) {
+                int activityId = resultSet.getInt("activity_id");
+                if(!activityMap.containsKey(activityId)) {
+                    Activity activity = ActivityMapper.getFromResultSet(resultSet);
+                    activityMap.put(activityId, activity);
+                }
+
+                if(!Objects.isNull(resultSet.getString("mission_state"))) {
+                    Mission mission = MissionMapper.getFromResultSet(resultSet);
+
+                    int userId = resultSet.getInt("user_id");
+                    if(!userMap.containsKey(userId)) {
+                        User user = UserMapper.getFromResultSet(resultSet);
+                        userMap.put(userId, user);
+                    }
+
+                    Activity activity = activityMap.get(activityId);
+                    activity.getMissions().add(mission);
+
+                    User user = userMap.get(userId);
+                    user.getMissions().add(mission);
+
+                    mission.setUser(user);
+                    mission.setActivity(activity);
+                }
+            }
+
+            return new ArrayList<>(activityMap.values());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public List<Activity> findActiveProxy() {
         List<Activity> activities = new ArrayList<>();
         try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.active.proxy"));
@@ -99,21 +141,43 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
-    public List<Activity> findActivePageableProxy(int page, int size) {
-        List<Activity> proxyActivities = new ArrayList<>();
+    public List<Activity> findActivePageable(int page, int size) {
+        Map<Integer, Activity> activityMap = new HashMap<>();
+        Map<Integer, User> userMap = new HashMap<>();
 
-        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.all.active.pageable.proxy"))) {
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.active.pageable"))) {
             ps.setInt(1, size);
             ps.setInt(2, size * page);
-
             ResultSet resultSet = ps.executeQuery();
+
             while(resultSet.next()) {
-                Activity proxyActivity = ActivityMapper.getFromResultSet(resultSet);
-                proxyActivities.add(proxyActivity);
+                int activityId = resultSet.getInt("activity_id");
+                if(!activityMap.containsKey(activityId)) {
+                    Activity activity = ActivityMapper.getFromResultSet(resultSet);
+                    activityMap.put(activityId, activity);
+                }
+
+                if(!Objects.isNull(resultSet.getString("mission_state"))) {
+                    Mission mission = MissionMapper.getFromResultSet(resultSet);
+
+                    int userId = resultSet.getInt("user_id");
+                    if(!userMap.containsKey(userId)) {
+                        User user = UserMapper.getFromResultSet(resultSet);
+                        userMap.put(userId, user);
+                    }
+
+                    Activity activity = activityMap.get(activityId);
+                    mission.setActivity(activity);
+
+                    User user = userMap.get(userId);
+                    mission.setUser(user);
+
+                    activity.getMissions().add(mission);
+                    user.getMissions().add(mission);
+                }
             }
 
-            System.out.println(proxyActivities);
-            return proxyActivities;
+            return new ArrayList<>(activityMap.values());
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -121,7 +185,7 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
-    public List<Activity> findArchivedPageableProxy(int page, int size) {
+    public List<Activity> findArchivedPageable(int page, int size) {
         List<Activity> proxyActivities = new ArrayList<>();
 
         try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.all.archived.pageable.proxy"))) {

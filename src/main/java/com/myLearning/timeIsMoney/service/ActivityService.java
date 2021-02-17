@@ -14,26 +14,25 @@ public class ActivityService {
         this.daoFactory = daoFactory;
     }
 
-
-    public List<Activity> findAll() {
-        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findAll();
-        }
-    }
-
     public List<Activity> findActivePageable(int page, int size) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findActivePageableProxy(page, size);
+            return activityDao.findActivePageable(page, size);
         }
     }
 
     public List<Activity> findArchivedPageable(int page, int size) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findArchivedPageableProxy(page, size);
+            return activityDao.findArchivedPageable(page, size);
         }
     }
 
     public List<Activity> findActive() {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.findActive();
+        }
+    }
+
+    public List<Activity> findActiveProxy() {
         try (ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findActiveProxy();
         }

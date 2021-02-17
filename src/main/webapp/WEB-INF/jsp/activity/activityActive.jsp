@@ -33,11 +33,13 @@
             <tr>
                 <th>Name:</th>
                 <th>Description:</th>
+                <th>Active users:</th>
             </tr>
             <c:forEach items="${requestScope.activities}" var="activity">
                 <tr>
                     <td>${activity.name}</td>
                     <td>${activity.description}</td>
+                    <td>${activity.missions.size()}</td>
                     <td>
                         <form action="<c:url value="/app/activity/archive"/>" method="GET">
                             <input type="hidden" name="id" value="${activity.id}">

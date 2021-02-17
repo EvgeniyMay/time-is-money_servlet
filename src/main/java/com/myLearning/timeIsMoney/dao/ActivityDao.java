@@ -9,11 +9,13 @@ public interface ActivityDao extends GenericDao<Activity> {
 
     List<Activity> findAllProxy();
 
+    List<Activity> findActive();
+
     List<Activity> findActiveProxy();
 
-    List<Activity> findActivePageableProxy(int page, int size);
+    List<Activity> findActivePageable(int page, int size);
 
-    List<Activity> findArchivedPageableProxy(int page, int size);
+    List<Activity> findArchivedPageable(int page, int size);
 
     Optional<Activity> findById(int id);
 

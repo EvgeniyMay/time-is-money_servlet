@@ -11,6 +11,8 @@ import com.mylearning.timeismoney.entity.enums.Role;
 
 import java.util.List;
 
+//ToDo
+// Make it smaller
 public class MissionService {
 
     public final DaoFactory daoFactory;
@@ -19,6 +21,8 @@ public class MissionService {
         this.daoFactory = daoFactory;
     }
 
+    //ToDo
+    // Check genericDao impl
     public List<Mission> findAll() {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.findAll();
@@ -61,12 +65,16 @@ public class MissionService {
         }
     }
 
+    //ToDo
+    // Rename
     public boolean passMission(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.pass(user, mission);
         }
     }
 
+    //ToDo
+    // Should is exist ?
     public boolean delete(Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.delete(mission);
@@ -81,6 +89,4 @@ public class MissionService {
             return missionDao.cancel(user, mission);
         }
     }
-
-
 }

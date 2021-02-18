@@ -8,7 +8,7 @@ import com.mylearning.timeismoney.service.MissionService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
-public class GetMission {
+public class GetMissionUtil {
 
     public static void makeExecuteByState(HttpServletRequest request, MissionState state, MissionService missionService) {
         int curPage = 0;
@@ -34,6 +34,8 @@ public class GetMission {
         int activityCount = missionService.countByState(state);
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 
+        //ToDo
+        // Arrows
         request.setAttribute("missions", missionService.findPageable(curPage, pageSize, state, sortField));
         request.setAttribute("sort_field", sortField.toString().toLowerCase());
         request.setAttribute("page_count", pageCount);

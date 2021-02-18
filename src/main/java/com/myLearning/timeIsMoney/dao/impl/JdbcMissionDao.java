@@ -224,6 +224,8 @@ public class JdbcMissionDao implements MissionDao {
         }
     }
 
+    //ToDo
+    // 1 query
     @Override
     public boolean pass(User user, Mission mission) {
         try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.pass"))) {
@@ -237,6 +239,7 @@ public class JdbcMissionDao implements MissionDao {
         }
     }
 
+
     @Override
     public boolean delete(Mission mission) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.delete"))) {
@@ -249,6 +252,8 @@ public class JdbcMissionDao implements MissionDao {
         }
     }
 
+    //ToDo
+    // 1 query
     @Override
     public boolean cancel(User user, Mission mission) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.cancel"))) {

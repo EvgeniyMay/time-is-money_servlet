@@ -1,44 +1,41 @@
-<div class="header-content">
-    <div class="localization">
-        <nav>
-            <a href="?lang=en"><fmt:message key="language.en" /></a>
-            <a href="?lang=ru"><fmt:message key="language.ru" /></a>
-        </nav>
-    </div>
-    <div class="profile">
-        <c:if test="${sessionScope.authUser == null}">
-            <nav class="navbar navbar-dark bg-dark">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/app/registration"/>"><fmt:message key="nav.signup" /></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/app/login"/>"><fmt:message key="nav.login" /></a>
-                    </li>
-                </ul>
-            </nav>
-        </c:if>
-        <c:if test="${sessionScope.authUser != null}">
-            <div>
-                <nav class="navbar navbar-dark bg-dark">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/app/profile"/>"><fmt:message key="nav.profile" /></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/app/logout"/>"><fmt:message key="nav.logout" /></a>
-                        </li>
-                    </ul>
-                </nav>
+<div class="container bg-dark text-white">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-md-auto">
+            <div class="row align-items-center justify-content-start">
+                <div class="col-auto">
+                  <img src="${pageContext.request.contextPath}/img/logo.png" alt="logo" height="75">
+                </div>
+                <div class="col-auto">
+                    <h1>Time Is Money</h1>
+                </div>
             </div>
-        </c:if>
+        </div>
+        <div class="col-sm-auto">
+            <div class="row align-items-center justify-content-end">
+                <div class="col-auto">
+                    <a class="text-white" href="?lang=en"><fmt:message key="language.en" /></a>
+                    <a class="text-white" href="?lang=ru"><fmt:message key="language.ru" /></a>
+                </div>
+                 <c:if test="${sessionScope.authUser == null}">
+                    <div class="col-auto">
+                        <a class="btn btn-light btn-outline-dark" href="<c:url value="/app/login"/>"><fmt:message key="nav.login" /></a>
+                    </div>
+                </c:if>
+                <c:if test="${sessionScope.authUser != null}">
+                    <div class="col-auto">
+                        <a class="btn btn-dark" href="<c:url value="/app/profile"/>"><fmt:message key="nav.profile" /></a>
+                    </div>
+                    <div class="col-auto">
+                        <a class="btn btn-light" href="<c:url value="/app/logout"/>"><fmt:message key="nav.logout" /></a>
+                    </div>
+                </c:if>
+            </div>
+        </div>
+        <div class="row">
+            <c:if test="${sessionScope.authUser.role == 'ADMIN'}">
+                <hr/>
+                <%@include file="adminPanel.jspf"%>
+            </c:if>
+        </div>
     </div>
-
-    <c:if test="${sessionScope.authUser.role == 'ADMIN'}">
-        <%@include file="activityNav.jspf"%>
-    </c:if>
-
-    <c:if test="${sessionScope.authUser.role == 'ADMIN'}">
-        <%@include file="/WEB-INF/jsp/fragments/missionNav.jspf"%>
-    </c:if>
 </div>

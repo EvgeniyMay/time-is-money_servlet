@@ -16,14 +16,31 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <h2>Are you sure you want logout ?</h2>
-    <form action="/app/logout" method="POST">
-        <input type="submit" value="Yes">
-    </form>
-    <form action="/" method="GET">
-        <input type="submit" value="No">
-    </form>
-
+    <main>
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-3 text-center">
+                    <h2>Are you sure you want logout ?</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <form action="<c:url value="/app/logout"/>" method="POST">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-dark">Yes</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-6">
+                            <form action="<c:url value="/app/profile"/>" method="GET">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-dark">No</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

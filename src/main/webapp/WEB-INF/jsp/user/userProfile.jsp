@@ -16,61 +16,102 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <h2>Hello, ${sessionScope.get("authUser").login}</h2>
-    <h3>Missions: </h3>
+    <main class="container">
+        <div class="row">
+            <div class="col text-center p-3">
+                <h2>Hello, ${sessionScope.get("authUser").login}</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 p-3">
+                <h3>Missions</h3>
 
-    <a href="<c:url value="/app/mission/offer"/>">Offer mission</a>
+                <div class="d-grid gap-2">
+                    <a class="btn btn-dark" href="<c:url value="/app/mission/offer"/>">Offer mission</a>
+                </div>
 
-    <c:if test="${requestScope.error != null}">
-        <div>${requestScope.error}</div>
-    </c:if>
-    <h4>Active:</h4>
-    <table>
-        <c:forEach items="${requestScope.activeMissions}" var="mission">
-            <tr>
-                <td>${mission.activity.name}</td>
-                <td>${mission.startTime}</td>
-                <td>${mission.endTime}</td>
-                <td>
-                    <form action="<c:url value="/app/mission/pass"/>" method="POST">
-                        <input type="hidden" name="missionId" value="${mission.id}">
-                        <input type="submit" value="Pass">
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
-    <hr/>
+                <c:if test="${requestScope.error != null}">
+                    <div>${requestScope.error}</div>
+                </c:if>
 
-    <h4>Passed:</h4>
-    <table>
-        <c:forEach items="${requestScope.passedMissions}" var="mission">
-            <tr>
-                <td>${mission.activity.name}</td>
-                <td>${mission.startTime}</td>
-                <td>${mission.endTime}</td>
-            </tr>
-        </c:forEach>
-    </table>
-    <hr/>
+                <h4>Active</h4>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${requestScope.activeMissions}" var="mission">
+                        <tr>
+                            <td>${mission.activity.name}</td>
+                            <td>${mission.startTime}</td>
+                            <td>${mission.endTime}</td>
+                            <td>
+                                <form action="<c:url value="/app/mission/pass"/>" method="POST">
+                                    <input type="hidden" name="missionId" value="${mission.id}">
+                                    <input class="btn btn-light" type="submit" value="Pass">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <hr/>
 
-    <h4>Offered:</h4>
-    <table>
-        <c:forEach items="${requestScope.offeredMissions}" var="mission">
-            <tr>
-                <td>${mission.activity.name}</td>
-                <td>${mission.startTime}</td>
-                <td>${mission.endTime}</td>
-                <td>
-                    <form action="<c:url value="/app/mission/cancel"/>" method="POST">
-                        <input type="hidden" name="missionId" value="${mission.id}">
-                        <input type="submit" value="Cancel">
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
+                <h4>Offered</h4>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${requestScope.offeredMissions}" var="mission">
+                            <tr>
+                                <td>${mission.activity.name}</td>
+                                <td>${mission.startTime}</td>
+                                <td>${mission.endTime}</td>
+                                <td>
+                                    <form action="<c:url value="/app/mission/cancel"/>" method="POST">
+                                        <input type="hidden" name="missionId" value="${mission.id}">
+                                        <input class="btn btn-light" type="submit" value="Cancel">
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+                <h4>Passed</h4>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${requestScope.passedMissions}" var="mission">
+                            <tr>
+                                <td>${mission.activity.name}</td>
+                                <td>${mission.startTime}</td>
+                                <td>${mission.endTime}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <hr/>
+            </div>
+        </div>
+    </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class GetMissionUtil {
 
-    public static void makeExecuteByState(HttpServletRequest request, MissionState state, MissionService missionService) {
+    public static void fillPageableRequest(HttpServletRequest request, MissionState state, MissionService missionService) {
         int curPage = 0;
         int pageSize = 5;
         MissionField sortField = MissionField.ACTIVITY_ID;
@@ -34,8 +34,6 @@ public class GetMissionUtil {
         int activityCount = missionService.countByState(state);
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 
-        //ToDo
-        // Arrows
         request.setAttribute("missions", missionService.findPageable(curPage, pageSize, state, sortField));
         request.setAttribute("sort_field", sortField.toString().toLowerCase());
         request.setAttribute("page_count", pageCount);

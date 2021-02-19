@@ -21,6 +21,8 @@
         <jstl.version>1.2</jstl.version>
 
         <mySql.version>8.0.23</mySql.version>
+
+        <log4j.version>2.14.0</log4j.version>
     </properties>
 
     <dependencies>
@@ -42,17 +44,21 @@
             <version>${jstl.version}</version>
         </dependency>
 
-        <!-- Is it legal ?-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>${commons-dbcp2.version}</version>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mySql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
     </dependencies>
 

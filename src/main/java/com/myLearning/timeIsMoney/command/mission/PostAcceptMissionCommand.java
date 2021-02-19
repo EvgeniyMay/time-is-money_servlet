@@ -25,7 +25,7 @@ public class PostAcceptMissionCommand implements Command {
 
         if(!added) {
             request.setAttribute("addResult", "Mission is not actual now");
-            GetMissionUtil.makeExecuteByState(request, MissionState.OFFERED, missionService);
+            GetMissionUtil.fillPageableRequest(request, MissionState.OFFERED, missionService);
 
             return "/WEB-INF/jsp/mission/missionOffered.jsp";
         }

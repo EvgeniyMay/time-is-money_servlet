@@ -16,7 +16,7 @@ public class GetPassedMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        GetMissionUtil.makeExecuteByState(request, MissionState.PASSED, missionService);
+        GetMissionUtil.fillPageableRequest(request, MissionState.PASSED, missionService);
 
         return "/WEB-INF/jsp/mission/missionPassed.jsp";
     }

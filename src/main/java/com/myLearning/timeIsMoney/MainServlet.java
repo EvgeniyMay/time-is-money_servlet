@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class MainServlet extends HttpServlet {
+
+    private final static Logger logger = Logger.getLogger(MainServlet.class.getName());
 
     private CommandController commandController;
 
@@ -34,6 +37,7 @@ public class MainServlet extends HttpServlet {
     private void process(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String page = commandController.getCommand(request).execute(request);
+        logger.info(page);
 
         if(page.contains("redirect:")) {
             response.sendRedirect(page.replace("redirect:", ""));

@@ -16,7 +16,7 @@ public class GetOfferedMissionsCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        GetMissionUtil.makeExecuteByState(request, MissionState.OFFERED, missionService);
+        GetMissionUtil.fillPageableRequest(request, MissionState.OFFERED, missionService);
 
         return "/WEB-INF/jsp/mission/missionOffered.jsp";
     }

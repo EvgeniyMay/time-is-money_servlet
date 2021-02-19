@@ -17,14 +17,16 @@ public class PostAcceptMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        boolean added = missionService.updateMissionState(new Mission.Builder()
+        boolean added = missionService.updateMissionState(
+                new Mission.Builder()
                         .id(Integer.parseInt(request.getParameter("missionId")))
                         .build(),
                 MissionState.ACTIVE);
 
         if(!added) {
             request.setAttribute("addResult", "Mission is not actual now");
-            request.setAttribute("missions", missionService.findByState(MissionState.OFFERED));
+            GetMissionUtil.makeExecuteByState(request, MissionState.OFFERED, missionService);
+
             return "/WEB-INF/jsp/mission/missionOffered.jsp";
         }
 

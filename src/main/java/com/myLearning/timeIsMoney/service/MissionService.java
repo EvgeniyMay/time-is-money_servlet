@@ -19,12 +19,6 @@ public class MissionService {
         this.daoFactory = daoFactory;
     }
 
-    public List<Mission> findByState(MissionState state) {
-        try (MissionDao missionDao = daoFactory.createMissionDao()) {
-            return missionDao.findByState(state);
-        }
-    }
-
     public List<Mission> findPageable(int page, int size, MissionState state, MissionField field) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.findPageableSortedBy(page, size, state, field);

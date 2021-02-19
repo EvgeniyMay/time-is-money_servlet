@@ -30,7 +30,7 @@
                         <ul class="pagination justify-content-center">
                             <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
                                 <li class="page-item">
-                                    <a class="page-link" href="<c:url value="/app/activity/archived?cur_page=${i}"/>">${i + 1}</a>
+                                    <a class="page-link text-dark" href="<c:url value="/app/activity/archived?cur_page=${i}"/>">${i + 1}</a>
                                 </li>
                             </c:forEach>
                         </ul>

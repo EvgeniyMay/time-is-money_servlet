@@ -17,17 +17,18 @@ public class PostReturnMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        boolean returned = missionService.updateMissionState(new Mission.Builder()
-                        .id(Integer.parseInt(request.getParameter("missionId")))
-                        .build(),
-                MissionState.ACTIVE);
+        Mission mission = new Mission.Builder()
+                .id(Integer.parseInt(request.getParameter("missionId")))
+                .build();
+
+        boolean returned = missionService.updateMissionState(mission, MissionState.ACTIVE);
 
         if(!returned) {
             request.setAttribute("addResult", "Mission is not actual now");
-            request.setAttribute("missions", missionService.findByState(MissionState.OFFERED));
-            return "/WEB-INF/jsp/mission/missionOffered.jsp";
+            GetMissionUtil.makeExecuteByState(request, MissionState.OFFERED, missionService);
+            return "/WEB-INF/jsp/mission/missionPassed.jsp";
         }
 
-        return "redirect:/app/mission/passed";
+        return "redirect:" + request.getHeader("referer");
     }
 }

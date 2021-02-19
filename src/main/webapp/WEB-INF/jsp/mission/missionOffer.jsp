@@ -30,8 +30,8 @@
                     <form action="<c:url value="/app/mission/offer"/>" method="POST">
                         <div class="my-3">
                             <label for="activity">Activity</label>
-                            <select class="form-select"  id="activity" name="activityId">
-                                <c:forEach items="${requestScope.activities}" var="activity">--%>
+                            <select class="form-select" id="activity" name="activityId">
+                                <c:forEach items="${requestScope.activities}" var="activity">
                                     <option value="${activity.id}">${activity.name} | ${activity.description}</option>
                                 </c:forEach>
                             </select>

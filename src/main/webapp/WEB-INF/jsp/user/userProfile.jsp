@@ -11,6 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
 </head>
 <body>
     <header>
@@ -18,13 +19,13 @@
     </header>
     <main class="container">
         <div class="row">
-            <div class="col text-center p-3">
-                <h2>Hello, ${sessionScope.get("authUser").login}</h2>
+            <div class="col text-center">
+                <h2 class="my-2">Hello, ${sessionScope.get("authUser").login}</h2>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-8 p-3">
-                <h3>Missions</h3>
+                <h3 class="mb-2">Missions</h3>
 
                 <div class="d-grid gap-2">
                     <a class="btn btn-dark" href="<c:url value="/app/mission/offer"/>">Offer mission</a>
@@ -34,14 +35,29 @@
                     <div class="alert alert-danger my-3" role="alert">${requestScope.error}</div>
                 </c:if>
 
-                <h4>Active</h4>
+                <h4 class="mt-2">Active</h4>
                 <table class="table table-dark table-striped">
                     <thead>
                         <tr>
-                            <th>Activity</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Action</th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'activity_id'}">
+                                    <input class="btn btn-dark" type="submit" value="${'Activity'}">
+                                </form>
+                            </th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'start_time'}">
+                                    <input class="btn btn-dark" type="submit" value="${'Start Time'}">
+                                </form>
+                            </th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'end_time'}">
+                                    <input class="btn btn-dark" type="submit" value="${'End Time'}">
+                                </form>
+                            </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,7 +67,7 @@
                             <td>${mission.startTime}</td>
                             <td>${mission.endTime}</td>
                             <td>
-                                <form action="<c:url value="/app/mission/pass"/>" method="POST">
+                                <form class="no-padding" action="<c:url value="/app/mission/pass"/>" method="POST">
                                     <input type="hidden" name="missionId" value="${mission.id}">
                                     <input class="btn btn-light" type="submit" value="Pass">
                                 </form>
@@ -60,16 +76,30 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <hr/>
 
-                <h4>Offered</h4>
+                <h4 class="mt-2">Offered</h4>
                 <table class="table table-dark table-striped">
                     <thead>
                         <tr>
-                            <th>Activity</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Action</th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'activity_id'}">
+                                    <input class="btn btn-dark" type="submit" value="${'Activity'}">
+                                </form>
+                            </th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'start_time'}">
+                                    <input class="btn btn-dark" type="submit" value="${'Start Time'}">
+                                </form>
+                            </th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'end_time'}">
+                                    <input class="btn btn-dark" type="submit" value="${'End Time'}">
+                                </form>
+                            </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,7 +109,7 @@
                                 <td>${mission.startTime}</td>
                                 <td>${mission.endTime}</td>
                                 <td>
-                                    <form action="<c:url value="/app/mission/cancel"/>" method="POST">
+                                    <form class="no-padding" action="<c:url value="/app/mission/cancel"/>" method="POST">
                                         <input type="hidden" name="missionId" value="${mission.id}">
                                         <input class="btn btn-light" type="submit" value="Cancel">
                                     </form>
@@ -89,13 +119,28 @@
                     </tbody>
                 </table>
 
-                <h4>Passed</h4>
+                <h4 class="mt-2">Passed</h4>
                 <table class="table table-dark table-striped">
                     <thead>
                         <tr>
-                            <th>Activity</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'activity_id'}">
+                                    <input class="btn btn-dark" type="submit" value="${'Activity'}">
+                                </form>
+                            </th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'start_time'}">
+                                    <input class="btn btn-dark" type="submit" value="${'Start Time'}">
+                                </form>
+                            </th>
+                            <th>
+                                <form class="no-padding">
+                                    <input type="hidden" name="sort_field" value="${'end_time'}">
+                                    <input class="btn btn-dark" type="submit" value="${'End Time'}">
+                                </form>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

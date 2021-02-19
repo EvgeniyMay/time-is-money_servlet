@@ -217,7 +217,9 @@ public class JdbcMissionDao implements MissionDao {
             ps.setString(1, state.toString());
             ps.setInt(2, mission.getId());
 
-            return ps.execute();
+            ps.execute();
+
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -245,7 +247,9 @@ public class JdbcMissionDao implements MissionDao {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.delete"))) {
             ps.setInt(1, mission.getId());
 
-            return ps.execute();
+            ps.execute();
+
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -260,7 +264,9 @@ public class JdbcMissionDao implements MissionDao {
             ps.setInt(1, mission.getId());
             ps.setInt(2, user.getId());
 
-            return ps.execute();
+            ps.execute();
+
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();

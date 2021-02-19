@@ -22,7 +22,7 @@
                 <h2 class="my-3">Active Activities</h2>
 
                 <c:if test="${requestScope.page_count == 0}">
-                    <div class="alert alert-danger my-3" role="alert">No active activities</div>
+                    <div class="alert alert-dark my-3" role="alert">No active activities</div>
                 </c:if>
 
                 <c:if test="${requestScope.page_count > 0}">
@@ -30,7 +30,7 @@
                         <ul class="pagination justify-content-center">
                             <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
                                 <li class="page-item">
-                                    <a class="page-link" href="<c:url value="/app/activity/active?cur_page=${i}"/>">${i + 1}</a>
+                                    <a class="page-link text-dark" href="<c:url value="/app/activity/active?cur_page=${i}"/>">${i + 1}</a>
                                 </li>
                             </c:forEach>
                         </ul>
@@ -56,13 +56,13 @@
                                         <form action="<c:url value="/app/activity/archive"/>" method="GET">
                                             <input type="hidden" name="id" value="${activity.id}">
                                             <input type="hidden" name="name" value="${activity.name}">
-                                            <input class="btn btn-light" type="submit" value="Archive">
+                                            <input class="btn btn-outline-light" type="submit" value="Archive">
                                         </form>
                                     </td>
                                     <td>
                                         <form action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
                                             <input type="hidden" name="id" value="${activity.id}">
-                                            <input class="btn btn-light" type="submit" value="Edit">
+                                            <input class="btn btn-outline-light" type="submit" value="Edit">
                                         </form>
                                     </td>
                                 </tr>

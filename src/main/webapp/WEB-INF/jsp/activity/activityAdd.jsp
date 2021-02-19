@@ -19,7 +19,7 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <h2 class="my-3">New activity form</h2>
+                <h2 class="my-3">New activity</h2>
 
                 <c:forEach items="${requestScope.errors}" var="error">
                     <div class="alert alert-danger my-3" role="alert">${error}</div>

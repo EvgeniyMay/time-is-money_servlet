@@ -16,12 +16,21 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <h1>Archive activity page</h1>
-    <p>Are you sure you want to archive <span><b>${requestScope.name}</b></span> ?</p>
-    <form action="<c:url value="/app/activity/archive"/>" method="POST">
-        <input type="hidden" name="id" value="${requestScope.id}">
-        <input type="submit" value="Archive">
-    </form>
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h2 class="my-3">Archive activity page</h2>
+                <p>Are you sure you want to archive <span><b>${requestScope.name}</b></span> ?</p>
+                <form action="<c:url value="/app/activity/archive"/>" method="POST">
+                    <input type="hidden" name="id" value="${requestScope.id}">
+                    <input type="submit" value="Archive">
+                </form>
+                <form action="<c:url value="/app/activity/active"/>" method="GET">
+                    <input type="submit" value="No">
+                </form>
+            </div>
+        </div>
+    </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

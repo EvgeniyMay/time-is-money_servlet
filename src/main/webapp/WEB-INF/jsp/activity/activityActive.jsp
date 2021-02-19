@@ -19,11 +19,7 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h1>Active Activities</h1>
-
-                <div class="d-grid gap-2">
-                    <a class="btn btn-dark" href="${pageContext.request.contextPath}/app/activity/add">Create new</a>
-                </div>
+                <h2 class="my-3">Active Activities</h2>
 
                 <c:if test="${requestScope.page_count == 0}">
                     <div class="alert alert-danger my-3" role="alert">No active activities</div>

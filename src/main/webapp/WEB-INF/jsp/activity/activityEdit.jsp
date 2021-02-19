@@ -16,12 +16,32 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <form action="<c:url value="/app/activity/edit"/>" method="post">
-        <input type="hidden" name="id" value="${requestScope.activity.id}">
-        <input type="text" name="name" value="${requestScope.activity.name}">
-        <input type="text" name="description" value="${requestScope.activity.description}">
-        <input type="submit" value="Edit">
-    </form>
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <h2 class="my-3">New activity form</h2>
+
+                <c:forEach items="${requestScope.errors}" var="error">
+                    <div class="alert alert-danger my-3" role="alert">${error}</div>
+                </c:forEach>
+
+                <form action="<c:url value="/app/activity/edit"/>" method="post">
+                    <input type="hidden" name="id" value="${requestScope.activity.id}">
+                    <div class="my-3">
+                        <label for="name">Name</label>
+                        <input class="form-control" type="text" name="name" value="${requestScope.activity.name}" id="name">
+                    </div>
+                    <div class="my-3">
+                        <label for="description">Description</label>
+                        <input class="form-control" type="text" name="description" value="${requestScope.activity.description}" id="description">
+                    </div>
+                    <div class="d-grid gap-2 mt-3">
+                        <button class="btn btn-dark" type="submit">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

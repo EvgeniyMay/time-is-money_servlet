@@ -27,8 +27,6 @@ public class AuthFilter implements Filter {
             }
             return;
         }
-        //ToDo
-        // !!! Evgeniy Borisov !!!
 
         if(!user.getRole().getAuthorities().contains(path)) {
             throw new PageNotFoundException();

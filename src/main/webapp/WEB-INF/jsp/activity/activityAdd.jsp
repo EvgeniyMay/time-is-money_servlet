@@ -16,18 +16,31 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <h1>New activity form</h1>
-    <form action="<c:url value="/app/activity/add"/>" method="POST">
-        <label>
-            Name:
-            <input type="text" name="name">
-        </label>
-        <label>
-            Description:
-            <input type="text" name="description">
-        </label>
-        <input type="submit" value="Add">
-    </form>
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <h2 class="my-3">New activity form</h2>
+
+                <c:forEach items="${requestScope.errors}" var="error">
+                    <div class="alert alert-danger my-3" role="alert">${error}</div>
+                </c:forEach>
+
+                <form action="<c:url value="/app/activity/add"/>" method="POST">
+                    <div class="my-3">
+                        <label for="name">Name</label>
+                        <input class="form-control" type="text" name="name" id="name">
+                    </div>
+                    <div class="my-3">
+                        <label for="description">Description</label>
+                        <input class="form-control" type="text" name="description" id="description">
+                    </div>
+                    <div class="d-grid gap-2 mt-3">
+                        <button class="btn btn-dark" type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

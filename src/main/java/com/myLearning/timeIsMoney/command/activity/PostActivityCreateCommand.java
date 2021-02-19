@@ -3,8 +3,10 @@ package com.mylearning.timeismoney.command.activity;
 import com.mylearning.timeismoney.command.Command;
 import com.mylearning.timeismoney.entity.Activity;
 import com.mylearning.timeismoney.service.ActivityService;
+import com.mylearning.timeismoney.util.ActivityValidator;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 public class PostActivityCreateCommand implements Command {
 
@@ -16,11 +18,24 @@ public class PostActivityCreateCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        activityService.create(new Activity.Builder()
+        Activity activity = new Activity.Builder()
                 .name(request.getParameter("name"))
                 .description(request.getParameter("description"))
-                .build());
+                .build();
 
-        return "redirect:/app/activity";
+        if(!ActivityValidator.getErrors(activity).isEmpty()) {
+            request.setAttribute("errors", ActivityValidator.getErrors(activity));
+            return "/WEB-INF/jsp/activity/activityAdd.jsp";
+        }
+
+        try {
+            activityService.create(activity);
+        } catch (Exception e) {
+            //ToDo | Localization
+            request.setAttribute("errors", Arrays.asList("Such activity already exists"));
+            return "/WEB-INF/jsp/activity/activityAdd.jsp";
+        }
+
+        return "redirect:/app/activity/active";
     }
 }

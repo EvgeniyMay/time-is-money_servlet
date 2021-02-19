@@ -19,7 +19,7 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h1>Archived Activities</h1>
+                <h2 class="my-3">Archived Activities</h2>
 
                 <c:if test="${requestScope.page_count == 0}">
                     <div class="alert alert-danger my-3" role="alert">No archived activities</div>

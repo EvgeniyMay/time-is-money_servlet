@@ -19,7 +19,7 @@ public class ActivityService {
             return activityDao.findPageableByState(page, size, isActive);
         }
     }
-    
+
     public List<Activity> findActiveProxy() {
         try (ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findActiveProxy();
@@ -47,13 +47,13 @@ public class ActivityService {
 
     public boolean archiveById(int id) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.archiveById(id);
+            return activityDao.updateStateById(id, false);
         }
     }
 
     public boolean activateById(int id) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.activateById(id);
+            return activityDao.updateStateById(id, true);
         }
     }
 

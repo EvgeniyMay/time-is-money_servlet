@@ -13,10 +13,7 @@ public interface ActivityDao extends GenericDao<Activity> {
 
     Optional<Activity> findById(int id);
 
-    boolean archiveById(int id);
-
-    boolean activateById(int id);
+    boolean updateStateById(int id, boolean makeActive);
 
     int getCountByState(boolean isActive);
-
 }

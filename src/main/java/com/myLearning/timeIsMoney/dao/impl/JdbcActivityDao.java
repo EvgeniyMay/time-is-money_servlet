@@ -155,21 +155,10 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
-    public boolean archiveById(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.archive"))) {
-            ps.setInt(1, id);
-
-            return ps.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
-    @Override
-    public boolean activateById(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.activate"))) {
-            ps.setInt(1, id);
+    public boolean updateStateById(int id, boolean makeActive) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.update.state.by.id"))) {
+            ps.setBoolean(1, !makeActive);
+            ps.setInt(2, id);
 
             return ps.execute();
         } catch (SQLException e) {

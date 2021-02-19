@@ -31,7 +31,7 @@
                 </div>
 
                 <c:if test="${requestScope.error != null}">
-                    <div>${requestScope.error}</div>
+                    <div class="alert alert-danger my-3" role="alert">${requestScope.error}</div>
                 </c:if>
 
                 <h4>Active</h4>

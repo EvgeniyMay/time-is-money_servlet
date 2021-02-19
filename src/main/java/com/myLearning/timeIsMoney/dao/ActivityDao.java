@@ -7,13 +7,9 @@ import java.util.Optional;
 
 public interface ActivityDao extends GenericDao<Activity> {
 
-    List<Activity> findActive();
-
     List<Activity> findActiveProxy();
 
-    List<Activity> findActivePageable(int page, int size);
-
-    List<Activity> findArchivedPageable(int page, int size);
+    List<Activity> findPageableByState(int page, int size, boolean isActive);
 
     Optional<Activity> findById(int id);
 
@@ -21,8 +17,6 @@ public interface ActivityDao extends GenericDao<Activity> {
 
     boolean activateById(int id);
 
-    int getActiveCount();
-
-    int getArchivedCount();
+    int getCountByState(boolean isActive);
 
 }

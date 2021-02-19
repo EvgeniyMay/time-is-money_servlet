@@ -63,48 +63,6 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
-    public List<Activity> findActive() {
-        Map<Integer, User> userMap = new HashMap<>();
-        Map<Integer, Activity> activityMap = new HashMap<>();
-
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(rb.getString("query.mission.find.all"))) {
-
-            while (resultSet.next()) {
-                int activityId = resultSet.getInt("activity_id");
-                if(!activityMap.containsKey(activityId)) {
-                    Activity activity = ActivityMapper.getFromResultSet(resultSet);
-                    activityMap.put(activityId, activity);
-                }
-
-                if(!Objects.isNull(resultSet.getString("mission_state"))) {
-                    Mission mission = MissionMapper.getFromResultSet(resultSet);
-
-                    int userId = resultSet.getInt("user_id");
-                    if(!userMap.containsKey(userId)) {
-                        User user = UserMapper.getFromResultSet(resultSet);
-                        userMap.put(userId, user);
-                    }
-
-                    Activity activity = activityMap.get(activityId);
-                    activity.getMissions().add(mission);
-
-                    User user = userMap.get(userId);
-                    user.getMissions().add(mission);
-
-                    mission.setUser(user);
-                    mission.setActivity(activity);
-                }
-            }
-
-            return new ArrayList<>(activityMap.values());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
-    @Override
     public List<Activity> findActiveProxy() {
         List<Activity> activities = new ArrayList<>();
         try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.active.proxy"));
@@ -115,72 +73,6 @@ public class JdbcActivityDao implements ActivityDao {
             }
 
             return activities;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
-    @Override
-    public List<Activity> findActivePageable(int page, int size) {
-        Map<Integer, Activity> activityMap = new HashMap<>();
-        Map<Integer, User> userMap = new HashMap<>();
-
-        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.active.pageable"))) {
-            ps.setInt(1, size);
-            ps.setInt(2, size * page);
-            ResultSet resultSet = ps.executeQuery();
-
-            while(resultSet.next()) {
-                int activityId = resultSet.getInt("activity_id");
-                if(!activityMap.containsKey(activityId)) {
-                    Activity activity = ActivityMapper.getFromResultSet(resultSet);
-                    activityMap.put(activityId, activity);
-                }
-
-                if(!Objects.isNull(resultSet.getString("mission_state"))) {
-                    Mission mission = MissionMapper.getFromResultSet(resultSet);
-
-                    int userId = resultSet.getInt("user_id");
-                    if(!userMap.containsKey(userId)) {
-                        User user = UserMapper.getFromResultSet(resultSet);
-                        userMap.put(userId, user);
-                    }
-
-                    Activity activity = activityMap.get(activityId);
-                    mission.setActivity(activity);
-
-                    User user = userMap.get(userId);
-                    mission.setUser(user);
-
-                    activity.getMissions().add(mission);
-                    user.getMissions().add(mission);
-                }
-            }
-
-            return new ArrayList<>(activityMap.values());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
-    @Override
-    public List<Activity> findArchivedPageable(int page, int size) {
-        List<Activity> proxyActivities = new ArrayList<>();
-
-        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.all.archived.pageable.proxy"))) {
-            ps.setInt(1, size);
-            ps.setInt(2, size * page);
-
-            ResultSet resultSet = ps.executeQuery();
-            while(resultSet.next()) {
-                Activity proxyActivity = ActivityMapper.getFromResultSet(resultSet);
-                proxyActivities.add(proxyActivity);
-            }
-
-            System.out.println(proxyActivities);
-            return proxyActivities;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -221,6 +113,28 @@ public class JdbcActivityDao implements ActivityDao {
             }
 
             return Optional.ofNullable(activity);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public List<Activity> findPageableByState(int page, int size, boolean isActive) {
+        List<Activity> activities = new ArrayList<>();
+
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.find.by.state.pageable.proxy"))) {
+            ps.setBoolean(1, !isActive);
+            ps.setInt(2, size);
+            ps.setInt(3, page * size);
+
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                Activity activity = ActivityMapper.getPageableProxy(resultSet);
+                activities.add(activity);
+            }
+
+            return activities;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -278,25 +192,10 @@ public class JdbcActivityDao implements ActivityDao {
     }
 
     @Override
-    public int getActiveCount() {
-        try (Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(rb.getString("query.activity.active.count"))) {
-
-            if(resultSet.next()) {
-                return resultSet.getInt(1);
-            }
-
-            return 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
-    @Override
-    public int getArchivedCount() {
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(rb.getString("query.activity.archived.count"))) {
+    public int getCountByState(boolean isActive) {
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.count.by.state"))) {
+            ps.setBoolean(1, !isActive);
+            ResultSet resultSet = ps.executeQuery();
 
             if(resultSet.next()) {
                 return resultSet.getInt(1);

@@ -16,47 +16,67 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <h1>Active Activities</h1>
-    <a href="${pageContext.request.contextPath}/app/activity/add">Create new</a>
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h1>Active Activities</h1>
 
-    <c:if test="${requestScope.page_count == 0}">
-        <div> No archived activities </div>
-    </c:if>
+                <div class="d-grid gap-2">
+                    <a class="btn btn-dark" href="${pageContext.request.contextPath}/app/activity/add">Create new</a>
+                </div>
 
-    <c:if test="${requestScope.page_count > 0}">
-        <nav>
-            <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
-                <a href="<c:url value="/app/activity/archived?cur_page=${i}"/>">${i + 1}</a>
-            </c:forEach>
-        </nav>
-        <table>
-            <tr>
-                <th>Name:</th>
-                <th>Description:</th>
-                <th>Active users:</th>
-            </tr>
-            <c:forEach items="${requestScope.activities}" var="activity">
-                <tr>
-                    <td>${activity.name}</td>
-                    <td>${activity.description}</td>
-                    <td>${activity.missions.size()}</td>
-                    <td>
-                        <form action="<c:url value="/app/activity/archive"/>" method="GET">
-                            <input type="hidden" name="id" value="${activity.id}">
-                            <input type="hidden" name="name" value="${activity.name}">
-                            <input type="submit" value="Archive">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
-                            <input type="hidden" name="id" value="${activity.id}">
-                            <input type="submit" value="Edit">
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
+                <c:if test="${requestScope.page_count == 0}">
+                    <div class="alert alert-danger my-3" role="alert">No active activities</div>
+                </c:if>
+
+                <c:if test="${requestScope.page_count > 0}">
+                    <nav class="my-3">
+                        <ul class="pagination justify-content-center">
+                            <c:forEach begin="0" end="${requestScope.page_count - 1}" step="1" var="i">
+                                <li class="page-item">
+                                    <a class="page-link" href="<c:url value="/app/activity/active?cur_page=${i}"/>">${i + 1}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </nav>
+
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name:</th>
+                                <th>Description:</th>
+                                <th>Active users:</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${requestScope.activities}" var="activity">
+                                <tr>
+                                    <td>${activity.name}</td>
+                                    <td>${activity.description}</td>
+                                    <td>${activity.missions.size()}</td>
+                                    <td>
+                                        <form action="<c:url value="/app/activity/archive"/>" method="GET">
+                                            <input type="hidden" name="id" value="${activity.id}">
+                                            <input type="hidden" name="name" value="${activity.name}">
+                                            <input class="btn btn-light" type="submit" value="Archive">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
+                                            <input type="hidden" name="id" value="${activity.id}">
+                                            <input class="btn btn-light" type="submit" value="Edit">
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </c:if>
+            </div>
+        </div>
+    </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

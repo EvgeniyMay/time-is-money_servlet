@@ -14,24 +14,12 @@ public class ActivityService {
         this.daoFactory = daoFactory;
     }
 
-    public List<Activity> findActivePageable(int page, int size) {
+    public List<Activity> findPageableByState(int page, int size, boolean isActive) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findActivePageable(page, size);
+            return activityDao.findPageableByState(page, size, isActive);
         }
     }
-
-    public List<Activity> findArchivedPageable(int page, int size) {
-        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findArchivedPageable(page, size);
-        }
-    }
-
-    public List<Activity> findActive() {
-        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.findActive();
-        }
-    }
-
+    
     public List<Activity> findActiveProxy() {
         try (ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findActiveProxy();
@@ -71,13 +59,13 @@ public class ActivityService {
 
     public int getActiveCount() {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.getActiveCount();
+            return activityDao.getCountByState(true);
         }
     }
 
     public int getArchivedCount() {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.getArchivedCount();
+            return activityDao.getCountByState(false);
         }
     }
 

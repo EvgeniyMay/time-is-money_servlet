@@ -21,14 +21,6 @@ public class MissionService {
         this.daoFactory = daoFactory;
     }
 
-    //ToDo
-    // Check genericDao impl
-    public List<Mission> findAll() {
-        try(MissionDao missionDao = daoFactory.createMissionDao()) {
-            return missionDao.findAll();
-        }
-    }
-
     public List<Mission> findByState(MissionState state) {
         try (MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.findByState(state);

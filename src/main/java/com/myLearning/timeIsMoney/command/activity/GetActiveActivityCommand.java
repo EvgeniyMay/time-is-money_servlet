@@ -18,7 +18,7 @@ public class GetActiveActivityCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         int curPage = 0;
-        int pageSize = 10;
+        int pageSize = 5;
 
         if (request.getParameter("cur_page") != null) {
             try {
@@ -29,13 +29,13 @@ public class GetActiveActivityCommand implements Command {
         }
 
         //TODO IS(TRUE)
-        //TODO COUNT INNER QUERY
         int activityCount = activityService.getActiveCount();
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 
-        request.setAttribute("activities", activityService.findActivePageable(curPage, pageSize));
+        request.setAttribute("activities", activityService.findPageableByState(curPage, pageSize, true));
         request.setAttribute("cur_page", curPage);
         request.setAttribute("page_count", pageCount);
+
         return "/WEB-INF/jsp/activity/activityActive.jsp";
     }
 }

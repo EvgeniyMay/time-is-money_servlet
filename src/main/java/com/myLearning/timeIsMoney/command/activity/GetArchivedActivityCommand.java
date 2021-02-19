@@ -17,7 +17,7 @@ public class GetArchivedActivityCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         int curPage = 0;
-        int pageSize = 10;
+        int pageSize = 5;
 
         if (request.getParameter("cur_page") != null) {
             try {
@@ -30,7 +30,7 @@ public class GetArchivedActivityCommand implements Command {
         int activityCount = activityService.getArchivedCount();
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 
-        request.setAttribute("activities", activityService.findArchivedPageable(curPage, pageSize));
+        request.setAttribute("activities", activityService.findPageableByState(curPage, pageSize, false));
         request.setAttribute("cur_page", curPage);
         request.setAttribute("page_count", pageCount);
 

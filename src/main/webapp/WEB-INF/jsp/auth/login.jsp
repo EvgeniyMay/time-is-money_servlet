@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tim" uri="time-is-money"%>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="localization.messages"/>
@@ -21,11 +22,13 @@
             <div class="col-md-3 text-center">
                 <img class="my-5" src="${pageContext.request.contextPath}/img/logo.png" alt="logo" height="250">
                 <h2>Please, login</h2>
+
                 <c:if test="${requestScope.error != null}">
-                    <div class="alert alert-danger" role="alert">
+                    <tim:danger-error>
                         ${requestScope.error}
-                    </div>
+                    </tim:danger-error>
                 </c:if>
+
                 <form action="<c:url value="/app/login"/>" method="POST">
                    <div class="form-floating mt-3">
                         <input class="form-control" id="login" type="text" name="login" placeholder="Login">

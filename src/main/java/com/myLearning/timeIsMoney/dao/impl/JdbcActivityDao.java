@@ -7,11 +7,16 @@ import com.mylearning.timeismoney.dao.mapper.UserMapper;
 import com.mylearning.timeismoney.entity.Activity;
 import com.mylearning.timeismoney.entity.Mission;
 import com.mylearning.timeismoney.entity.User;
+import com.mylearning.timeismoney.exception.DaoException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.*;
 
 public class JdbcActivityDao implements ActivityDao {
+
+    private final Logger logger = LogManager.getLogger(JdbcActivityDao.class.getName());
 
     private final Connection connection;
     private final static ResourceBundle rb = ResourceBundle.getBundle("database");
@@ -58,8 +63,8 @@ public class JdbcActivityDao implements ActivityDao {
 
             return new ArrayList<>(activityMap.values());
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find activities");
+            throw new DaoException("Can not find activities");
         }
     }
 
@@ -75,8 +80,8 @@ public class JdbcActivityDao implements ActivityDao {
 
             return activities;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find activities");
+            throw new DaoException("Can not find activities");
         }
     }
 
@@ -115,8 +120,8 @@ public class JdbcActivityDao implements ActivityDao {
 
             return Optional.ofNullable(activity);
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find activity");
+            throw new DaoException("Can not find activity");
         }
     }
 
@@ -137,8 +142,8 @@ public class JdbcActivityDao implements ActivityDao {
 
             return activities;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find activities");
+            throw new DaoException("Can not find activities");
         }
     }
 
@@ -147,11 +152,12 @@ public class JdbcActivityDao implements ActivityDao {
         try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.activity.insert"))) {
             ActivityMapper.basicFillStatement(ps, activity);
 
-            return ps.execute();
+            ps.execute();
 
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not create activity");
+            throw new DaoException("Can not create activity");
         }
     }
 
@@ -161,10 +167,12 @@ public class JdbcActivityDao implements ActivityDao {
             ps.setBoolean(1, !makeActive);
             ps.setInt(2, id);
 
-            return ps.execute();
+            ps.execute();
+
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not update activity");
+            throw new DaoException("Can not update activity");
         }
     }
 
@@ -174,10 +182,12 @@ public class JdbcActivityDao implements ActivityDao {
             ActivityMapper.basicFillStatement(ps, activity);
             ps.setInt(3, activity.getId());
 
-            return ps.execute();
+            ps.execute();
+
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not update activity");
+            throw new DaoException("Can not update activity");
         }
     }
 
@@ -193,8 +203,8 @@ public class JdbcActivityDao implements ActivityDao {
 
             return 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find count");
+            throw new DaoException("Can not find count");
         }
     }
 
@@ -203,9 +213,7 @@ public class JdbcActivityDao implements ActivityDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            //ToDo:
-            // Add something
+            logger.warn("Can not close connection");
         }
     }
 }

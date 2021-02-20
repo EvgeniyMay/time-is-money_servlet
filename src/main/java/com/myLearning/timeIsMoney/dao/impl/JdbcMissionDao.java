@@ -10,11 +10,16 @@ import com.mylearning.timeismoney.entity.Mission;
 import com.mylearning.timeismoney.entity.User;
 import com.mylearning.timeismoney.entity.enums.MissionField;
 import com.mylearning.timeismoney.entity.enums.MissionState;
+import com.mylearning.timeismoney.exception.DaoException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.*;
 
 public class JdbcMissionDao implements MissionDao {
+
+    private final static Logger logger = LogManager.getLogger(JdbcMissionDao.class.getName());
 
     private final Connection connection;
     private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
@@ -55,8 +60,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return missions;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find missions");
+            throw new DaoException("Can not find missions");
         }
     }
 
@@ -87,8 +92,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return usersAndActivities;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find user and activities");
+            throw new DaoException("Can not find user and activities");
         }
     }
 
@@ -126,8 +131,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return missions;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find missions");
+            throw new DaoException("Can not find missions");
         }
     }
 
@@ -143,8 +148,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find count");
+            throw new DaoException("Can not find count");
         }
     }
 
@@ -157,8 +162,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not create mission");
+            throw new DaoException("Can not create mission");
         }
     }
 
@@ -172,8 +177,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not update mission");
+            throw new DaoException("Can not update mission");
         }
     }
 
@@ -187,8 +192,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not update mission");
+            throw new DaoException("Can not update mission");
         }
     }
 
@@ -202,8 +207,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not pass mission");
+            throw new DaoException("Can not pass mission");
         }
     }
 
@@ -216,8 +221,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not delete mission");
+            throw new DaoException("Can not delete mission");
         }
     }
 
@@ -231,8 +236,8 @@ public class JdbcMissionDao implements MissionDao {
 
             return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not cancel mission");
+            throw new DaoException("Can not cancel mission");
         }
     }
 
@@ -241,7 +246,7 @@ public class JdbcMissionDao implements MissionDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.warn("Can not close connection");
         }
     }
 }

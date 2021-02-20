@@ -7,11 +7,16 @@ import com.mylearning.timeismoney.dao.mapper.UserMapper;
 import com.mylearning.timeismoney.entity.Activity;
 import com.mylearning.timeismoney.entity.Mission;
 import com.mylearning.timeismoney.entity.User;
+import com.mylearning.timeismoney.exception.DaoException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.*;
 
 public class JdbcUserDao implements UserDao {
+
+    private final static Logger logger = LogManager.getLogger(JdbcUserDao.class.getName());
 
     private final Connection connection;
     private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
@@ -58,8 +63,8 @@ public class JdbcUserDao implements UserDao {
 
             return new ArrayList<>(userMap.values());
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find users");
+            throw new DaoException("Can not find users");
         }
     }
 
@@ -77,8 +82,8 @@ public class JdbcUserDao implements UserDao {
 
             return proxyUsers;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find users");
+            throw new DaoException("Can not find users");
         }
     }
 
@@ -117,8 +122,8 @@ public class JdbcUserDao implements UserDao {
 
             return Optional.ofNullable(user);
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find user");
+            throw new DaoException("Can not find user");
         }
     }
 
@@ -156,8 +161,8 @@ public class JdbcUserDao implements UserDao {
             }
             return Optional.ofNullable(user);
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find user");
+            throw new DaoException("Can not find user");
         }
     }
 
@@ -171,8 +176,8 @@ public class JdbcUserDao implements UserDao {
             User user = UserMapper.getUserDetailsFromResultSet(resultSet);
             return Optional.of(user);
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not find user");
+            throw new DaoException("Can not find user");
         }
     }
 
@@ -183,8 +188,8 @@ public class JdbcUserDao implements UserDao {
 
             return ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not create user");
+            throw new DaoException("Can not create user");
         }
     }
 
@@ -196,8 +201,8 @@ public class JdbcUserDao implements UserDao {
 
             return ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            logger.warn("Can not update user");
+            throw new DaoException("Can not create user");
         }
     }
 
@@ -206,9 +211,7 @@ public class JdbcUserDao implements UserDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            //ToDo:
-            // Add something
+            logger.warn("Can not close connection");
         }
     }
 }

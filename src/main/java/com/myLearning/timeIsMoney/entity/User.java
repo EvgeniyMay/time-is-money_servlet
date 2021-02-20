@@ -15,6 +15,7 @@ public class User {
 
     private List<Mission> missions;
 
+
     public int getId() {
         return id;
     }
@@ -49,6 +50,7 @@ public class User {
     public void setMissions(List<Mission> missions) {
         this.missions = missions;
     }
+
 
     public static class Builder {
 

@@ -201,19 +201,6 @@ public class JdbcUserDao implements UserDao {
         }
     }
 
-    //ToDo
-    // Delete missions of user
-    public boolean delete(User user) {
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.delete"))) {
-            ps.setInt(1, user.getId());
-
-            return ps.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
     @Override
     public void close() {
         try {

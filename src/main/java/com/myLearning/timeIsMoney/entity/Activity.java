@@ -12,6 +12,7 @@ public class Activity {
 
     private boolean isArchived;
 
+
     public int getId() {
         return id;
     }
@@ -46,6 +47,7 @@ public class Activity {
     public void setArchived(boolean archived) {
         isArchived = archived;
     }
+
 
     public static class Builder {
 

@@ -10,8 +10,6 @@ import java.util.List;
 
 public interface MissionDao extends GenericDao<Mission> {
 
-    List<Mission> findByState(MissionState state);
-
     List<Mission> findPageableSortedBy(int page, int size, MissionState state, MissionField field);
 
     int countByState(MissionState state);

@@ -19,6 +19,7 @@ public class MissionService {
         this.daoFactory = daoFactory;
     }
 
+
     public List<Mission> findPageable(int page, int size, MissionState state, MissionField field) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.findPageableSortedBy(page, size, state, field);
@@ -52,12 +53,6 @@ public class MissionService {
     public boolean passMission(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.pass(user, mission);
-        }
-    }
-
-    public boolean delete(Mission mission) {
-        try(MissionDao missionDao = daoFactory.createMissionDao()) {
-            return missionDao.delete(mission);
         }
     }
 

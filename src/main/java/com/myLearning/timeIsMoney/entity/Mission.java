@@ -18,6 +18,7 @@ public class Mission {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
+
     public int getId() {
         return id;
     }
@@ -59,6 +60,7 @@ public class Mission {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
+
 
     public static class Builder {
 

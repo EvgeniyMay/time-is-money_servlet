@@ -14,6 +14,7 @@ public class ActivityService {
         this.daoFactory = daoFactory;
     }
 
+
     public List<Activity> findPageableByState(int page, int size, boolean isActive) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findPageableByState(page, size, isActive);

@@ -20,6 +20,7 @@ public class JdbcActivityDao implements ActivityDao {
         this.connection = connection;
     }
 
+
     @Override
     public List<Activity> findAll() {
         Map<Integer, Activity> activityMap = new HashMap<>();

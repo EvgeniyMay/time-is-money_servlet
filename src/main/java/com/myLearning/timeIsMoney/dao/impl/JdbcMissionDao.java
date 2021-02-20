@@ -23,6 +23,7 @@ public class JdbcMissionDao implements MissionDao {
         this.connection = connection;
     }
 
+
     @Override
     public List<Mission> findAll() {
         Map<Integer, User> userMap = new HashMap<>();
@@ -59,8 +60,6 @@ public class JdbcMissionDao implements MissionDao {
         }
     }
 
-    //ToDo
-    // !!!!!!!!!!!!!!!!!!!!!! Refactor !!!!!!!!!!!!!!!!!!
     @Override
     public UsersAndActivities getUsersAndActivities() {
         Map<Integer, User> userMap = new HashMap<>();
@@ -87,43 +86,6 @@ public class JdbcMissionDao implements MissionDao {
             usersAndActivities.setActivities(new ArrayList<>(activityMap.values()));
 
             return usersAndActivities;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
-    @Override
-    public List<Mission> findByState(MissionState state) {
-        Map<Integer, User> userMap = new HashMap<>();
-        Map<Integer, Activity> activityMap = new HashMap<>();
-        List<Mission> missions = new ArrayList<>();
-
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.find.by.state"))) {
-            ps.setString(1, state.toString());
-            ResultSet resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-                int userId = resultSet.getInt("user_id");
-                if(!userMap.containsKey(userId)) {
-                    User user = UserMapper.getFromResultSet(resultSet);
-                    userMap.put(userId, user);
-                }
-
-                int activityId = resultSet.getInt("activity_id");
-                if(!activityMap.containsKey(activityId)) {
-                    Activity activity = ActivityMapper.getFromResultSet(resultSet);
-                    activityMap.put(activityId, activity);
-                }
-
-                Mission mission = MissionMapper.getFromResultSet(resultSet);
-                mission.setUser(userMap.get(userId));
-                mission.setActivity(activityMap.get(activityId));
-
-                missions.add(mission);
-            }
-
-            return missions;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -190,8 +152,10 @@ public class JdbcMissionDao implements MissionDao {
     public boolean create(Mission mission) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.insert"))) {
             MissionMapper.basicFillStatement(ps, mission);
-            
-            return ps.execute();
+
+            ps.execute();
+
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -204,7 +168,9 @@ public class JdbcMissionDao implements MissionDao {
             MissionMapper.basicFillStatement(ps, mission);
             ps.setInt(6, mission.getId());
 
-            return ps.execute();
+            ps.execute();
+
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
@@ -226,21 +192,20 @@ public class JdbcMissionDao implements MissionDao {
         }
     }
 
-    //ToDo
-    // 1 query
     @Override
     public boolean pass(User user, Mission mission) {
         try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.pass"))) {
             ps.setInt(1, mission.getId());
             ps.setInt(2, user.getId());
 
-            return ps.execute();
+            ps.execute();
+
+            return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException();
         }
     }
-
 
     @Override
     public boolean delete(Mission mission) {
@@ -256,8 +221,6 @@ public class JdbcMissionDao implements MissionDao {
         }
     }
 
-    //ToDo
-    // 1 query
     @Override
     public boolean cancel(User user, Mission mission) {
         try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.cancel"))) {

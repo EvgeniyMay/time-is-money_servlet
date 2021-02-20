@@ -16,28 +16,33 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <h2>Registration</h2>
-    <div>
-        <c:forEach items="${requestScope.errors}" var="error">
-            <div class="alert alert-danger" role="alert">
-                ${error}
-            </div>
-        </c:forEach>
-    </div>
-    <form action="<c:url value="/app/registration"/>" method="post">
-        <table>
-            <tr>
-                <td>Login</td>
-                <td><input type="text" name="login"></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="password"></td>
-            </tr>
-        </table>
-        <input type="submit" value="Sign up">
-    </form>
+    <main class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-3 text-center">
+                <h2 class="my-2">New user</h2>
 
+                <c:forEach items="${requestScope.errors}" var="error">
+                    <div class="alert alert-danger" role="alert">
+                            ${error}
+                    </div>
+                </c:forEach>
+
+                <form action="<c:url value="/app/registration"/>" method="post">
+                    <div class="form-floating mt-3">
+                        <input class="form-control" id="login" type="text" name="login" placeholder="Login">
+                        <label for="login">Login</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                       <input class="form-control" id="password" type="password" name="password" placeholder="Password">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="d-grid gap-2 mt-3">
+                        <button class="btn btn-dark" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

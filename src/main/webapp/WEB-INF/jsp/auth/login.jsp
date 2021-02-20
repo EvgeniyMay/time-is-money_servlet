@@ -16,31 +16,29 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <main>
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-3 text-center">
-                    <img class="my-5" src="${pageContext.request.contextPath}/img/logo.png" alt="logo" height="250">
-                    <h2>Please, login</h2>
-                    <c:if test="${requestScope.error != null}">
-                        <div class="alert alert-danger" role="alert">
-                            ${requestScope.error}
-                        </div>
-                    </c:if>
-                    <form action="<c:url value="/app/login"/>" method="POST">
-                       <div class="form-floating mt-3">
-                            <input class="form-control" id="login" type="text" name="login" placeholder="Login">
-                            <label for="login">Login</label>
-                        </div>
-                        <div class="form-floating mt-3">
-                            <input class="form-control" id="password" type="password" name="password" placeholder="Password">
-                            <label for="password">Password</label>
-                        </div>
-                        <div class="d-grid gap-2 mt-3">
-                            <button class="btn btn-dark" type="submit">Login</button>
-                        </div>
-                    </form>
-                </div>
+    <main class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-3 text-center">
+                <img class="my-5" src="${pageContext.request.contextPath}/img/logo.png" alt="logo" height="250">
+                <h2>Please, login</h2>
+                <c:if test="${requestScope.error != null}">
+                    <div class="alert alert-danger" role="alert">
+                        ${requestScope.error}
+                    </div>
+                </c:if>
+                <form action="<c:url value="/app/login"/>" method="POST">
+                   <div class="form-floating mt-3">
+                        <input class="form-control" id="login" type="text" name="login" placeholder="Login">
+                        <label for="login">Login</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input class="form-control" id="password" type="password" name="password" placeholder="Password">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="d-grid gap-2 mt-3">
+                        <button class="btn btn-dark" type="submit">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
     </main>

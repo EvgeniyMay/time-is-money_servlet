@@ -11,8 +11,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
 </head>
-    <body>
+<body>
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
@@ -50,15 +51,15 @@
                                     <td>${activity.name}</td>
                                     <td>${activity.description}</td>
                                     <td>
-                                        <form action="<c:url value="/app/activity/activate"/>" method="POST">
+                                        <form class="no-padding" action="<c:url value="/app/activity/activate"/>" method="POST">
                                             <input type="hidden" name="id" value="${activity.id}">
-                                            <input type="submit" value="Activate">
+                                            <input class="btn btn-outline-light" type="submit" value="Activate">
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
+                                        <form class="no-padding" action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
                                             <input type="hidden" name="id" value="${activity.id}">
-                                            <input type="submit" value="Edit">
+                                            <input class="btn btn-outline-light" type="submit" value="Edit">
                                         </form>
                                     </td>
                                 </tr>

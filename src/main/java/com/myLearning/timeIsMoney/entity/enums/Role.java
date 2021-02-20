@@ -7,14 +7,14 @@ public enum Role {
 
     GUEST(Arrays.asList(
             "/",
-            "/login",
-            "/registration"
+            "/login"
     )),
     ADMIN(Arrays.asList(
             "/",
             "/profile",
             "/logout",
             "/user",
+            "/registration",
 
             "/activity/active",
             "/activity/add",

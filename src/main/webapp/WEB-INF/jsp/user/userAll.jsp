@@ -16,13 +16,27 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <table>
-        <c:forEach items="#{requestScope.users}" var="user">
-            <tr>
-                <td>${user.login}</td>
-            </tr>
-        </c:forEach>
-    </table>
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h2 class="my-2">Users</h2>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Login</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="#{requestScope.users}" var="user">
+                            <tr>
+                                <td>${user.login}</td>
+                            </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

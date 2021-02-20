@@ -11,6 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
 </head>
 <body>
     <header>
@@ -53,14 +54,14 @@
                                     <td>${activity.description}</td>
                                     <td>${activity.missions.size()}</td>
                                     <td>
-                                        <form action="<c:url value="/app/activity/archive"/>" method="GET">
+                                        <form class="no-padding" action="<c:url value="/app/activity/archive"/>" method="GET">
                                             <input type="hidden" name="id" value="${activity.id}">
                                             <input type="hidden" name="name" value="${activity.name}">
                                             <input class="btn btn-outline-light" type="submit" value="Archive">
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
+                                        <form class="no-padding" action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
                                             <input type="hidden" name="id" value="${activity.id}">
                                             <input class="btn btn-outline-light" type="submit" value="Edit">
                                         </form>

@@ -3,7 +3,7 @@
         <div class="col-auto">
             <div class="dropdown">
                 <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" >
-                    Activity
+                    Activities
                 </p>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="<c:url value="/app/activity/active"/>">Active</a>
@@ -16,7 +16,7 @@
         <div class="col-auto">
             <div class="dropdown">
                 <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" >
-                    Mission
+                    Missions
                 </p>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="<c:url value="/app/mission/active"/>">Active</a></li>
@@ -25,6 +25,18 @@
                     <li><a class="dropdown-item" href="<c:url value="/app/mission/completed"/>">Completed</a>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="<c:url value="/app/mission/add"/>">Create new</a>
+                </ul>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="dropdown">
+                <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" >
+                    Users
+                </p>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="<c:url value="/app/user"/>">All</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="<c:url value="/app/registration"/>">Create new</a>
                 </ul>
             </div>
         </div>

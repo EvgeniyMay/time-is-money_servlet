@@ -16,7 +16,7 @@ public class GetActiveMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        GetMissionUtil.fillPageableRequest(request, MissionState.ACTIVE, missionService);
+        PageableMissionUtil.fillPageableRequest(request, MissionState.ACTIVE, missionService);
 
         return "/WEB-INF/jsp/mission/missionActive.jsp";
     }

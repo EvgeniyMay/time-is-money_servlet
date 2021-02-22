@@ -8,7 +8,7 @@ import com.mylearning.timeismoney.service.MissionService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
-public class GetMissionUtil {
+public class PageableMissionUtil {
 
     public static void fillPageableRequest(HttpServletRequest request, MissionState state, MissionService missionService) {
         int curPage = 0;

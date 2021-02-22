@@ -34,8 +34,6 @@ public class PostOfferMissionCommand implements Command {
                     .build();
         } catch (DateTimeParseException | NumberFormatException e) {
             request.setAttribute("errors", Collections.singletonList("Please, fill all fields"));
-            //ToDo
-            // Change for activity service
             request.setAttribute("activities", missionService.getUsersAndActivities().getActivities());
 
             return "/WEB-INF/jsp/mission/missionOffer.jsp";
@@ -43,8 +41,6 @@ public class PostOfferMissionCommand implements Command {
 
         if(!MissionValidator.getErrors(mission).isEmpty()) {
             request.setAttribute("errors", MissionValidator.getErrors(mission));
-            //ToDo
-            // Change for activity service
             request.setAttribute("activities", missionService.getUsersAndActivities().getActivities());
 
             return "/WEB-INF/jsp/mission/missionOffer.jsp";

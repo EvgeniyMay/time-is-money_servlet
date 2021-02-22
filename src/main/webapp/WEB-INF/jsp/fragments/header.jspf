@@ -31,9 +31,9 @@
                 </c:if>
             </div>
         </div>
+        <hr/>
         <div class="row">
             <c:if test="${sessionScope.authUser.role == 'ADMIN'}">
-                <hr/>
                 <%@include file="adminPanel.jspf"%>
             </c:if>
         </div>

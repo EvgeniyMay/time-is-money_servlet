@@ -16,7 +16,7 @@ public class GetCompletedMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        GetMissionUtil.fillPageableRequest(request, MissionState.COMPLETED, missionService);
+        PageableMissionUtil.fillPageableRequest(request, MissionState.COMPLETED, missionService);
 
         return "/WEB-INF/jsp/mission/missionCompleted.jsp";
     }

@@ -1,4 +1,4 @@
 package com.mylearning.timeismoney.exception;
 
-public class AuthorizationException extends RuntimeException{
+public class AuthorizationException extends RuntimeException {
 }

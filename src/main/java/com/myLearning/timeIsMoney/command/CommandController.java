@@ -10,12 +10,16 @@ import com.mylearning.timeismoney.dao.impl.JdbcDaoFactory;
 import com.mylearning.timeismoney.service.ActivityService;
 import com.mylearning.timeismoney.service.MissionService;
 import com.mylearning.timeismoney.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandController {
+    
+    private final static Logger logger = LogManager.getLogger();
 
     private Map<String, Command> getCommands;
     private Map<String, Command> postCommands;
@@ -25,6 +29,7 @@ public class CommandController {
     public static CommandController getInstance() {
         if(commandController == null) {
             commandController = new CommandController();
+            logger.info("Command controller created");
         }
         return commandController;
     }

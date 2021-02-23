@@ -16,7 +16,7 @@ import java.util.*;
 
 public class JdbcActivityDao implements ActivityDao {
 
-    private final Logger logger = LogManager.getLogger(JdbcActivityDao.class.getName());
+    private final Logger logger = LogManager.getLogger();
 
     private final Connection connection;
     private final static ResourceBundle rb = ResourceBundle.getBundle("database");

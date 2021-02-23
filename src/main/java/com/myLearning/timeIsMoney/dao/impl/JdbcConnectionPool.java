@@ -2,6 +2,8 @@ package com.mylearning.timeismoney.dao.impl;
 
 import com.mylearning.timeismoney.dao.ConnectionPool;
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -9,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class JdbcConnectionPool implements ConnectionPool {
+
+    private final static Logger logger = LogManager.getLogger();
 
     private final DataSource dataSource;
     private static volatile JdbcConnectionPool jdbcConnectionPool;
@@ -29,6 +33,7 @@ public class JdbcConnectionPool implements ConnectionPool {
             synchronized (JdbcConnectionPool.class) {
                 if(jdbcConnectionPool == null) {
                     jdbcConnectionPool = new JdbcConnectionPool();
+                    logger.info("JdbcConnectionPool created");
                 }
             }
         }
@@ -39,9 +44,8 @@ public class JdbcConnectionPool implements ConnectionPool {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.warn("Get connection error");
+            throw new RuntimeException("Get connection error");
         }
-        return null;
     }
-
 }

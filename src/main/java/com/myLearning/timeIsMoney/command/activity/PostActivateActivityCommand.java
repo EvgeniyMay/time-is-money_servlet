@@ -15,7 +15,11 @@ public class PostActivateActivityCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        activityService.activateById(Integer.parseInt(request.getParameter("id")));
+        try {
+            activityService.activateById(Integer.parseInt(request.getParameter("id")));
+        } catch (Exception e) {
+            // ToDo | Log
+        }
 
         return "redirect:/app/activity/archived";
     }

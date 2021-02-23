@@ -15,7 +15,11 @@ public class PostArchiveActivityCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        activityService.archiveById(Integer.parseInt(request.getParameter("id")));
+        try {
+            activityService.archiveById(Integer.parseInt(request.getParameter("id")));
+        } catch (Exception e) {
+            // ToDo | Log
+        }
 
         return "redirect:/app/activity/active";
     }

@@ -1,8 +1,12 @@
 package com.mylearning.timeismoney.dao.impl;
 
 import com.mylearning.timeismoney.dao.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class JdbcDaoFactory implements DaoFactory {
+
+    private final static Logger logger = LogManager.getLogger();
 
     private static JdbcDaoFactory jdbcDaoFactory;
     private JdbcDaoFactory() {}
@@ -11,6 +15,7 @@ public class JdbcDaoFactory implements DaoFactory {
             synchronized (JdbcDaoFactory.class) {
                 if(jdbcDaoFactory == null) {
                     jdbcDaoFactory = new JdbcDaoFactory();
+                    logger.info("JdbcDaoFactory created");
                 }
             }
         }

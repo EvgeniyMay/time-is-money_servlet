@@ -16,7 +16,7 @@ import java.util.*;
 
 public class JdbcUserDao implements UserDao {
 
-    private final static Logger logger = LogManager.getLogger(JdbcUserDao.class.getName());
+    private final static Logger logger = LogManager.getLogger();
 
     private final Connection connection;
     private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("database");

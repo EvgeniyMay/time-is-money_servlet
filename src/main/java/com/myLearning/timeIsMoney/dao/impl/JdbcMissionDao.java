@@ -19,13 +19,14 @@ import java.util.*;
 
 public class JdbcMissionDao implements MissionDao {
 
-    private final static Logger logger = LogManager.getLogger(JdbcMissionDao.class.getName());
+    private final static Logger logger = LogManager.getLogger();
 
     private final Connection connection;
     private final static ResourceBundle rb = ResourceBundle.getBundle("database");
 
     public JdbcMissionDao(Connection connection) {
         this.connection = connection;
+        logger.info("JdbcMissionDao created");
     }
 
 
@@ -38,31 +39,36 @@ public class JdbcMissionDao implements MissionDao {
         try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.find.all"));
              ResultSet resultSet = ps.executeQuery();) {
 
-            while (resultSet.next()) {
-                int userId = resultSet.getInt("user_id");
-                if(!userMap.containsKey(userId)) {
-                    User user = UserMapper.getFromResultSet(resultSet);
-                    userMap.put(userId, user);
-                }
-
-                int activityId = resultSet.getInt("activity_id");
-                if(!activityMap.containsKey(activityId)) {
-                    Activity activity = ActivityMapper.getFromResultSet(resultSet);
-                    activityMap.put(activityId, activity);
-                }
-
-                Mission mission = MissionMapper.getFromResultSet(resultSet);
-                mission.setUser(userMap.get(userId));
-                mission.setActivity(activityMap.get(activityId));
-
-                missions.add(mission);
-            }
-
-            return missions;
+            return getMissions(userMap, activityMap, missions, resultSet);
         } catch (SQLException e) {
             logger.warn("Can not find missions");
             throw new DaoException("Can not find missions");
         }
+    }
+
+    private List<Mission> getMissions(Map<Integer, User> userMap, Map<Integer, Activity> activityMap, List<Mission> missions, ResultSet resultSet)
+            throws SQLException {
+        while (resultSet.next()) {
+            int userId = resultSet.getInt("user_id");
+            if(!userMap.containsKey(userId)) {
+                User user = UserMapper.getFromResultSet(resultSet);
+                userMap.put(userId, user);
+            }
+
+            int activityId = resultSet.getInt("activity_id");
+            if(!activityMap.containsKey(activityId)) {
+                Activity activity = ActivityMapper.getFromResultSet(resultSet);
+                activityMap.put(activityId, activity);
+            }
+
+            Mission mission = MissionMapper.getFromResultSet(resultSet);
+            mission.setUser(userMap.get(userId));
+            mission.setActivity(activityMap.get(activityId));
+
+            missions.add(mission);
+        }
+
+        return missions;
     }
 
     @Override
@@ -109,27 +115,7 @@ public class JdbcMissionDao implements MissionDao {
             ps.setInt(3, page * size);
             ResultSet resultSet = ps.executeQuery();
 
-            while (resultSet.next()) {
-                int userId = resultSet.getInt("user_id");
-                if(!userMap.containsKey(userId)) {
-                    User user = UserMapper.getFromResultSet(resultSet);
-                    userMap.put(userId, user);
-                }
-
-                int activityId = resultSet.getInt("activity_id");
-                if(!activityMap.containsKey(activityId)) {
-                    Activity activity = ActivityMapper.getFromResultSet(resultSet);
-                    activityMap.put(activityId, activity);
-                }
-
-                Mission mission = MissionMapper.getFromResultSet(resultSet);
-                mission.setUser(userMap.get(userId));
-                mission.setActivity(activityMap.get(activityId));
-
-                missions.add(mission);
-            }
-
-            return missions;
+            return getMissions(userMap, activityMap, missions, resultSet);
         } catch (SQLException e) {
             logger.warn("Can not find missions");
             throw new DaoException("Can not find missions");

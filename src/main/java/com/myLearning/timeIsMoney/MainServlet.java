@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MainServlet extends HttpServlet {
 
-    private final static Logger logger = LogManager.getLogger(MainServlet.class.getName());
+    private final static Logger logger = LogManager.getLogger();
 
     private CommandController commandController;
 
@@ -21,6 +21,7 @@ public class MainServlet extends HttpServlet {
     public void init() throws ServletException {
         commandController = CommandController.getInstance();
         getServletContext().setAttribute("authedUsers", new ArrayList<Integer>());
+        logger.info("MainServlet created");
     }
 
     @Override
@@ -38,7 +39,7 @@ public class MainServlet extends HttpServlet {
     private void process(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String page = commandController.getCommand(request).execute(request);
-        logger.info(page);
+        logger.info("Request to {}",page);
 
         if(page.contains("redirect:")) {
             response.sendRedirect(page.replace("redirect:", ""));

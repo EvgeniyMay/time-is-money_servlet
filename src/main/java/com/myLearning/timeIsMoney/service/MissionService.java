@@ -52,7 +52,10 @@ public class MissionService {
 
     public boolean pass(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
-            return missionDao.userUpdateState(user, mission, MissionState.PASSED);
+            if(MissionState.ACTIVE.equals(mission.getState())) {
+                missionDao.userUpdateState(user, mission, MissionState.PASSED);
+            }
+            return  false;
         }
     }
 

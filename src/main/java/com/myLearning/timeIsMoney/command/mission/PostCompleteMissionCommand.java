@@ -21,8 +21,15 @@ public class PostCompleteMissionCommand implements Command {
                 .id(Integer.parseInt(request.getParameter("missionId")))
                 .build();
 
-        missionService.updateState(mission, MissionState.COMPLETED);
+        try {
+            missionService.updateState(mission, MissionState.COMPLETED);
+        } catch (Exception e) {
+            request.setAttribute("error", "Mission is not actual now");
+            PageableMissionUtil.fillPageableRequest(request, MissionState.OFFERED, missionService);
 
-        return "redirect:" + request.getHeader("referer");
+            return "/WEB-INF/jsp/mission/missionOffered.jsp";
+        }
+
+        return "redirect:/app/mission/offered";
     }
 }

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tim" uri="time-is-money" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="localization.messages"/>
@@ -20,6 +21,12 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-8">
+
+                <c:if test="${requestScope.error != null}">
+                    <tim:danger-error>
+                        ${requestScope.error}
+                    </tim:danger-error>
+                </c:if>
 
                 <c:if test="${requestScope.addResult != null}">
                     <div class="alert alert-danger" role="alert">

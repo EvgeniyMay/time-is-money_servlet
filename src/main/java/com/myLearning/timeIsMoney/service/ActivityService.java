@@ -21,6 +21,15 @@ public class ActivityService {
     }
 
 
+    public boolean create(Activity activity) {
+        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
+            return activityDao.create(activity);
+        } catch (DaoException e) {
+            logger.warn("Creation error");
+            throw new ServiceException("Creation error", e);
+        }
+    }
+
     public List<Activity> findPageableByState(int page, int size, boolean isActive) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findPageableByState(page, size, isActive);
@@ -46,15 +55,6 @@ public class ActivityService {
         } catch (DaoException e) {
             logger.warn("Find by id error");
             throw new ServiceException("Find by id error", e);
-        }
-    }
-
-    public boolean create(Activity activity) {
-        try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.create(activity);
-        } catch (DaoException e) {
-            logger.warn("Creation error");
-            throw new ServiceException("Creation error", e);
         }
     }
 

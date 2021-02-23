@@ -6,4 +6,4 @@ My little team time management project
 
 Database schema
 
-![img.png](img.png)
+<img src="img/db_schema.png" />

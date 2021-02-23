@@ -22,7 +22,7 @@ public class JdbcMissionDao implements MissionDao {
     private final static Logger logger = LogManager.getLogger(JdbcMissionDao.class.getName());
 
     private final Connection connection;
-    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
+    private final static ResourceBundle rb = ResourceBundle.getBundle("database");
 
     public JdbcMissionDao(Connection connection) {
         this.connection = connection;
@@ -35,7 +35,7 @@ public class JdbcMissionDao implements MissionDao {
         Map<Integer, Activity> activityMap = new HashMap<>();
         List<Mission> missions = new ArrayList<>();
 
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.find.all"));
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.find.all"));
              ResultSet resultSet = ps.executeQuery();) {
 
             while (resultSet.next()) {
@@ -70,7 +70,7 @@ public class JdbcMissionDao implements MissionDao {
         Map<Integer, User> userMap = new HashMap<>();
         Map<Integer, Activity> activityMap = new HashMap<>();
 
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.find.info"));
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.find.info"));
             ResultSet resultSet = ps.executeQuery()) {
             while (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
@@ -103,7 +103,7 @@ public class JdbcMissionDao implements MissionDao {
         Map<Integer, Activity> activityMap = new HashMap<>();
         List<Mission> missions = new ArrayList<>();
 
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString(field.getPropertyName()))) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString(field.getPropertyName()))) {
             ps.setString(1, state.toString());
             ps.setInt(2, size);
             ps.setInt(3, page * size);
@@ -138,7 +138,7 @@ public class JdbcMissionDao implements MissionDao {
 
     @Override
     public int countByState(MissionState state) {
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.count.by.state"))) {
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.count.by.state"))) {
             ps.setString(1, state.toString());
 
             ResultSet resultSet = ps.executeQuery();
@@ -155,7 +155,7 @@ public class JdbcMissionDao implements MissionDao {
 
     @Override
     public boolean create(Mission mission) {
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.insert"))) {
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.insert"))) {
             MissionMapper.basicFillStatement(ps, mission);
 
             ps.execute();
@@ -169,7 +169,7 @@ public class JdbcMissionDao implements MissionDao {
 
     @Override
     public boolean update(Mission mission) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.update"))) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.update"))) {
             MissionMapper.basicFillStatement(ps, mission);
             ps.setInt(6, mission.getId());
 
@@ -183,8 +183,8 @@ public class JdbcMissionDao implements MissionDao {
     }
 
     @Override
-    public boolean updateMissionState(Mission mission, MissionState state) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.update.state"))) {
+    public boolean updateState(Mission mission, MissionState state) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.update.state"))) {
             ps.setString(1, state.toString());
             ps.setInt(2, mission.getId());
 
@@ -198,23 +198,24 @@ public class JdbcMissionDao implements MissionDao {
     }
 
     @Override
-    public boolean pass(User user, Mission mission) {
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.pass"))) {
-            ps.setInt(1, mission.getId());
-            ps.setInt(2, user.getId());
+    public boolean userUpdateState(User user, Mission mission, MissionState state) {
+        try (PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.user.update"))) {
+            ps.setString(1, state.toString());
+            ps.setInt(2, mission.getId());
+            ps.setInt(3, user.getId());
 
             ps.execute();
 
             return ps.getUpdateCount() > 0;
         } catch (SQLException e) {
-            logger.warn("Can not pass mission");
-            throw new DaoException("Can not pass mission");
+            logger.warn("Can not change mission state");
+            throw new DaoException("Can not change mission state");
         }
     }
 
     @Override
     public boolean delete(Mission mission) {
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.delete"))) {
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.delete"))) {
             ps.setInt(1, mission.getId());
 
             ps.execute();
@@ -228,7 +229,7 @@ public class JdbcMissionDao implements MissionDao {
 
     @Override
     public boolean cancel(User user, Mission mission) {
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.mission.user.cancel"))) {
+        try(PreparedStatement ps = connection.prepareStatement(rb.getString("query.mission.user.cancel"))) {
             ps.setInt(1, mission.getId());
             ps.setInt(2, user.getId());
 

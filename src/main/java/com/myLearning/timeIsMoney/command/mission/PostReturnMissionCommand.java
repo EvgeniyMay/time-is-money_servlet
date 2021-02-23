@@ -21,7 +21,7 @@ public class PostReturnMissionCommand implements Command {
                 .id(Integer.parseInt(request.getParameter("missionId")))
                 .build();
 
-        boolean returned = missionService.updateMissionState(mission, MissionState.ACTIVE);
+        boolean returned = missionService.updateState(mission, MissionState.ACTIVE);
 
         if(!returned) {
             request.setAttribute("addResult", "Mission is not actual now");

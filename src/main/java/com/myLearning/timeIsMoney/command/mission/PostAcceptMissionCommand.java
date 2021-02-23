@@ -17,7 +17,7 @@ public class PostAcceptMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        boolean added = missionService.updateMissionState(
+        boolean added = missionService.updateState(
                 new Mission.Builder()
                         .id(Integer.parseInt(request.getParameter("missionId")))
                         .build(),

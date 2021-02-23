@@ -19,7 +19,7 @@ public class PostPassMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        missionService.passMission((User) request.getSession().getAttribute("authUser"),
+        missionService.pass((User) request.getSession().getAttribute("authUser"),
                 new Mission.Builder()
                         .id(Integer.parseInt(request.getParameter("missionId")))
                         .build());

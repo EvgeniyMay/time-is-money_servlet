@@ -47,7 +47,7 @@ public class PostCreateMissionCommand implements Command {
             return "/WEB-INF/jsp/mission/missionCreate.jsp";
         }
 
-        missionService.createMission(mission);
+        missionService.create(mission);
 
         return "redirect:/app/mission/active";
     }

@@ -21,7 +21,7 @@ public class PostCompleteMissionCommand implements Command {
                 .id(Integer.parseInt(request.getParameter("missionId")))
                 .build();
 
-        missionService.updateMissionState(mission, MissionState.COMPLETED);
+        missionService.updateState(mission, MissionState.COMPLETED);
 
         return "redirect:" + request.getHeader("referer");
     }

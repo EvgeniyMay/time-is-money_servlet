@@ -38,21 +38,21 @@ public class MissionService {
         }
     }
 
-    public boolean createMission(Mission mission) {
+    public boolean create(Mission mission) {
         try (MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.create(mission);
         }
     }
 
-    public boolean updateMissionState(Mission mission, MissionState state) {
+    public boolean updateState(Mission mission, MissionState state) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
-            return missionDao.updateMissionState(mission, state);
+            return missionDao.updateState(mission, state);
         }
     }
 
-    public boolean passMission(User user, Mission mission) {
+    public boolean pass(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
-            return missionDao.pass(user, mission);
+            return missionDao.userUpdateState(user, mission, MissionState.PASSED);
         }
     }
 

@@ -16,11 +16,11 @@ public interface MissionDao extends GenericDao<Mission> {
 
     UsersAndActivities getUsersAndActivities();
 
-    boolean updateMissionState(Mission mission, MissionState state);
+    boolean updateState(Mission mission, MissionState state);
 
     boolean delete(Mission mission);
 
-    boolean pass(User user, Mission mission);
+    boolean userUpdateState (User user, Mission mission, MissionState state);
 
     boolean cancel(User user, Mission mission);
 }

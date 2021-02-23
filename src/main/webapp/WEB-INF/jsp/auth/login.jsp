@@ -22,7 +22,9 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-md-3 text-center">
                 <img class="my-5" src="${pageContext.request.contextPath}/img/logo.png" alt="logo" height="250">
-                <h2>Please, login</h2>
+                <h2>
+                    <fmt:message key="login.message" />
+                </h2>
 
                 <c:if test="${requestScope.error != null}">
                     <tim:danger-error>
@@ -31,16 +33,19 @@
                 </c:if>
 
                 <form action="<c:url value="/app/login"/>" method="POST">
-                   <div class="form-floating mt-3">
+                    <div class="form-floating mt-3">
                         <input class="form-control" id="login" type="text" name="login" placeholder="Login">
-                        <label for="login">Login</label>
+                        <fmt:message key="login.login" var="loginLogin"/>
+                        <label for="login">${loginLogin}</label>
                     </div>
                     <div class="form-floating mt-3">
                         <input class="form-control" id="password" type="password" name="password" placeholder="Password">
-                        <label for="password">Password</label>
+                        <fmt:message key="login.password" var="loginPassword"/>
+                        <label for="password">${loginPassword}</label>
                     </div>
                     <div class="d-grid gap-2 mt-3">
-                        <button class="btn btn-dark" type="submit">Login</button>
+                        <fmt:message key="login.confirm" var="loginConfirm"/>
+                        <button class="btn btn-dark" type="submit">${loginConfirm}</button>
                     </div>
                 </form>
             </div>

@@ -18,15 +18,15 @@
                 </div>
                  <c:if test="${sessionScope.authUser == null}">
                     <div class="col-auto">
-                        <a class="btn btn-light btn-outline-dark" href="<c:url value="/app/login"/>"><fmt:message key="nav.login" /></a>
+                        <a class="btn btn-light btn-outline-dark" href="<c:url value="/app/login"/>"><fmt:message key="nav.account.login" /></a>
                     </div>
                 </c:if>
                 <c:if test="${sessionScope.authUser != null}">
                     <div class="col-auto">
-                        <a class="btn btn-dark" href="<c:url value="/app/profile"/>"><fmt:message key="nav.profile" /></a>
+                        <a class="btn btn-dark" href="<c:url value="/app/profile"/>"><fmt:message key="nav.account.profile" /></a>
                     </div>
                     <div class="col-auto">
-                        <a class="btn btn-light" href="<c:url value="/app/logout"/>"><fmt:message key="nav.logout" /></a>
+                        <a class="btn btn-light" href="<c:url value="/app/logout"/>"><fmt:message key="nav.account.logout" /></a>
                     </div>
                 </c:if>
             </div>

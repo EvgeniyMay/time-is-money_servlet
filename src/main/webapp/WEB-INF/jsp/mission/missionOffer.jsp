@@ -27,10 +27,12 @@
                 <c:if test="${requestScope.activities.size() == 0}">
                     <div class="alert alert-danger my-3" role="alert">No active activities</div>
                 </c:if>
+
                 <c:if test="${requestScope.activities.size() !=0}">
                     <form action="<c:url value="/app/mission/offer"/>" method="POST">
                         <div class="my-3">
-                            <label for="activity">Activity</label>
+                            <fmt:message key="mission.offer.activity" var="offerActivity"/>
+                            <label for="activity" >${offerActivity}</label>
                             <select class="form-select" id="activity" name="activityId">
                                 <c:forEach items="${requestScope.activities}" var="activity">
                                     <option value="${activity.id}">${activity.name} | ${activity.description}</option>
@@ -38,15 +40,18 @@
                             </select>
                         </div>
                         <div class="mb-2">
-                            <label for="startTime" class="form-label">Start time</label>
+                            <fmt:message key="mission.offer.time.start" var="offerStartTime"/>
+                            <label for="startTime" class="form-label">${offerStartTime}</label>
                             <input type="datetime-local" class="form-control" name="startTime" id="startTime">
                         </div>
                         <div class="mb-3">
-                            <label for="endTime" class="form-label">End time</label>
+                            <fmt:message key="mission.offer.time.end" var="offerEndTime"/>
+                            <label for="endTime" class="form-label">${offerEndTime}</label>
                             <input type="datetime-local" class="form-control" name="endTime" id="endTime">
                         </div>
                         <div class="d-grid gap-2 mt-3">
-                            <button class="btn btn-dark" type="submit">Offer</button>
+                            <fmt:message key="mission.offer.make" var="makeOffer"/>
+                            <button class="btn btn-dark" type="submit">${makeOffer}</button>
                         </div>
                     </form>
                 </c:if>

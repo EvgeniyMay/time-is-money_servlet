@@ -3,40 +3,40 @@
         <div class="col-auto">
             <div class="dropdown">
                 <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" >
-                    Activities
+                    <fmt:message key="nav.activity" />
                 </p>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="<c:url value="/app/activity/active"/>">Active</a>
-                    <li><a class="dropdown-item" href="<c:url value="/app/activity/archived"/>">Archive</a>
+                    <li><a class="dropdown-item" href="<c:url value="/app/activity/active"/>"><fmt:message key="nav.activity.active" /></a>
+                    <li><a class="dropdown-item" href="<c:url value="/app/activity/archived"/>"><fmt:message key="nav.activity.archived" /></a>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="<c:url value="/app/activity/add"/>">Create new</a>
+                    <li><a class="dropdown-item" href="<c:url value="/app/activity/add"/>"><fmt:message key="nav.activity.create" /></a>
                 </ul>
             </div>
         </div>
         <div class="col-auto">
             <div class="dropdown">
                 <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" >
-                    Missions
+                    <fmt:message key="nav.mission" />
                 </p>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="<c:url value="/app/mission/active"/>">Active</a></li>
-                    <li><a class="dropdown-item" href="<c:url value="/app/mission/offered"/>">Offered</a>
-                    <li><a class="dropdown-item" href="<c:url value="/app/mission/passed"/>">Passed</a>
-                    <li><a class="dropdown-item" href="<c:url value="/app/mission/completed"/>">Completed</a>
+                    <li><a class="dropdown-item" href="<c:url value="/app/mission/active"/>"><fmt:message key="nav.mission.active" /></a></li>
+                    <li><a class="dropdown-item" href="<c:url value="/app/mission/offered"/>"><fmt:message key="nav.mission.offered" /></a>
+                    <li><a class="dropdown-item" href="<c:url value="/app/mission/passed"/>"><fmt:message key="nav.mission.passed" /></a>
+                    <li><a class="dropdown-item" href="<c:url value="/app/mission/completed"/>"><fmt:message key="nav.mission.completed" /></a>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="<c:url value="/app/mission/add"/>">Create new</a>
+                    <li><a class="dropdown-item" href="<c:url value="/app/mission/add"/>"><fmt:message key="nav.mission.create" /></a>
                 </ul>
             </div>
         </div>
         <div class="col-auto">
             <div class="dropdown">
                 <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" >
-                    Users
+                    <fmt:message key="nav.user" />
                 </p>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="<c:url value="/app/user"/>">All</a></li>
+                    <li><a class="dropdown-item" href="<c:url value="/app/user"/>"><fmt:message key="nav.user.active" /></a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="<c:url value="/app/registration"/>">Create new</a>
+                    <li><a class="dropdown-item" href="<c:url value="/app/registration"/>"><fmt:message key="nav.user.create" /></a>
                 </ul>
             </div>
         </div>

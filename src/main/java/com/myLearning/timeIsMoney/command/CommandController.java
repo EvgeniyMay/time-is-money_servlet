@@ -37,7 +37,6 @@ public class CommandController {
 
         getCommands = new HashMap<>();
         postCommands = new HashMap<>();
-
 //        Activity
         getCommands.put("/activity/active", new GetActiveActivityCommand(activityService));
         getCommands.put("/activity/archived", new GetArchivedActivityCommand(activityService));

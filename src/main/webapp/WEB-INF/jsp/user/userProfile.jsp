@@ -21,41 +21,54 @@
     <main class="container">
         <div class="row">
             <div class="col text-center">
-                <h2 class="my-2">Hello, ${sessionScope.get("authUser").login}</h2>
+                <h2 class="my-2">
+                    ${sessionScope.get("authUser").login}
+                </h2>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-8 p-3">
-                <h3 class="mb-2">Missions</h3>
+                <h3 class="mb-2">
+                    <fmt:message key="profile.mission" />
+                </h3>
 
                 <div class="d-grid gap-2">
-                    <a class="btn btn-dark" href="<c:url value="/app/mission/offer"/>">Offer mission</a>
+                    <a class="btn btn-dark" href="<c:url value="/app/mission/offer"/>">
+                        <fmt:message key="profile.action.mission.offer" />
+                    </a>
                 </div>
 
                 <c:if test="${requestScope.error != null}">
-                    <div class="alert alert-danger my-3" role="alert">${requestScope.error}</div>
+                    <div class="alert alert-danger my-3" role="alert">
+                            ${requestScope.error}
+                    </div>
                 </c:if>
 
-                <h4 class="mt-2">Active</h4>
+                <h4 class="mt-2">
+                    <fmt:message key="profile.mission.active" />
+                </h4>
                 <table class="table table-dark table-striped">
                     <thead>
                         <tr>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.activity" var="activeMissionsTitle"/>
                                     <input type="hidden" name="sort_field" value="${'activity_id'}">
-                                    <input class="btn btn-dark" type="submit" value="${'Activity'}">
+                                    <input class="btn btn-dark" type="submit" value="${activeMissionsTitle}">
                                 </form>
                             </th>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.time.start" var="startTimeTitle"/>
                                     <input type="hidden" name="sort_field" value="${'start_time'}">
-                                    <input class="btn btn-dark" type="submit" value="${'Start Time'}">
+                                    <input class="btn btn-dark" type="submit" value="${startTimeTitle}">
                                 </form>
                             </th>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.time.end" var="endTimeTitle"/>
                                     <input type="hidden" name="sort_field" value="${'end_time'}">
-                                    <input class="btn btn-dark" type="submit" value="${'End Time'}">
+                                    <input class="btn btn-dark" type="submit" value="${endTimeTitle}">
                                 </form>
                             </th>
                             <th></th>
@@ -70,7 +83,8 @@
                             <td>
                                 <form class="no-padding" action="<c:url value="/app/mission/pass"/>" method="POST">
                                     <input type="hidden" name="missionId" value="${mission.id}">
-                                    <input class="btn btn-light" type="submit" value="Pass">
+                                    <fmt:message key="profile.action.mission.pass" var="actionPass"/>
+                                    <input class="btn btn-light" type="submit" value="${actionPass}">
                                 </form>
                             </td>
                         </tr>
@@ -78,26 +92,31 @@
                     </tbody>
                 </table>
 
-                <h4 class="mt-2">Offered</h4>
+                <h4 class="mt-2">
+                    <fmt:message key="profile.mission.offered" />
+                </h4>
                 <table class="table table-dark table-striped">
                     <thead>
                         <tr>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.activity" var="activeMissionsTitle"/>
                                     <input type="hidden" name="sort_field" value="${'activity_id'}">
-                                    <input class="btn btn-dark" type="submit" value="${'Activity'}">
+                                    <input class="btn btn-dark" type="submit" value="${activeMissionsTitle}">
                                 </form>
                             </th>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.time.start" var="startTimeTitle"/>
                                     <input type="hidden" name="sort_field" value="${'start_time'}">
-                                    <input class="btn btn-dark" type="submit" value="${'Start Time'}">
+                                    <input class="btn btn-dark" type="submit" value="${startTimeTitle}">
                                 </form>
                             </th>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.time.end" var="endTimeTitle"/>
                                     <input type="hidden" name="sort_field" value="${'end_time'}">
-                                    <input class="btn btn-dark" type="submit" value="${'End Time'}">
+                                    <input class="btn btn-dark" type="submit" value="${endTimeTitle}">
                                 </form>
                             </th>
                             <th></th>
@@ -112,7 +131,8 @@
                                 <td>
                                     <form class="no-padding" action="<c:url value="/app/mission/cancel"/>" method="POST">
                                         <input type="hidden" name="missionId" value="${mission.id}">
-                                        <input class="btn btn-light" type="submit" value="Cancel">
+                                        <fmt:message key="profile.action.mission.cancel" var="actionCancel"/>
+                                        <input class="btn btn-light" type="submit" value="${actionCancel}">
                                     </form>
                                 </td>
                             </tr>
@@ -120,26 +140,31 @@
                     </tbody>
                 </table>
 
-                <h4 class="mt-2">Passed</h4>
+                <h4 class="mt-2">
+                    <fmt:message key="profile.mission.passed" />
+                </h4>
                 <table class="table table-dark table-striped">
                     <thead>
                         <tr>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.activity" var="activeMissionsTitle"/>
                                     <input type="hidden" name="sort_field" value="${'activity_id'}">
-                                    <input class="btn btn-dark" type="submit" value="${'Activity'}">
+                                    <input class="btn btn-dark" type="submit" value="${activeMissionsTitle}">
                                 </form>
                             </th>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.time.start" var="startTimeTitle"/>
                                     <input type="hidden" name="sort_field" value="${'start_time'}">
-                                    <input class="btn btn-dark" type="submit" value="${'Start Time'}">
+                                    <input class="btn btn-dark" type="submit" value="${startTimeTitle}">
                                 </form>
                             </th>
                             <th>
                                 <form class="no-padding">
+                                    <fmt:message key="profile.mission.table.time.end" var="endTimeTitle"/>
                                     <input type="hidden" name="sort_field" value="${'end_time'}">
-                                    <input class="btn btn-dark" type="submit" value="${'End Time'}">
+                                    <input class="btn btn-dark" type="submit" value="${endTimeTitle}">
                                 </form>
                             </th>
                         </tr>

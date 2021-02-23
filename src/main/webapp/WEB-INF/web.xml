@@ -18,7 +18,6 @@
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
 
-
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.mylearning.timeismoney.filter.EncodingFilter</filter-class>

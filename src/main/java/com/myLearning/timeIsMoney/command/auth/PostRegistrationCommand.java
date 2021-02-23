@@ -4,6 +4,7 @@ import com.mylearning.timeismoney.command.Command;
 import com.mylearning.timeismoney.entity.User;
 import com.mylearning.timeismoney.service.UserService;
 import com.mylearning.timeismoney.util.UserValidator;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -28,6 +29,10 @@ public class PostRegistrationCommand implements Command {
             return "/WEB-INF/jsp/auth/registration.jsp";
         }
 
+        // ToDo | Refactor
+        // Hash password. Can be removed if change validation system
+        user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+
         try {
             userService.create(user);
         } catch (Exception e) {
@@ -35,6 +40,6 @@ public class PostRegistrationCommand implements Command {
             return "/WEB-INF/jsp/auth/registration.jsp";
         }
 
-        return "redirect:/app/login";
+        return "redirect:/app/user";
     }
 }

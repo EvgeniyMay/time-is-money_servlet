@@ -3,13 +3,12 @@ package com.mylearning.timeismoney.command.auth;
 import com.mylearning.timeismoney.command.Command;
 import com.mylearning.timeismoney.entity.User;
 import com.mylearning.timeismoney.service.UserService;
-import sun.security.util.Password;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Objects;
 
 public class PostLoginCommand implements Command {
 
@@ -21,6 +20,7 @@ public class PostLoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        User user;
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
@@ -29,19 +29,18 @@ public class PostLoginCommand implements Command {
             return "/WEB-INF/jsp/auth/login.jsp";
         }
 
-        User user;
         try {
              user = userService.findByLoginProxy(login);
-
         } catch (Exception e) {
             request.setAttribute("error", "Such user does not exist");
             return "/WEB-INF/jsp/auth/login.jsp";
         }
 
-        if(!user.getPassword().equals(password)) {
+        if(!user.getPassword().equals(DigestUtils.sha256Hex(password))) {
             request.setAttribute("error", "Wrong login or password");
             return "/WEB-INF/jsp/auth/login.jsp";
         }
+
 
         ServletContext servletContext = request.getServletContext();
         List<Integer> authedUsers = (List<Integer>)servletContext.getAttribute("authedUsers");

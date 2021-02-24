@@ -7,6 +7,9 @@ import com.mylearning.timeismoney.service.ActivityService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
+/**
+ * all active activities page with pagination
+ */
 public class GetActiveActivityCommand implements Command {
 
     private final ActivityService activityService;
@@ -28,7 +31,6 @@ public class GetActiveActivityCommand implements Command {
             }
         }
 
-        //TODO IS(TRUE)
         int activityCount = activityService.getActiveCount();
         int pageCount = (int)Math.ceil((double)activityCount/pageSize);
 

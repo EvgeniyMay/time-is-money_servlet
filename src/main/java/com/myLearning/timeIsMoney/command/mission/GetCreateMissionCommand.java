@@ -15,6 +15,10 @@ public class GetCreateMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        /**
+         * fill page by mission state
+         * @see com.mylearning.timeismoney.command.mission.PageableMissionUtil
+         */
         request.setAttribute("usersAndActivities", missionService.getUsersAndActivities());
 
         return "/WEB-INF/jsp/mission/missionCreate.jsp";

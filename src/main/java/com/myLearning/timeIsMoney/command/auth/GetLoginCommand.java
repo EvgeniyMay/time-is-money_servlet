@@ -4,6 +4,9 @@ import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * login form page
+ */
 public class GetLoginCommand implements Command {
 
     @Override

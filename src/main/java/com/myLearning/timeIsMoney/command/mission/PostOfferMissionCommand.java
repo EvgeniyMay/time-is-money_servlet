@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 
+/**
+ * offer mission command
+ */
 public class PostOfferMissionCommand implements Command {
 
     private final MissionService missionService;

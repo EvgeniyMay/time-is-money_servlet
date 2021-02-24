@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * logout command
+ */
 public class PostLogoutCommand implements Command {
 
     @Override

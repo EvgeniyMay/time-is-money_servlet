@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * login command
+ */
 public class PostLoginCommand implements Command {
 
     private final UserService userService;

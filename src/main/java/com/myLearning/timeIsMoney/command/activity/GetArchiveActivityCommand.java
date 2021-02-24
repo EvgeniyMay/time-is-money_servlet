@@ -4,6 +4,9 @@ import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * confirm archive activity page
+ */
 public class GetArchiveActivityCommand implements Command {
 
     @Override

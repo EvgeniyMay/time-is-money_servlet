@@ -19,7 +19,7 @@ public class ActivityServiceTest {
 
     private final ActivityDao mockActivityDao = Mockito.mock(JdbcActivityDao.class);
     private final DaoFactory mockDaoFactory = Mockito.mock(JdbcDaoFactory.class);
-    ActivityService activityService = new ActivityService(mockDaoFactory);
+    private final ActivityService activityService = new ActivityService(mockDaoFactory);
 
     @Before
     public void createDao() {

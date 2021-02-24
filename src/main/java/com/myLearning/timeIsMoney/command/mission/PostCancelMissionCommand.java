@@ -9,6 +9,9 @@ import com.mylearning.timeismoney.service.MissionService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * cancel mission command
+ */
 public class PostCancelMissionCommand implements Command {
 
     private final MissionService missionService;

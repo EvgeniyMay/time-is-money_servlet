@@ -8,6 +8,9 @@ import com.mylearning.timeismoney.util.ActivityValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
+/**
+ * creating activity command
+ */
 public class PostCreateActivityCommand implements Command {
 
     private final ActivityService activityService;

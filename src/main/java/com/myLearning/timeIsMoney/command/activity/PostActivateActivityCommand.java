@@ -5,6 +5,9 @@ import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * activation activity command
+ */
 public class PostActivateActivityCommand implements Command {
 
     private final ActivityService activityService;

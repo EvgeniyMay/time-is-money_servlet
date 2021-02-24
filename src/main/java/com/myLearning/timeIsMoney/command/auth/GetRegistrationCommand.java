@@ -4,6 +4,9 @@ import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * registration form page
+ */
 public class GetRegistrationCommand implements Command {
 
     @Override

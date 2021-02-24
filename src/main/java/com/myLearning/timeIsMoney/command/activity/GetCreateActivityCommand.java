@@ -4,6 +4,9 @@ import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * form for activity creation
+ */
 public class GetCreateActivityCommand implements Command {
 
     @Override

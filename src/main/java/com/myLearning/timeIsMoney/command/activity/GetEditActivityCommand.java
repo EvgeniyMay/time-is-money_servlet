@@ -6,6 +6,9 @@ import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * edit activity page
+ */
 public class GetEditActivityCommand implements Command {
 
     private final ActivityService activityService;

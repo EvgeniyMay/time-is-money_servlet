@@ -8,6 +8,9 @@ import com.mylearning.timeismoney.service.MissionService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
+/**
+ * Util class for filling pageable page with missions by state
+ */
 public class PageableMissionUtil {
 
     public static void fillPageableRequest(HttpServletRequest request, MissionState state, MissionService missionService) {

@@ -4,6 +4,9 @@ import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * confirm logout page
+ */
 public class GetLogoutCommand implements Command {
 
     @Override

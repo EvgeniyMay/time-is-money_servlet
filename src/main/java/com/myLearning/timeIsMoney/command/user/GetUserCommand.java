@@ -5,6 +5,9 @@ import com.mylearning.timeismoney.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * all active users list page
+ */
 public class GetUserCommand implements Command {
 
     private final UserService userService;

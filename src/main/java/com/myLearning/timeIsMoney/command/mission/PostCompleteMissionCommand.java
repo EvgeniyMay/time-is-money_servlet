@@ -7,6 +7,9 @@ import com.mylearning.timeismoney.service.MissionService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * complete mission command
+ */
 public class PostCompleteMissionCommand implements Command {
 
     private final MissionService missionService;

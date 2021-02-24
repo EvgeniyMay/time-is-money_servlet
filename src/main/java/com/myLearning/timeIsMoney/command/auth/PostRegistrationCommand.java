@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * registration command
+ */
 public class PostRegistrationCommand implements Command {
 
     private final UserService userService;

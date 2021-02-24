@@ -6,6 +6,9 @@ import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * all archived activities page with pagination
+ */
 public class GetArchivedActivityCommand implements Command {
 
     private final ActivityService activityService;

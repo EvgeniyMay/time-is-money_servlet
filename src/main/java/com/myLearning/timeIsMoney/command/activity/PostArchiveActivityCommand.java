@@ -5,6 +5,9 @@ import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * archiving activity command
+ */
 public class PostArchiveActivityCommand implements Command {
 
     private final ActivityService activityService;

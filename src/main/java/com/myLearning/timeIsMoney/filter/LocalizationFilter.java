@@ -5,6 +5,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * change localization of session
+ */
 @WebFilter(filterName = "LocalizationFilter", urlPatterns = { "/*" })
 public class LocalizationFilter implements Filter {
 

@@ -17,6 +17,10 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Jdbc realization of MissionDao
+ * @see com.mylearning.timeismoney.dao.MissionDao
+ */
 public class JdbcMissionDao implements MissionDao {
 
     private final static Logger logger = LogManager.getLogger();

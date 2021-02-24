@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Jdbc realization of ConnectionPool
+ * @see com.mylearning.timeismoney.dao.ConnectionPool
+ */
 public class JdbcConnectionPool implements ConnectionPool {
 
     private final static Logger logger = LogManager.getLogger();

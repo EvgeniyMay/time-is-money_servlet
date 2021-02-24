@@ -32,6 +32,7 @@ public class ActivityServiceTest {
         Mockito.when(mockActivityDao.create(Mockito.any()))
                 .thenReturn(true);
 
+
         Activity activity = new Activity();
         boolean creationResult = activityService.create(activity);
 

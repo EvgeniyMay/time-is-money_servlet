@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * work with Activity and ResultSet
+ */
 public class ActivityMapper {
 
     public static Activity getFromResultSet(ResultSet resultSet) throws SQLException {

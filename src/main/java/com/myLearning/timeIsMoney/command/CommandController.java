@@ -6,7 +6,6 @@ import com.mylearning.timeismoney.command.mission.*;
 import com.mylearning.timeismoney.command.user.GetUserCommand;
 import com.mylearning.timeismoney.command.user.GetUserProfile;
 import com.mylearning.timeismoney.dao.DaoFactory;
-import com.mylearning.timeismoney.dao.impl.JdbcDaoFactory;
 import com.mylearning.timeismoney.service.ActivityService;
 import com.mylearning.timeismoney.service.MissionService;
 import com.mylearning.timeismoney.service.UserService;
@@ -17,25 +16,40 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controls path-command binding
+ * Return command by path
+ */
 public class CommandController {
-    
+    /**
+     * Logger for logging important information
+     */
     private final static Logger logger = LogManager.getLogger();
-
+    /**
+     * Map of requests with GET method
+     */
     private Map<String, Command> getCommands;
+    /**
+     * Map of requests with POST method
+     */
     private Map<String, Command> postCommands;
 
     private static CommandController commandController;
 
-    public static CommandController getInstance() {
+    public static CommandController getInstance(DaoFactory daoFactory) {
         if(commandController == null) {
-            commandController = new CommandController();
+            commandController = new CommandController(daoFactory);
             logger.info("Command controller created");
         }
         return commandController;
     }
 
-    private CommandController () {
-        DaoFactory daoFactory = JdbcDaoFactory.getInstance();
+    /**
+     * Binding commands to heir paths
+     * @param daoFactory
+     * daoFactory for services
+     */
+    private CommandController (DaoFactory daoFactory) {
         ActivityService activityService = new ActivityService(daoFactory);
         UserService userService = new UserService(daoFactory);
         MissionService missionService = new MissionService(daoFactory);
@@ -81,6 +95,12 @@ public class CommandController {
         postCommands.put("/mission/complete", new PostCompleteMissionCommand(missionService));
     }
 
+    /**
+     * return Command by request path from request
+     * @param request
+     * @return command
+     * @see com.mylearning.timeismoney.command
+     */
     public Command getCommand(HttpServletRequest request) {
         String path = request.getRequestURI().replace("/app", "");
 

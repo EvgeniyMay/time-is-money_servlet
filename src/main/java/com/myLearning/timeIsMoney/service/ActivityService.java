@@ -10,17 +10,29 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+/**
+ * class for all operation with activities
+ */
 public class ActivityService {
-
+    /**
+     * Logger for logging important information
+     */
     private final Logger logger = LogManager.getLogger();
 
+    /**
+     * Dao for dao creating
+     */
     private final DaoFactory daoFactory;
 
     public ActivityService(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
 
-
+    /**
+     * create new activity
+     * @param activity to create
+     * @return result of creating
+     */
     public boolean create(Activity activity) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.create(activity);
@@ -30,6 +42,13 @@ public class ActivityService {
         }
     }
 
+    /**
+     * get pageable list of activities
+     * @param page page number
+     * @param size max size of list
+     * @param isActive state of activities to find
+     * @return list of activities by all finding settings
+     */
     public List<Activity> findPageableByState(int page, int size, boolean isActive) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findPageableByState(page, size, isActive);
@@ -39,6 +58,10 @@ public class ActivityService {
         }
     }
 
+    /**
+     * find all active activities without all active missions
+     * @return list of active without all active missions
+     */
     public List<Activity> findActiveProxy() {
         try (ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findActiveProxy();
@@ -48,6 +71,11 @@ public class ActivityService {
         }
     }
 
+    /**
+     * get activity by id
+     * @param id of activity to find
+     * @return activity with id from param
+     */
     public Activity findById(int id) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.findById(id)
@@ -58,6 +86,11 @@ public class ActivityService {
         }
     }
 
+    /**
+     * update activity
+     * @param activity to update
+     * @return result of updating
+     */
     public boolean update(Activity activity) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.update(activity);
@@ -67,6 +100,11 @@ public class ActivityService {
         }
     }
 
+    /**
+     * change state of activity for archived
+     * @param id of activity to archived
+     * @return result of archiving
+     */
     public boolean archiveById(int id) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.updateStateById(id, false);
@@ -76,6 +114,11 @@ public class ActivityService {
         }
     }
 
+    /**
+     * change state of activity for active
+     * @param id of activity to activate
+     * @return result of activating
+     */
     public boolean activateById(int id) {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.updateStateById(id, true);
@@ -85,6 +128,9 @@ public class ActivityService {
         }
     }
 
+    /**
+     * @return count activities with active state
+     */
     public int getActiveCount() {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.getCountByState(true);
@@ -94,6 +140,9 @@ public class ActivityService {
         }
     }
 
+    /**
+     * @return count activities with archived state
+     */
     public int getArchivedCount() {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
             return activityDao.getCountByState(false);

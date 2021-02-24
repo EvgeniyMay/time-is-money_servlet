@@ -4,6 +4,10 @@ import com.mylearning.timeismoney.dao.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Jdbc realization of DaoFactory
+ * @see com.mylearning.timeismoney.dao.DaoFactory
+ */
 public class JdbcDaoFactory implements DaoFactory {
 
     private final static Logger logger = LogManager.getLogger();

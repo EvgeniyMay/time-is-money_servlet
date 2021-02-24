@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+/**
+ * work with Mission and ResultSet
+ */
 public class MissionMapper {
 
     public static Mission getFromResultSet(ResultSet resultSet) throws SQLException {

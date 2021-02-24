@@ -14,6 +14,10 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Jdbc realization of UserDao
+ * @see com.mylearning.timeismoney.dao.UserDao
+ */
 public class JdbcUserDao implements UserDao {
 
     private final static Logger logger = LogManager.getLogger();
@@ -69,25 +73,6 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public List<User> findAllProxy() {
-        List<User> proxyUsers = new ArrayList<>();
-
-        try(PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.all.proxy"));
-            ResultSet resultSet = ps.executeQuery()) {
-
-            while (resultSet.next()) {
-                User proxyUser = UserMapper.getProxyFromResultSet(resultSet);
-                proxyUsers.add(proxyUser);
-            }
-
-            return proxyUsers;
-        } catch (SQLException e) {
-            logger.warn("Can not find users");
-            throw new DaoException("Can not find users");
-        }
-    }
-
-    @Override
     public Optional<User> findById(int id) {
         Map<Integer, Activity> activityMap = new HashMap<>();
         User user = null;
@@ -127,44 +112,6 @@ public class JdbcUserDao implements UserDao {
         }
     }
 
-    @Override
-    public Optional<User> findByLogin(String login) {
-        Map<Integer, Activity> activityMap = new HashMap<>();
-        User user = null;
-
-        try (PreparedStatement ps = connection.prepareStatement(resourceBundle.getString("query.user.find.by.login"))) {
-            ps.setString(1, login);
-            ResultSet resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-                if(Objects.isNull(user)) {
-                    user = UserMapper.getFromResultSet(resultSet);
-                }
-
-                if(!Objects.isNull(resultSet.getString("mission_state"))) {
-                    Mission mission = MissionMapper.getFromResultSet(resultSet);
-
-                    int activityId = resultSet.getInt("activity_id");
-                    if(!activityMap.containsKey(activityId)) {
-                        Activity activity = ActivityMapper.getFromResultSet(resultSet);
-                        activityMap.put(activityId, activity);
-                    }
-
-                    Activity activity = activityMap.get(activityId);
-                    activity.getMissions().add(mission);
-
-                    mission.setUser(user);
-                    mission.setActivity(activity);
-
-                    user.getMissions().add(mission);
-                }
-            }
-            return Optional.ofNullable(user);
-        } catch (SQLException e) {
-            logger.warn("Can not find user");
-            throw new DaoException("Can not find user");
-        }
-    }
 
     @Override
     public Optional<User> findByLoginProxy(String login) {

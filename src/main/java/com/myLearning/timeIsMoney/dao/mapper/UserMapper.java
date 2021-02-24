@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * work with User and ResultSet
+ */
 public class UserMapper {
 
     public static User getFromResultSet(ResultSet resultSet) throws SQLException {

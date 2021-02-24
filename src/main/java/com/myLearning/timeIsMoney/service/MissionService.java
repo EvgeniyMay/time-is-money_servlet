@@ -15,10 +15,18 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+/**
+ * class for all operation with missions
+ */
 public class MissionService {
-
+    /**
+     * Logger for logging important information
+     */
     private final Logger logger = LogManager.getLogger();
 
+    /**
+     * Dao for dao creating
+     */
     public final DaoFactory daoFactory;
 
     public MissionService(DaoFactory daoFactory) {
@@ -26,7 +34,14 @@ public class MissionService {
         logger.info("Mission service created");
     }
 
-
+    /**
+     * get pageable list of missions
+     * @param page page number
+     * @param size max size of list
+     * @param state state of missions to find
+     * @param field field for sorting
+     * @return list of missions by all params settings
+     */
     public List<Mission> findPageable(int page, int size, MissionState state, MissionField field) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.findPageableSortedBy(page, size, state, field);
@@ -36,6 +51,11 @@ public class MissionService {
         }
     }
 
+    /**
+     * count of entities by state to get quantity of pages for pagination
+     * @param state state of missions count to find
+     * @return count of missions by state
+     */
     public int countByState(MissionState state) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.countByState(state);
@@ -45,6 +65,9 @@ public class MissionService {
         }
     }
 
+    /**
+     * @return all able users and missions
+     */
     public UsersAndActivities getUsersAndActivities() {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.getUsersAndActivities();
@@ -54,6 +77,11 @@ public class MissionService {
         }
     }
 
+    /**
+     * create mission
+     * @param mission to create
+     * @return result of creating
+     */
     public boolean create(Mission mission) {
         try (MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.create(mission);
@@ -63,6 +91,12 @@ public class MissionService {
         }
     }
 
+    /**
+     * update state of mission without checking
+     * @param mission mission to change
+     * @param state new mission state
+     * @return result of mission updating
+     */
     public boolean updateState(Mission mission, MissionState state) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             return missionDao.updateState(mission, state);
@@ -72,6 +106,12 @@ public class MissionService {
         }
     }
 
+    /**
+     * change mission state for PASSED by user
+     * @param user who's mission update
+     * @param mission to update state
+     * @return result of updating
+     */
     public boolean pass(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             if(MissionState.ACTIVE.equals(mission.getState())) {
@@ -84,6 +124,12 @@ public class MissionService {
         }
     }
 
+    /**
+     * delete mission with check of user owns mission
+     * @param user owner of mission to cancel
+     * @param mission mission to cancel
+     * @return result of updating
+     */
     public boolean cancel(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
             if(Role.ADMIN.equals(user.getRole())) {

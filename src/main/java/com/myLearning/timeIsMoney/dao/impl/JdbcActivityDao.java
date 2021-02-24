@@ -14,6 +14,10 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Jdbc realization of ActivityDao
+ * @see com.mylearning.timeismoney.dao.ActivityDao
+ */
 public class JdbcActivityDao implements ActivityDao {
 
     private final Logger logger = LogManager.getLogger();

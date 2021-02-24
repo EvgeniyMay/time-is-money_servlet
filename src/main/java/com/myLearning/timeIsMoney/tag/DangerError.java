@@ -5,8 +5,11 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.io.StringWriter;
 
+/**
+ * div block with alert and alert-danger classes
+ * and alert role
+ */
 public class DangerError extends SimpleTagSupport {
-
 
     StringWriter sw = new StringWriter();
     public void doTag() throws IOException, JspException {

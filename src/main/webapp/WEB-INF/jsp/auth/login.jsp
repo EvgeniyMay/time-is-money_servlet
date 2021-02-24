@@ -21,7 +21,7 @@
     <main class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-3 text-center">
-                <img class="my-5" src="${pageContext.request.contextPath}/img/logo.png" alt="logo" height="250">
+                <img class="my-5" src="${pageContext.request.contextPath}/img/login.png" alt="login imp" height="250">
                 <h2>
                     <fmt:message key="login.message" />
                 </h2>

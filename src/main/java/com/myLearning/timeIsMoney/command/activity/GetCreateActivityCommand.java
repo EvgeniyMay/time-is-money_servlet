@@ -4,7 +4,7 @@ import com.mylearning.timeismoney.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class GetActivityCreateCommand implements Command {
+public class GetCreateActivityCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {

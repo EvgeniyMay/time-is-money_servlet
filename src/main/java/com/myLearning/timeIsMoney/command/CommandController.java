@@ -4,7 +4,7 @@ import com.mylearning.timeismoney.command.activity.*;
 import com.mylearning.timeismoney.command.auth.*;
 import com.mylearning.timeismoney.command.mission.*;
 import com.mylearning.timeismoney.command.user.GetUserCommand;
-import com.mylearning.timeismoney.command.user.GetUserProfile;
+import com.mylearning.timeismoney.command.user.GetUserProfileCommand;
 import com.mylearning.timeismoney.dao.DaoFactory;
 import com.mylearning.timeismoney.service.ActivityService;
 import com.mylearning.timeismoney.service.MissionService;
@@ -59,13 +59,13 @@ public class CommandController {
 //        Activity
         getCommands.put("/activity/active", new GetActiveActivityCommand(activityService));
         getCommands.put("/activity/archived", new GetArchivedActivityCommand(activityService));
-        getCommands.put("/activity/add", new GetActivityCreateCommand());
+        getCommands.put("/activity/add", new GetCreateActivityCommand());
         getCommands.put("/activity/archive", new GetArchiveActivityCommand());
-        getCommands.put("/activity/edit", new GetActivityEditCommand(activityService));
+        getCommands.put("/activity/edit", new GetEditActivityCommand(activityService));
 
-        postCommands.put("/activity/add", new PostActivityCreateCommand(activityService));
+        postCommands.put("/activity/add", new PostCreateActivityCommand(activityService));
         postCommands.put("/activity/archive", new PostArchiveActivityCommand(activityService));
-        postCommands.put("/activity/edit", new PostActivityEditCommand(activityService));
+        postCommands.put("/activity/edit", new PostEditActivityCommand(activityService));
         postCommands.put("/activity/activate", new PostActivateActivityCommand(activityService));
 //        Auth
         getCommands.put("/registration", new GetRegistrationCommand());
@@ -77,7 +77,7 @@ public class CommandController {
         postCommands.put("/logout", new PostLogoutCommand());
 //        User
         getCommands.put("/user", new GetUserCommand(userService));
-        getCommands.put("/profile", new GetUserProfile(userService));
+        getCommands.put("/profile", new GetUserProfileCommand(userService));
 //        Mission
         getCommands.put("/mission/add", new GetCreateMissionCommand(missionService));
         getCommands.put("/mission/offer", new GetOfferMissionCommand(activityService));

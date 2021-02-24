@@ -8,11 +8,11 @@ import com.mylearning.timeismoney.util.ActivityValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
-public class PostActivityEditCommand implements Command {
+public class PostEditActivityCommand implements Command {
 
     private final ActivityService activityService;
 
-    public PostActivityEditCommand(ActivityService activityService) {
+    public PostEditActivityCommand(ActivityService activityService) {
         this.activityService = activityService;
     }
 

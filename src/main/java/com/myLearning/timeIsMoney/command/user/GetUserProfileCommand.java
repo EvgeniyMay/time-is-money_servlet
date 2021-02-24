@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GetUserProfile implements Command {
+public class GetUserProfileCommand implements Command {
 
     private final UserService userService;
-    public GetUserProfile(UserService userService) {
+    public GetUserProfileCommand(UserService userService) {
         this.userService = userService;
     }
 

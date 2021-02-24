@@ -6,11 +6,11 @@ import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class GetActivityEditCommand implements Command {
+public class GetEditActivityCommand implements Command {
 
     private final ActivityService activityService;
 
-    public GetActivityEditCommand(ActivityService activityService) {
+    public GetEditActivityCommand(ActivityService activityService) {
         this.activityService = activityService;
     }
 

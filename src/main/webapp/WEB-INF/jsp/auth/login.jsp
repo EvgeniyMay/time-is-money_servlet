@@ -26,9 +26,10 @@
                     <fmt:message key="login.message" />
                 </h2>
 
-                <c:if test="${requestScope.error != null}">
+                <c:if test="${requestScope.errorProperty != null}">
                     <tim:danger-error>
-                        ${requestScope.error}
+                        <fmt:message key="${requestScope.errorProperty}" />
+<%--                        ${requestScope.errorProperty}--%>
                     </tim:danger-error>
                 </c:if>
 

@@ -28,19 +28,19 @@ public class PostLoginCommand implements Command {
         String password = request.getParameter("password");
 
         if(String.valueOf(login).isEmpty() || String.valueOf(password).isEmpty()) {
-            request.setAttribute("error", "Please, fill all fields");
+            request.setAttribute("errorProperty", "input.error.empty.field");
             return "/WEB-INF/jsp/auth/login.jsp";
         }
 
         try {
              user = userService.findByLoginProxy(login);
         } catch (Exception e) {
-            request.setAttribute("error", "Such user does not exist");
+            request.setAttribute("errorProperty", "login.error.wrong.user");
             return "/WEB-INF/jsp/auth/login.jsp";
         }
 
         if(!user.getPassword().equals(DigestUtils.sha256Hex(password))) {
-            request.setAttribute("error", "Wrong login or password");
+            request.setAttribute("errorProperty", "login.error.wrong.user");
             return "/WEB-INF/jsp/auth/login.jsp";
         }
 
@@ -48,7 +48,7 @@ public class PostLoginCommand implements Command {
         ServletContext servletContext = request.getServletContext();
         List<Integer> authedUsers = (List<Integer>)servletContext.getAttribute("authedUsers");
         if(authedUsers.contains(user.getId())) {
-            request.setAttribute("error", "Such user authorized");
+            request.setAttribute("errorProperty", "login.error.auth.user");
             return "/WEB-INF/jsp/auth/login.jsp";
         }
 

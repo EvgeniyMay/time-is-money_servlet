@@ -25,7 +25,7 @@
                     </h2>
                     <c:if test="${sessionScope.authUser == null}">
                         <div class="col-auto">
-                            <a class="btn btn-light btn-outline-dark" href=${pageContext.request.contextPath}/app/login"/>
+                            <a class="btn btn-light btn-outline-dark" href="${pageContext.request.contextPath}/app/login">
                                 <fmt:message key="nav.account.login" />
                             </a>
                         </div>

@@ -11,7 +11,8 @@
     <title>Offered Missions</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -21,6 +22,9 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-8">
+                <h2 class="my-3">
+                    <fmt:message key="missions.offered" />
+                </h2>
 
                 <c:if test="${requestScope.error != null}">
                     <tim:danger-error>
@@ -34,10 +38,10 @@
                     </div>
                 </c:if>
 
-                <h2 class="my-3">Offered missions</h2>
-
                 <c:if test="${requestScope.page_count == 0}">
-                    <div class="alert alert-dark my-3" role="alert">No offered missions</div>
+                    <div class="alert alert-dark my-3" role="alert">
+                        <fmt:message key="missions.offered.absent" />
+                    </div>
                 </c:if>
 
                 <c:if test="${requestScope.page_count > 0}">
@@ -58,25 +62,29 @@
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'user_id'}">
-                                        <input class="btn btn-dark" type="submit" value="${'User'}">
+                                        <fmt:message key="mission.table.user" var="loginColumn" />
+                                        <input class="btn btn-dark" type="submit" value="${loginColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'activity_id'}">
-                                        <input class="btn btn-dark" type="submit" value="${'Activity'}">
+                                        <fmt:message key="mission.table.activity" var="activityColumn" />
+                                        <input class="btn btn-dark" type="submit" value="${activityColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'start_time'}">
-                                        <input class="btn btn-dark" type="submit" value="${'Start Time'}">
+                                        <fmt:message key="mission.table.time.start" var="startTimeColumn" />
+                                        <input class="btn btn-dark" type="submit" value="${startTimeColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'end_time'}">
-                                        <input class="btn btn-dark" type="submit" value="${'End Time'}">
+                                        <fmt:message key="mission.table.time.end" var="endTimeColumn" />
+                                        <input class="btn btn-dark" type="submit" value="${endTimeColumn}">
                                     </form>
                                 </th>
                                 <th></th>
@@ -98,13 +106,15 @@
                                 <td>
                                     <form class="no-padding" action="${pageContext.request.contextPath}/app/mission/accept" method="POST">
                                         <input type="hidden" name="missionId" value="${mission.id}">
-                                        <input class="btn btn-light" type="submit" value="Accept">
+                                        <fmt:message key="mission.action.accept" var="acceptMissionButton" />
+                                        <input class="btn btn-light" type="submit" value="${acceptMissionButton}">
                                     </form>
                                 </td>
                                 <td>
                                     <form class="no-padding" action="${pageContext.request.contextPath}/app/mission/cancel" method="POST">
                                         <input type="hidden" name="missionId" value="${mission.id}">
-                                        <input class="btn btn-light" type="submit" value="Deny">
+                                        <fmt:message key="mission.action.deny" var="denyMissionButton" />
+                                        <input class="btn btn-light" type="submit" value="${denyMissionButton}">
                                     </form>
                                 </td>
                             </tr>
@@ -114,6 +124,7 @@
             </div>
         </div>
     </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

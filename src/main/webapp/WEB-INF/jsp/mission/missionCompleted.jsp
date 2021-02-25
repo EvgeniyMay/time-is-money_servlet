@@ -21,10 +21,14 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h2 class="my-3">Completed missions:</h2>
+                <h2 class="my-3">
+                    <fmt:message key="missions.completed" />
+                </h2>
 
                 <c:if test="${requestScope.page_count == 0}">
-                    <div class="alert alert-dark my-3" role="alert">No completed missions</div>
+                    <div class="alert alert-dark my-3" role="alert">
+                        <fmt:message key="missions.completed.absent" />
+                    </div>
                 </c:if>
 
                 <c:if test="${requestScope.page_count > 0}">
@@ -45,25 +49,29 @@
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'user_id'}">
-                                        <input class="btn btn-dark" type="submit"  value="${'User'}">
+                                        <fmt:message key="mission.table.user" var="loginColumn" />
+                                        <input class="btn btn-dark" type="submit"  value="${loginColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'activity_id'}">
-                                        <input class="btn btn-dark" type="submit" value="${'Activity'}">
+                                        <fmt:message key="mission.table.activity" var="activityColumn" />
+                                        <input class="btn btn-dark" type="submit" value="${activityColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'start_time'}">
-                                        <input class="btn btn-dark" type="submit" value="${'Start Time'}">
+                                        <fmt:message key="mission.table.time.start" var="startTimeColumn" />
+                                        <input class="btn btn-dark" type="submit" value="${startTimeColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'end_time'}">
-                                        <input class="btn btn-dark" type="submit" value="${'End Time'}">
+                                        <fmt:message key="mission.table.time.end" var="endTimeColumn" />
+                                        <input class="btn btn-dark" type="submit" value="${endTimeColumn}">
                                     </form>
                                 </th>
                             </tr>
@@ -89,6 +97,7 @@
             </div>
         </div>
     </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

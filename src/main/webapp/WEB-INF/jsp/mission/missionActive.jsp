@@ -10,7 +10,8 @@
     <title>Active missions</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -20,10 +21,14 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h2 class="my-3">Active missions:</h2>
+                <h2 class="my-3">
+                    <fmt:message key="missions.active" />
+                </h2>
 
                 <c:if test="${requestScope.page_count == 0}">
-                    <div class="alert alert-dark my-3" role="alert">No active missions</div>
+                    <div class="alert alert-dark my-3" role="alert">
+                        <fmt:message key="missions.active.absent" />
+                    </div>
                 </c:if>
 
                 <c:if test="${requestScope.page_count > 0}">
@@ -44,25 +49,29 @@
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'user_id'}">
-                                        <input type="submit" class="btn btn-dark" value="${'User'}">
+                                        <fmt:message key="mission.table.user" var="loginColumn" />
+                                        <input type="submit" class="btn btn-dark" value="${loginColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'activity_id'}">
-                                        <input type="submit" class="btn btn-dark" value="${'Activity'}">
+                                        <fmt:message key="mission.table.activity" var="activityColumn" />
+                                        <input type="submit" class="btn btn-dark" value="${activityColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'start_time'}">
-                                        <input type="submit" class="btn btn-dark" value="${'Start Time'}">
+                                        <fmt:message key="mission.table.time.start" var="startTimeColumn" />
+                                        <input type="submit" class="btn btn-dark" value="${startTimeColumn}">
                                     </form>
                                 </th>
                                 <th>
                                     <form class="no-padding">
                                         <input type="hidden" name="sort_field" value="${'end_time'}">
-                                        <input type="submit" class="btn btn-dark" value="${'End Time'}">
+                                        <fmt:message key="mission.table.time.end" var="endTimeColumn" />
+                                        <input type="submit" class="btn btn-dark" value="${endTimeColumn}">
                                     </form>
                                 </th>
                             </tr>
@@ -86,6 +95,7 @@
             </div>
         </div>
     </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

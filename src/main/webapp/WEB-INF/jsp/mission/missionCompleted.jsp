@@ -75,11 +75,11 @@
                                     <td>${mission.activity.name}</td>
                                     <td>
                                         <fmt:parseDate value="${mission.startTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartTime" type="both"/>
-                                        <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${parsedStartTime}"/>
+                                        <fmt:formatDate pattern="MM/dd | HH:mm" value="${parsedStartTime}"/>
                                     </td>
                                     <td>
                                         <fmt:parseDate value="${mission.endTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndTime" type="both"/>
-                                        <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${parsedEndTime}"/>
+                                        <fmt:formatDate pattern="MM/dd | HH:mm" value="${parsedEndTime}"/>
                                     </td>
                                 </tr>
                             </c:forEach>

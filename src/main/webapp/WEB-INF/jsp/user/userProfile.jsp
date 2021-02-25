@@ -78,8 +78,14 @@
                     <c:forEach items="${requestScope.activeMissions}" var="mission">
                         <tr>
                             <td>${mission.activity.name}</td>
-                            <td>${mission.startTime}</td>
-                            <td>${mission.endTime}</td>
+                            <td>
+                                <fmt:parseDate value="${mission.startTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartTime" type="both"/>
+                                <fmt:formatDate pattern="MM/dd | HH:mm" value="${parsedStartTime}"/>
+                            </td>
+                            <td>
+                                <fmt:parseDate value="${mission.endTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndTime" type="both"/>
+                                <fmt:formatDate pattern="MM/dd | HH:mm" value="${parsedEndTime}"/>
+                            </td>
                             <td>
                                 <form class="no-padding" action="${pageContext.request.contextPath}/app/mission/pass" method="POST">
                                     <input type="hidden" name="missionId" value="${mission.id}">
@@ -126,8 +132,14 @@
                         <c:forEach items="${requestScope.offeredMissions}" var="mission">
                             <tr>
                                 <td>${mission.activity.name}</td>
-                                <td>${mission.startTime}</td>
-                                <td>${mission.endTime}</td>
+                                <td>
+                                    <fmt:parseDate value="${mission.startTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartTime" type="both"/>
+                                    <fmt:formatDate pattern="MM/dd | HH:mm" value="${parsedStartTime}"/>
+                                </td>
+                                <td>
+                                    <fmt:parseDate value="${mission.endTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndTime" type="both"/>
+                                    <fmt:formatDate pattern="MM/dd | HH:mm" value="${parsedEndTime}"/>
+                                </td>
                                 <td>
                                     <form class="no-padding" action="<c:url value="/app/mission/cancel"/>" method="POST">
                                         <input type="hidden" name="missionId" value="${mission.id}">
@@ -173,8 +185,14 @@
                         <c:forEach items="${requestScope.passedMissions}" var="mission">
                             <tr>
                                 <td>${mission.activity.name}</td>
-                                <td>${mission.startTime}</td>
-                                <td>${mission.endTime}</td>
+                                <td>
+                                    <fmt:parseDate value="${mission.startTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedStartTime" type="both"/>
+                                    <fmt:formatDate pattern="MM/dd | HH:mm" value="${parsedStartTime}"/>
+                                </td>
+                                <td>
+                                    <fmt:parseDate value="${mission.endTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedEndTime" type="both"/>
+                                    <fmt:formatDate pattern="MM/dd | HH:mm" value="${parsedEndTime}"/>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>

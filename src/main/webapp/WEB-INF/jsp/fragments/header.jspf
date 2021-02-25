@@ -13,20 +13,30 @@
         <div class="col-sm-auto">
             <div class="row align-items-center justify-content-end">
                 <div class="col-auto">
-                    <a class="text-white" href="?lang=en"><fmt:message key="language.en" /></a>
-                    <a class="text-white" href="?lang=ru"><fmt:message key="language.ru" /></a>
+                    <a class="text-white" href="?lang=en">
+                        <fmt:message key="language.en" />
+                    </a>
+                    <a class="text-white" href="?lang=ru">
+                        <fmt:message key="language.ru" />
+                    </a>
                 </div>
                  <c:if test="${sessionScope.authUser == null}">
                     <div class="col-auto">
-                        <a class="btn btn-light btn-outline-dark" href="<c:url value="/app/login"/>"><fmt:message key="nav.account.login" /></a>
+                        <a class="btn btn-light btn-outline-dark" href="${pageContext.request.contextPath}/app/login">
+                            <fmt:message key="nav.account.login" />
+                        </a>
                     </div>
                 </c:if>
                 <c:if test="${sessionScope.authUser != null}">
                     <div class="col-auto">
-                        <a class="btn btn-dark" href="<c:url value="/app/profile"/>"><fmt:message key="nav.account.profile" /></a>
+                        <a class="btn btn-dark" href="${pageContext.request.contextPath}/app/profile">
+                            <fmt:message key="nav.account.profile" />
+                        </a>
                     </div>
                     <div class="col-auto">
-                        <a class="btn btn-light" href="<c:url value="/app/logout"/>"><fmt:message key="nav.account.logout" /></a>
+                        <a class="btn btn-light" href="${pageContext.request.contextPath}/app/logout">
+                            <fmt:message key="nav.account.logout" />
+                        </a>
                     </div>
                 </c:if>
             </div>

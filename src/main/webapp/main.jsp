@@ -23,11 +23,20 @@
                     <h2 class="my-4">
                         <fmt:message key="text.welcome" />
                     </h2>
-                    <div class="d-grid gap-2">
-                        <a class="btn btn-dark" href="<c:url value="/app/login"/>">
-                            <fmt:message key="nav.account.login" />
-                        </a>
-                    </div>
+                    <c:if test="${sessionScope.authUser == null}">
+                        <div class="col-auto">
+                            <a class="btn btn-light btn-outline-dark" href=${pageContext.request.contextPath}/app/login"/>
+                                <fmt:message key="nav.account.login" />
+                            </a>
+                        </div>
+                    </c:if>
+                    <c:if test="${sessionScope.authUser != null}">
+                        <div class="col-auto">
+                            <a class="btn btn-dark" href="${pageContext.request.contextPath}/app/profile">
+                                <fmt:message key="nav.account.profile" />
+                            </a>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>

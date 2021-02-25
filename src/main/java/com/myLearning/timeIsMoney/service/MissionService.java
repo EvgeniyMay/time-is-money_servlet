@@ -114,10 +114,8 @@ public class MissionService {
      */
     public boolean pass(User user, Mission mission) {
         try(MissionDao missionDao = daoFactory.createMissionDao()) {
-            if(MissionState.ACTIVE.equals(mission.getState())) {
-                missionDao.userUpdateState(user, mission, MissionState.PASSED);
-            }
-            return  false;
+            return missionDao.userUpdateState(user, mission, MissionState.PASSED);
+
         } catch (DaoException e) {
             logger.warn("Pass error");
             throw new ServiceException("Pass error", e);

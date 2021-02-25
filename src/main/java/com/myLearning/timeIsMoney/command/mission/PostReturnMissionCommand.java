@@ -32,6 +32,6 @@ public class PostReturnMissionCommand implements Command {
             return "/WEB-INF/jsp/mission/missionPassed.jsp";
         }
 
-        return "redirect:" + request.getHeader("referer");
+        return "/WEB-INF/jsp/mission/missionPassed.jsp";
     }
 }

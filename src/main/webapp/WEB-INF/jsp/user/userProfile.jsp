@@ -81,7 +81,7 @@
                             <td>${mission.startTime}</td>
                             <td>${mission.endTime}</td>
                             <td>
-                                <form class="no-padding" action="<c:url value="/app/mission/pass"/>" method="POST">
+                                <form class="no-padding" action="${pageContext.request.contextPath}/app/mission/pass" method="POST">
                                     <input type="hidden" name="missionId" value="${mission.id}">
                                     <fmt:message key="profile.action.mission.pass" var="actionPass"/>
                                     <input class="btn btn-light" type="submit" value="${actionPass}">

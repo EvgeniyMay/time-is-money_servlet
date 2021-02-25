@@ -28,11 +28,11 @@ public class CommandController {
     /**
      * Map of requests with GET method
      */
-    private Map<String, Command> getCommands;
+    private final Map<String, Command> getCommands;
     /**
      * Map of requests with POST method
      */
-    private Map<String, Command> postCommands;
+    private final Map<String, Command> postCommands;
 
     private static CommandController commandController;
 

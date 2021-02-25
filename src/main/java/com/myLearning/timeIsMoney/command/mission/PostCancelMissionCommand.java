@@ -32,7 +32,8 @@ public class PostCancelMissionCommand implements Command {
 
         if(!canceled) {
             request.setAttribute("addResult", "Mission is not actual now");
-            PageableMissionUtil.fillPageableRequest(request, MissionState.OFFERED, missionService);
+            PageableMissionUtil.fillPageableRequest(request,
+                    MissionState.OFFERED, missionService);
 
             return Role.ADMIN.equals(user.getRole()) ?
                     "/WEB-INF/jsp/mission/missionOffered.jsp"

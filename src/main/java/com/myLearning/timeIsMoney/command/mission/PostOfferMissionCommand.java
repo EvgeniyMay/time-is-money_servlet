@@ -36,7 +36,8 @@ public class PostOfferMissionCommand implements Command {
                     .endTime(HtmlDataConverter.parseToLocalDateTime(request.getParameter("endTime")))
                     .build();
         } catch (DateTimeParseException | NumberFormatException e) {
-            request.setAttribute("errors", Collections.singletonList("Please, fill all fields"));
+            request.setAttribute("errors",
+                    Collections.singletonList("Please, fill all fields"));
             request.setAttribute("activities", missionService.getUsersAndActivities().getActivities());
 
             return "/WEB-INF/jsp/mission/missionOffer.jsp";

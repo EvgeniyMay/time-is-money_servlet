@@ -38,14 +38,16 @@ public class PostCreateMissionCommand implements Command {
                     .build();
         } catch (DateTimeParseException | NumberFormatException e) {
             request.setAttribute("errors", Collections.singletonList("Please, fill all fields"));
-            request.setAttribute("usersAndActivities", missionService.getUsersAndActivities());
+            request.setAttribute("usersAndActivities",
+                    missionService.getUsersAndActivities());
 
             return "/WEB-INF/jsp/mission/missionCreate.jsp";
         }
 
         if(!MissionValidator.getErrors(mission).isEmpty()) {
             request.setAttribute("errors", MissionValidator.getErrors(mission));
-            request.setAttribute("usersAndActivities", missionService.getUsersAndActivities());
+            request.setAttribute("usersAndActivities",
+                    missionService.getUsersAndActivities());
 
             return "/WEB-INF/jsp/mission/missionCreate.jsp";
         }

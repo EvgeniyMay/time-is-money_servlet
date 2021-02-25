@@ -28,7 +28,8 @@ public class PostCompleteMissionCommand implements Command {
             missionService.updateState(mission, MissionState.COMPLETED);
         } catch (Exception e) {
             request.setAttribute("error", "Mission is not actual now");
-            PageableMissionUtil.fillPageableRequest(request, MissionState.OFFERED, missionService);
+            PageableMissionUtil.fillPageableRequest(request,
+                    MissionState.OFFERED, missionService);
 
             return "/WEB-INF/jsp/mission/missionOffered.jsp";
         }

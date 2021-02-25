@@ -18,7 +18,8 @@ public class GetOfferMissionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("activities", activityService.findActiveProxy());
+        request.setAttribute("activities",
+                activityService.findActiveProxy());
 
         return "/WEB-INF/jsp/mission/missionOffer.jsp";
     }

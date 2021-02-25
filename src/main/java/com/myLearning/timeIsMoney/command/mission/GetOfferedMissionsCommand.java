@@ -23,7 +23,8 @@ public class GetOfferedMissionsCommand implements Command {
          * fill page by mission state
          * @see com.mylearning.timeismoney.command.mission.PageableMissionUtil
          */
-        PageableMissionUtil.fillPageableRequest(request, MissionState.OFFERED, missionService);
+        PageableMissionUtil.fillPageableRequest(request,
+                MissionState.OFFERED, missionService);
 
         return "/WEB-INF/jsp/mission/missionOffered.jsp";
     }

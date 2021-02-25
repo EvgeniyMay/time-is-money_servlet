@@ -5,6 +5,7 @@ import com.mylearning.timeismoney.dao.DaoFactory;
 import com.mylearning.timeismoney.entity.Activity;
 import com.mylearning.timeismoney.exception.DaoException;
 import com.mylearning.timeismoney.exception.ServiceException;
+import com.mylearning.timeismoney.exception.ServiceLogicException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,9 +34,15 @@ public class ActivityService {
      * @param activity to create
      * @return result of creating
      */
-    public boolean create(Activity activity) {
+    public boolean create(Activity activity) throws ServiceLogicException {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.create(activity);
+            boolean created = activityDao.create(activity);
+
+            if(!created) {
+                throw new ServiceLogicException("Creation error");
+            }
+
+            return true;
         } catch (DaoException e) {
             logger.warn("Creation error");
             throw new ServiceException("Creation error", e);
@@ -91,9 +98,15 @@ public class ActivityService {
      * @param activity to update
      * @return result of updating
      */
-    public boolean update(Activity activity) {
+    public boolean update(Activity activity) throws ServiceLogicException {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.update(activity);
+            boolean updated = activityDao.update(activity);
+
+            if(!updated) {
+                throw new ServiceLogicException("Update error");
+            }
+
+            return true;
         } catch (DaoException e) {
             logger.warn("Update error");
             throw new ServiceException("Update error", e);
@@ -105,9 +118,15 @@ public class ActivityService {
      * @param id of activity to archived
      * @return result of archiving
      */
-    public boolean archiveById(int id) {
+    public boolean archiveById(int id) throws ServiceLogicException {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.updateStateById(id, false);
+            boolean archived = activityDao.updateStateById(id, false);
+
+            if(!archived) {
+                throw new ServiceLogicException("Archive error");
+            }
+
+            return true;
         } catch (DaoException e) {
             logger.warn("Archive error");
             throw new ServiceException("Archive error", e);
@@ -119,9 +138,15 @@ public class ActivityService {
      * @param id of activity to activate
      * @return result of activating
      */
-    public boolean activateById(int id) {
+    public boolean activateById(int id) throws ServiceLogicException {
         try(ActivityDao activityDao = daoFactory.createActivityDao()) {
-            return activityDao.updateStateById(id, true);
+            boolean activated = activityDao.updateStateById(id, true);
+
+            if(!activated) {
+                throw new ServiceLogicException("Arhive arror");
+            }
+
+            return true;
         } catch (DaoException e) {
             logger.warn("Active error");
             throw new ServiceException("Active error", e);

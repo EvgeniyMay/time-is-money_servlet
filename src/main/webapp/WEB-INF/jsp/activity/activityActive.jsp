@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tim" uri="time-is-money" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="localization.messages"/>
@@ -22,6 +23,12 @@
         <div class="row justify-content-center">
             <div class="col-8">
                 <h2 class="my-3">Active Activities</h2>
+
+                <c:if test="${requestScope.error != null}">
+                    <tim:danger-error>
+                        <fmt:message key="${requestScope.error}" />
+                    </tim:danger-error>
+                </c:if>
 
                 <c:if test="${requestScope.page_count == 0}">
                     <div class="alert alert-dark my-3" role="alert">No active activities</div>

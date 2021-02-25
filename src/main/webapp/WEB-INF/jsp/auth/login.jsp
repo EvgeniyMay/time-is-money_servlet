@@ -29,7 +29,6 @@
                 <c:if test="${requestScope.errorProperty != null}">
                     <tim:danger-error>
                         <fmt:message key="${requestScope.errorProperty}" />
-<%--                        ${requestScope.errorProperty}--%>
                     </tim:danger-error>
                 </c:if>
 

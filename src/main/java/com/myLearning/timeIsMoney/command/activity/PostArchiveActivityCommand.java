@@ -1,6 +1,7 @@
 package com.mylearning.timeismoney.command.activity;
 
 import com.mylearning.timeismoney.command.Command;
+import com.mylearning.timeismoney.exception.ServiceLogicException;
 import com.mylearning.timeismoney.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +21,17 @@ public class PostArchiveActivityCommand implements Command {
     public String execute(HttpServletRequest request) {
         try {
             activityService.archiveById(Integer.parseInt(request.getParameter("id")));
-        } catch (Exception e) {
-            // ToDo | Log
+        } catch (ServiceLogicException e) {
+            // ToDo | Localize
+            /**
+             * if something went wrong
+             * we just add error message
+             * and delegate get command executing
+             */
+            request.setAttribute("error", "Archive error");
+
+            return new GetActiveActivityCommand(activityService)
+                    .execute(request);
         }
 
         return "redirect:/app/activity/active";

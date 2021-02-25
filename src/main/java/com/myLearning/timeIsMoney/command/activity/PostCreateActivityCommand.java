@@ -2,6 +2,7 @@ package com.mylearning.timeismoney.command.activity;
 
 import com.mylearning.timeismoney.command.Command;
 import com.mylearning.timeismoney.entity.Activity;
+import com.mylearning.timeismoney.exception.ServiceLogicException;
 import com.mylearning.timeismoney.service.ActivityService;
 import com.mylearning.timeismoney.util.ActivityValidator;
 
@@ -33,9 +34,9 @@ public class PostCreateActivityCommand implements Command {
 
         try {
             activityService.create(activity);
-        } catch (Exception e) {
+        } catch (ServiceLogicException e) {
             //ToDo | Localization
-            request.setAttribute("errors", Arrays.asList("Such activity already exists"));
+            request.setAttribute("errors", Arrays.asList("Activity creation error"));
             return "/WEB-INF/jsp/activity/activityAdd.jsp";
         }
 

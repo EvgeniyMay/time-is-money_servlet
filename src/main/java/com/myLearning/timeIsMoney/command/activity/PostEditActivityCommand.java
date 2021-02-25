@@ -2,6 +2,7 @@ package com.mylearning.timeismoney.command.activity;
 
 import com.mylearning.timeismoney.command.Command;
 import com.mylearning.timeismoney.entity.Activity;
+import com.mylearning.timeismoney.exception.ServiceLogicException;
 import com.mylearning.timeismoney.service.ActivityService;
 import com.mylearning.timeismoney.util.ActivityValidator;
 
@@ -37,11 +38,11 @@ public class PostEditActivityCommand implements Command {
 
         try {
             activityService.update(activity);
-        } catch (Exception e) {
+        } catch (ServiceLogicException e) {
             request.setAttribute("activity",(activity));
 
             //ToDo | Localization
-            request.setAttribute("errors", Arrays.asList("Such activity already exists"));
+            request.setAttribute("errors", Arrays.asList("Update error"));
             return "/WEB-INF/jsp/activity/activityEdit.jsp";
         }
         

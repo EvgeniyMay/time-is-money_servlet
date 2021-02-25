@@ -5,6 +5,7 @@ import com.mylearning.timeismoney.dao.DaoFactory;
 import com.mylearning.timeismoney.dao.impl.JdbcActivityDao;
 import com.mylearning.timeismoney.dao.impl.JdbcDaoFactory;
 import com.mylearning.timeismoney.entity.Activity;
+import com.mylearning.timeismoney.exception.ServiceLogicException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -34,7 +35,13 @@ public class ActivityServiceTest {
 
 
         Activity activity = new Activity();
-        boolean creationResult = activityService.create(activity);
+        boolean creationResult = false;
+
+        try {
+            creationResult = activityService.create(activity);
+        } catch (ServiceLogicException e) {
+            e.printStackTrace();
+        }
 
         assertTrue(creationResult);
     }
@@ -85,7 +92,13 @@ public class ActivityServiceTest {
         Mockito.when(mockActivityDao.updateStateById(0, false))
                 .thenReturn(true);
 
-        boolean result = activityService.archiveById(0);
+        boolean result = false;
+
+        try {
+            result = activityService.archiveById(0);
+        } catch (ServiceLogicException e) {
+            e.printStackTrace();
+        }
 
         assertTrue(result);
     }
@@ -95,7 +108,13 @@ public class ActivityServiceTest {
         Mockito.when(mockActivityDao.updateStateById(0, true))
                 .thenReturn(true);
 
-        boolean result = activityService.activateById(0);
+        boolean result = false;
+
+        try {
+            result = activityService.activateById(0);
+        } catch (ServiceLogicException e) {
+            e.printStackTrace();
+        }
 
         assertTrue(result);
     }
@@ -128,7 +147,13 @@ public class ActivityServiceTest {
                 .thenReturn(true);
 
         activity.setId(1);
-        boolean updateResult = activityService.update(activity);
+        boolean updateResult = false;
+
+        try {
+            updateResult = activityService.update(activity);
+        } catch (ServiceLogicException e) {
+            e.printStackTrace();
+        }
 
         assertTrue(updateResult);
     }

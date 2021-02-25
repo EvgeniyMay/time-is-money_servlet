@@ -23,6 +23,12 @@ public class PostActivateActivityCommand implements Command {
             activityService.activateById(Integer.parseInt(request.getParameter("id")));
         } catch (ServiceLogicException e) {
             // ToDo | Log
+            // ToDo | Localize
+            /**
+             * if something went wrong
+             * we just add error message
+             * and delegate get command executing
+             */
             request.setAttribute("error", "Activate error");
 
             return new GetArchivedActivityCommand(activityService)

@@ -20,7 +20,9 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <h2 class="my-3">New activity</h2>
+                <h2 class="my-3">
+                    <fmt:message key="activity.new.header" />
+                </h2>
 
                 <c:forEach items="${requestScope.errors}" var="error">
                     <div class="alert alert-danger my-3" role="alert">${error}</div>
@@ -28,20 +30,26 @@
 
                 <form action="<c:url value="/app/activity/add"/>" method="POST">
                     <div class="my-3">
-                        <label for="name">Name</label>
+                        <label for="name">
+                            <fmt:message key="activity.table.name" />
+                        </label>
                         <input class="form-control" type="text" name="name" id="name">
                     </div>
                     <div class="my-3">
-                        <label for="description">Description</label>
+                        <label for="description">
+                            <fmt:message key="activity.table.description" />
+                        </label>
                         <input class="form-control" type="text" name="description" id="description">
                     </div>
                     <div class="d-grid gap-2 mt-3">
-                        <button class="btn btn-dark" type="submit">Create</button>
+                        <fmt:message key="activity.action.create" var="createActivity" />
+                        <button class="btn btn-dark" type="submit">${createActivity}</button>
                     </div>
                 </form>
             </div>
         </div>
     </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

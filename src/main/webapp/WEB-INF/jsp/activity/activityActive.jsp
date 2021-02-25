@@ -22,7 +22,9 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h2 class="my-3">Active Activities</h2>
+                <h2 class="my-3">
+                    <fmt:message key="activity.activities.active" />
+                </h2>
 
                 <c:if test="${requestScope.error != null}">
                     <tim:danger-error>
@@ -31,7 +33,9 @@
                 </c:if>
 
                 <c:if test="${requestScope.page_count == 0}">
-                    <div class="alert alert-dark my-3" role="alert">No active activities</div>
+                    <div class="alert alert-dark my-3" role="alert">
+                        <fmt:message key="activity.activities.active.absent" />
+                    </div>
                 </c:if>
 
                 <c:if test="${requestScope.page_count > 0}">
@@ -48,9 +52,9 @@
                     <table class="table table-dark table-striped">
                         <thead>
                             <tr>
-                                <th>Name:</th>
-                                <th>Description:</th>
-                                <th>Active users:</th>
+                                <th><fmt:message key="activity.table.name" /></th>
+                                <th><fmt:message key="activity.table.description" /></th>
+                                <th><fmt:message key="activity.table.missions" /></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -65,13 +69,15 @@
                                         <form class="no-padding" action="<c:url value="/app/activity/archive"/>" method="GET">
                                             <input type="hidden" name="id" value="${activity.id}">
                                             <input type="hidden" name="name" value="${activity.name}">
-                                            <input class="btn btn-outline-light" type="submit" value="Archive">
+                                            <fmt:message key="activity.action.archive" var="archiveActivity" />
+                                            <input class="btn btn-outline-light" type="submit" value="${archiveActivity}">
                                         </form>
                                     </td>
                                     <td>
                                         <form class="no-padding" action="${pageContext.request.contextPath}/app/activity/edit" method="GET">
                                             <input type="hidden" name="id" value="${activity.id}">
-                                            <input class="btn btn-outline-light" type="submit" value="Edit">
+                                            <fmt:message key="activity.action.edit" var="editActivity" />
+                                            <input class="btn btn-outline-light" type="submit" value="${editActivity}">
                                         </form>
                                     </td>
                                 </tr>
@@ -82,6 +88,7 @@
             </div>
         </div>
     </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

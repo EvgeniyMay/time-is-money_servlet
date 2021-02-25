@@ -20,7 +20,9 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <h2 class="my-3">New activity form</h2>
+                <h2 class="my-3">
+                    <fmt:message key="activity.edit.header" />
+                </h2>
 
                 <c:forEach items="${requestScope.errors}" var="error">
                     <div class="alert alert-danger my-3" role="alert">${error}</div>
@@ -29,15 +31,22 @@
                 <form action="<c:url value="/app/activity/edit"/>" method="post">
                     <input type="hidden" name="id" value="${requestScope.activity.id}">
                     <div class="my-3">
-                        <label for="name">Name</label>
-                        <input class="form-control" type="text" name="name" value="${requestScope.activity.name}" id="name">
+                        <label for="name">
+                            <fmt:message key="activity.table.name" />
+                        </label>
+                        <input class="form-control" type="text" name="name"
+                               value="${requestScope.activity.name}" id="name">
                     </div>
                     <div class="my-3">
-                        <label for="description">Description</label>
-                        <input class="form-control" type="text" name="description" value="${requestScope.activity.description}" id="description">
+                        <label for="description">
+                            <fmt:message key="activity.table.description" />
+                        </label>
+                        <input class="form-control" type="text" name="description"
+                               value="${requestScope.activity.description}" id="description">
                     </div>
                     <div class="d-grid gap-2 mt-3">
-                        <button class="btn btn-dark" type="submit">Edit</button>
+                        <fmt:message key="activity.action.edit" var="editActivity" />
+                        <button class="btn btn-dark" type="submit">${editActivity}</button>
                     </div>
                 </form>
             </div>

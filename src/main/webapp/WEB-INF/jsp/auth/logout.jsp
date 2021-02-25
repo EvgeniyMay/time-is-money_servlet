@@ -16,30 +16,28 @@
     <header>
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
-    <main>
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-3 text-center">
-                    <h2>
-                        <fmt:message key="logout.message" />
-                    </h2>
-                    <div class="row">
-                        <div class="col-6">
-                            <form action="<c:url value="/app/logout"/>" method="POST">
-                                <div class="d-grid gap-2">
-                                    <fmt:message key="logout.confirm" var="confirmLogout" />
-                                    <button class="btn btn-dark">${confirmLogout}</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-6">
-                            <form action="<c:url value="/app/profile"/>" method="GET">
-                                <div class="d-grid gap-2">
-                                    <fmt:message key="logout.cancel" var="cancelLogout" />
-                                    <button class="btn btn-dark">${cancelLogout}</button>
-                                </div>
-                            </form>
-                        </div>
+    <main class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-3 text-center">
+                <h2>
+                    <fmt:message key="logout.message" />
+                </h2>
+                <div class="row">
+                    <div class="col-6">
+                        <form action="<c:url value="/app/logout"/>" method="POST">
+                            <div class="d-grid gap-2">
+                                <fmt:message key="logout.confirm" var="confirmLogout" />
+                                <button class="btn btn-dark">${confirmLogout}</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <form action="<c:url value="/app/profile"/>" method="GET">
+                            <div class="d-grid gap-2">
+                                <fmt:message key="logout.cancel" var="cancelLogout" />
+                                <button class="btn btn-dark">${cancelLogout}</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

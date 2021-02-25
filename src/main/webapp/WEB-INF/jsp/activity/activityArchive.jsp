@@ -18,17 +18,29 @@
         <%@include file="/WEB-INF/jsp/fragments/header.jspf"%>
     </header>
     <main class="container">
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <h2 class="my-3">Archive activity page</h2>
-                <p>Are you sure you want to archive <span><b>${requestScope.name}</b></span> ?</p>
-                <form action="<c:url value="/app/activity/archive"/>" method="POST">
-                    <input type="hidden" name="id" value="${requestScope.id}">
-                    <input type="submit" value="Archive">
-                </form>
-                <form action="<c:url value="/app/activity/active"/>" method="GET">
-                    <input type="submit" value="No">
-                </form>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-3 text-center">
+                <h2 class="my-3">
+                    <fmt:message key="activity.archive.header" />
+                </h2>
+
+                <p><fmt:message key="activity.archive.message" /> <span><b>${requestScope.name}</b></span> ?</p>
+
+                <div class="row">
+                    <div class="col-6">
+                        <form action="<c:url value="/app/activity/archive"/>" method="POST">
+                            <input type="hidden" name="id" value="${requestScope.id}">
+                            <fmt:message key="activity.action.archive" var="archiveActivity" />
+                            <input class="btn btn-dark" type="submit" value="${archiveActivity}">
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <form action="<c:url value="/app/activity/active"/>" method="GET">
+                            <fmt:message key="nav.main" var="toMain" />
+                            <input class="btn btn-dark" type="submit" value="${toMain}">
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

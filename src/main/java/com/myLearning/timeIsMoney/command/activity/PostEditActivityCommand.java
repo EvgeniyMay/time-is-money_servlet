@@ -29,12 +29,11 @@ public class PostEditActivityCommand implements Command {
                 .build();
 
         if(!ActivityValidator.getErrors(activity).isEmpty()) {
-            request.setAttribute("activity",(activity));
-
+            request.setAttribute("activity",activity);
             request.setAttribute("errors", ActivityValidator.getErrors(activity));
+
             return "/WEB-INF/jsp/activity/activityEdit.jsp";
         }
-
 
         try {
             activityService.update(activity);

@@ -20,6 +20,5 @@ public class LocalizationFilter implements Filter {
         }
 
         filterChain.doFilter(request, response);
-
     }
 }

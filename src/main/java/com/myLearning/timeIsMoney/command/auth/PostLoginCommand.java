@@ -2,6 +2,7 @@ package com.mylearning.timeismoney.command.auth;
 
 import com.mylearning.timeismoney.command.Command;
 import com.mylearning.timeismoney.entity.User;
+import com.mylearning.timeismoney.service.AuthService;
 import com.mylearning.timeismoney.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -16,9 +17,11 @@ import java.util.List;
 public class PostLoginCommand implements Command {
 
     private final UserService userService;
+    private final AuthService authService;
 
-    public PostLoginCommand(UserService userService) {
+    public PostLoginCommand(UserService userService, AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
     }
 
     @Override
@@ -44,15 +47,10 @@ public class PostLoginCommand implements Command {
             return "/WEB-INF/jsp/auth/login.jsp";
         }
 
-
-        ServletContext servletContext = request.getServletContext();
-        List<Integer> authedUsers = (List<Integer>)servletContext.getAttribute("authedUsers");
-        if(authedUsers.contains(user.getId())) {
+        if(!authService.authUser(user)) {
             request.setAttribute("errorProperty", "login.error.auth.user");
             return "/WEB-INF/jsp/auth/login.jsp";
         }
-
-        authedUsers.add(user.getId());
 
         HttpSession session = request.getSession();
         session.setAttribute("authUser", user);

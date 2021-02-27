@@ -7,6 +7,7 @@ import com.mylearning.timeismoney.command.user.GetUserCommand;
 import com.mylearning.timeismoney.command.user.GetUserProfileCommand;
 import com.mylearning.timeismoney.dao.DaoFactory;
 import com.mylearning.timeismoney.service.ActivityService;
+import com.mylearning.timeismoney.service.AuthService;
 import com.mylearning.timeismoney.service.MissionService;
 import com.mylearning.timeismoney.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -54,6 +55,8 @@ public class CommandController {
         UserService userService = new UserService(daoFactory);
         MissionService missionService = new MissionService(daoFactory);
 
+        AuthService authService = AuthService.getInstance();
+
         getCommands = new HashMap<>();
         postCommands = new HashMap<>();
 //        Activity
@@ -73,8 +76,8 @@ public class CommandController {
         getCommands.put("/logout", new GetLogoutCommand());
 
         postCommands.put("/registration", new PostRegistrationCommand(userService));
-        postCommands.put("/login", new PostLoginCommand(userService));
-        postCommands.put("/logout", new PostLogoutCommand());
+        postCommands.put("/login", new PostLoginCommand(userService, authService));
+        postCommands.put("/logout", new PostLogoutCommand(authService));
 //        User
         getCommands.put("/user", new GetUserCommand(userService));
         getCommands.put("/profile", new GetUserProfileCommand(userService));

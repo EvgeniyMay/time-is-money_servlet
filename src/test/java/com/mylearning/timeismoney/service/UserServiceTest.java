@@ -55,7 +55,7 @@ public class UserServiceTest {
     public void findById() {
         User user = new User.Builder().id(0).build();
 
-        Mockito.when(mockUserDao.findById(5))
+        Mockito.when(mockUserDao.findById(0))
                 .thenReturn(Optional.of(user));
 
         User result = userService.findById(0);

@@ -49,6 +49,7 @@ public class Activity {
     }
 
 
+
     public static class Builder {
 
         private final Activity newActivity;

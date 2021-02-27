@@ -4,6 +4,7 @@ import com.mylearning.timeismoney.entity.User;
 import com.mylearning.timeismoney.entity.enums.Role;
 import com.mylearning.timeismoney.exception.AuthorizationException;
 import com.mylearning.timeismoney.exception.PageNotFoundException;
+import com.mylearning.timeismoney.service.AuthService;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ import java.util.*;
  */
 public class AuthFilter implements Filter {
 
+    private final AuthService authService = AuthService.getInstance();
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
@@ -24,25 +27,8 @@ public class AuthFilter implements Filter {
         // Current path
         String path = httpRequest.getRequestURI().replace("/app", "");
 
-        /**
-         * @throws AuthorizationException when user has not access to current page
-         */
-        if(Objects.isNull(user)) {
-            if(!Role.GUEST.getAuthorities().contains(path)) {
-                throw new AuthorizationException();
-            } else {
-                filterChain.doFilter(request, response);
-            }
-            return;
-        }
+        authService.checkUserAccess(user, path);
 
-        /**
-         * @throws PageNotFoundException when user has not access to current page
-         */
-        if(!user.getRole().getAuthorities().contains(path)) {
-            throw new PageNotFoundException();
-        } else {
-            filterChain.doFilter(request, response);
-        }
+        filterChain.doFilter(request, response);
     }
 }

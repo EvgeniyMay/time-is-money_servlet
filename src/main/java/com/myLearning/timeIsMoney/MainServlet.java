@@ -35,8 +35,7 @@ public class MainServlet extends HttpServlet {
     public void init() throws ServletException {
         commandController = CommandController.getInstance(
                 JdbcDaoFactory.getInstance());
-
-        getServletContext().setAttribute("authedUsers", new ArrayList<Integer>());
+        
         logger.info("MainServlet created");
     }
     /**
